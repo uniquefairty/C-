@@ -41,3 +41,28 @@ int main()
 	system("pause");
 	return 0;
 }
+
+//ÓĞ´íÎó
+void Fun(char *a, int len)
+{
+	int i, j;
+	for (i = 0; i < len; i++)
+	{
+		if (a[i] == ' ')
+		{
+			for (j = i; j < len; j++)
+			{
+				a[i + 1] = a[i];
+			}
+			a[i] = '%20';
+		}
+	}
+}
+int main¡ª¡ª()
+{
+	char *a = "abc defgx yz";
+	Fun(a, sizeof(a) / sizeof(a[0]));
+	putchar(a);
+	system("pause");
+	return 0;
+}
