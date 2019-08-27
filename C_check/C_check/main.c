@@ -3,7 +3,21 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 
-int main()
+int main8_5()
+{
+	char s[] = "\\123456\123456\t";
+	printf("%d\n", strlen(s));
+	system("pause");
+	return 0;
+}
+int main8()
+{
+	unsigned long ula = 0x11000000;
+	printf("%x\n", *(unsigned char *)&ula);
+	system("pause");
+	return 0;
+}
+int main11_1()
 {
 	unsigned char a = 0xa5;
 	unsigned char b =(~a) >>4 + 1;
