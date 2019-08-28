@@ -1,8 +1,9 @@
-﻿生成启动时间为 2019/8/7 19:01:54。
+﻿生成启动时间为 2019/8/28 12:51:14。
      1>项目“E:\githab代码\C-\C_Practice\C_Practice\C_Practice.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
          main.c
+     1>e:\githab代码\c-\c_practice\c_practice\main.c(25): warning C4554: “&”: 检查运算符优先级可能存在的错误；使用圆括号阐明优先级
        Link:
          D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\githab代码\C-\C_Practice\Debug\C_Practice.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\githab代码\C-\C_Practice\Debug\C_Practice.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\githab代码\C-\C_Practice\Debug\C_Practice.lib" /MACHINE:X86 Debug\main.obj
          C_Practice.vcxproj -> E:\githab代码\C-\C_Practice\Debug\C_Practice.exe
@@ -10,4 +11,4 @@
 
 生成成功。
 
-已用时间 00:00:01.12
+已用时间 00:00:01.28

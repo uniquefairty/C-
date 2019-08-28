@@ -3,6 +3,137 @@
 #pragma warning(disable:4996)
 
 
+//4.求unsigned int 型变量x在内存中二进制1的个数
+int main()
+{
+	unsigned int x = 236;
+	int count = 0;
+	while (x)
+	{
+		count++;
+		x = x&(x - 1);//每次消去一个1
+	}
+	printf("%d", count);
+	system("pause");
+	return 0;
+}
+
+int main4()
+{
+	unsigned int x = 236;
+	int count = 0;
+	for (; x > 0; x >>= 1)
+	{
+		if (x & 1 == 1)
+		{  
+			count++;
+		}
+	}
+	printf("%d", count);
+	system("pause");
+	return 0;
+}
+//3.斐波那契数0 1 1 2 3 5 8
+Print(int *a,int n)
+{
+	int i = 0;
+	for (i = 0; i < n; i++)
+	{
+		printf("%d ", a[i]);
+	}
+}
+int fib1(int n)//递归求第n个斐波那契数
+{
+	if (n <= 2)
+	{
+		return 1;
+	}
+	return fib1(n - 1) + fib1(n - 2);
+}
+int fib2(int n)//非递归求第n个斐波那契数
+{
+	int first = 0;
+	int scend = 1;
+	int third = 1;
+
+	while (n > 2)
+	{
+		first = scend;
+		scend = third;
+		third = first + scend;
+		n--;
+	}
+
+	return third;
+
+}
+void fib(int *a,int n)//非递归求前n个斐波那契数
+{
+	int i = 0;
+	a[0] = 0;
+	a[1] = 1;
+	if (n < 2)
+	{
+		Print(a,n);
+		return;
+	}
+	for (i= 2; i< n; i++)
+	{
+		a[i] = a[i - 1] + a[i - 2];
+	}
+	Print(a, n);
+}
+
+int main3()
+{
+	int n;
+	//int arr[100] = { 0 };
+	scanf("%d", &n);
+
+	int res=fib2(n);
+	printf("%d", res);
+
+	//fib(arr,n);
+	system("pause");
+	return 0;
+}
+
+//****2**********************
+void Move(char *str, int p,int num)
+{
+	for (num; num>p+1; num--)
+	{
+		str[num+1] = str[num - 1];
+	}
+	str[p] = '%';
+	str[p + 1] = '2';
+	str[p + 2] = '0';
+}
+
+int main2()
+{
+	char str[20] = "abc defgx yz";
+	int num = strlen(str);
+	int i = 0;
+	for (; str[i];i++)
+	{
+		if (str[i]== ' ')
+		{
+			Move(str, i,num);
+			num+=2;
+		}
+	}
+
+	//puts(str);
+	
+	for (i = 0; i < num; i++)
+	{
+		printf("%c", str[i]);
+	}
+	system("pause");
+	return 0;
+
+}
 int main_1()
 {
 	int a[] = { 2,4,6,8,10,12,14,16,18,20,22,24 };
@@ -18,7 +149,7 @@ int main_1()
 	system("pause");
 	return 0;
 }
-int main()
+int main——()
 {
 	int i, j, a = 0;
 
@@ -77,29 +208,3 @@ int main()
 	return 0;
 }
 #endif
-
-
-////有错误
-//void Fun(char *a, int len)
-//{
-//	int i, j;
-//	for (i = 0; i < len; i++)
-//	{
-//		if (a[i] == ' ')
-//		{
-//			for (j = i; j < len; j++)
-//			{
-//				a[i + 1] = a[i];
-//			}
-//			a[i] = '%20';
-//		}
-//	}
-//}
-//int main——()
-//{
-//	char *a = "abc defgx yz";
-//	Fun(a, sizeof(a) / sizeof(a[0]));
-//	putchar(a);
-//	system("pause");
-//	return 0;
-//}
