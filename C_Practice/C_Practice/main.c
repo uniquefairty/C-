@@ -2,9 +2,59 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 
-
-//4.求unsigned int 型变量x在内存中二进制1的个数
+//8 求出现次数超过数组一半的数字
 int main()
+{
+	int a[] = { 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+	int num = sizeof(a) / sizeof(a[0]);
+	int i = 0;
+
+	int b[10] = { 0 };
+
+	for (i = 0; i<num; i++)
+	{
+		b[a[i]]++;
+	}
+	for (i = 0; i<10; i++)
+	{
+		if (b[i]>num / 2)
+		{
+			printf("%d", i);
+
+		}
+	}
+
+	system("pause");
+	return 0;
+
+}
+//7.求数组前k个最小的值
+int FunMin(int *arr,int k)
+{
+	int min = arr[0];
+	int i = 0;
+
+	for (i = 0; i < k; i++)
+	{
+		if (min>arr[i])
+		{
+			min = arr[i];
+		}
+	}
+	return min;
+}
+
+int main7()
+{
+	int arr[20] = { 3, 4, 5, 6, 34, 2 };
+	int k = 4;
+	int res=FunMin(arr, k);
+	printf("%d", res);
+	system("pause");
+	return 0;
+}
+//4.求unsigned int 型变量x在内存中二进制1的个数
+int main4_()
 {
 	unsigned int x = 236;
 	int count = 0;
