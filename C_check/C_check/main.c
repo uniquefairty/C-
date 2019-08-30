@@ -2,6 +2,63 @@
 #include<string.h>
 #include<Windows.h>
 #pragma warning(disable:4996)
+void foo(int b[][3])
+{
+	++b;
+	b[1][1] = 9;
+}
+int main()
+{
+	int a[3][3] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	foo(a);
+	printf("%d", a[2][1]);
+	system("pause");
+	return 0;
+}
+int main17_2_3()
+{
+	int i = 10;
+	long long t = sizeof(i++);
+	printf("%d", i);
+	system("pause");
+	return 0;
+}
+int main17_1_3()
+{
+	char *str = "abcde";
+	str += 2;
+	printf("%lu\n", str);
+
+	system("pause");
+	return 0;
+}
+#pragma pack(8)
+int main4()
+{
+	struct t
+	{
+		int a;
+		char d;
+		short b;
+		short c;
+
+		/*char c1;
+		int i;
+		char c2;*/
+
+		/*short a;
+		char d;
+		long b;
+		long c;*/
+	};
+
+	struct t t1;
+
+	printf("%d", sizeof(t1));
+	system("pause");
+	return 0;
+}
+#pragma pack()
 
 int main8_5()
 {
