@@ -1,9 +1,147 @@
 #include<stdio.h>
 #include<Windows.h>
 #pragma warning(disable:4996)
+#define MAX 256
+//13.两个字符串，从第一个字符串中删除第二个字符串中所有的字符
+char *DeleteChars(char *str1,char *str2)
+{
+	if (str1 == NULL || str2 == NULL)
+	{
+		return NULL;
+	}
+	int hashtable[MAX] = { 0 };
 
-//8 求出现次数超过数组一半的数字
+	while ( *str2 != '\0')//将str2中字符对应的hashtable数组中的位置上的值设为1
+	{
+		hashtable[*str2] = 1;
+		++str2;
+	}
+
+	char *p = str1;
+	char *q = str1;
+
+	while (*p != '\0')
+	{
+		if (!hashtable[*p])
+		{
+			*q = *p;
+			q++;
+		}
+		p++;
+	}
+	*q = '\0';
+	return str1;
+}
 int main()
+{
+	char str1[] = "They are students.";
+	char str2[]= "aeiou";
+	printf("%s",DeleteChars(str1, str2));
+	system("pause");
+	return 0;
+}
+//12.找出数组中两个唯一出现一次的数字
+int fun(int num)
+{
+	int count = 1;
+	while (num)
+	{
+		if (num & 1 == 1)
+		{
+			return count;
+		}
+		num >>= 1;
+		count++;
+	}
+}
+
+int main12()
+{
+	int arr[] = { 1, 3, 5, 7, 1, 3, 5, 9 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int i = 0;
+	int add = 0;
+	int pos = 0;
+	int res1=0, res2=0;
+
+	for (i = 0; i < len; i++)
+	{
+		add ^= arr[i];
+	}
+
+	pos=fun(add);
+
+
+	for (i = 0; i < len; i++)
+	{
+		if ((arr[i] >> pos) & 1 ==1)
+		{
+		   res1^= arr[i];
+		}
+		else
+		{
+			res2^= arr[i];
+		}
+	}
+
+	printf("%d,%d\n", res1, res2);
+	system("pause");
+	return 0;
+}
+//11.找出字符串中第一次重复出现的字符
+int main11()
+{
+	char str[] = "qywyer23tdd";
+	int i = 0;
+	int arr[256] = { 0 };
+	for (i = 0; i < strlen(str); i++)
+	{
+		arr[str[i]]++;
+	}
+
+	for (i = 0; i < strlen(str); i++)//c语言中的ascll码值一共256个
+	{
+		if (arr[str[i]] == 2)
+		{
+			printf("%c\n", str[i]);
+			break;
+		}
+	}
+	system("pause");
+	return 0;
+}
+
+//10.找出字符串第一次出现一次的字符
+int main10()
+{
+	char str[]="abaccdeff";
+	int i = 0;
+	int arr[256] = { 0 };//c语言中的ascll码值一共256个
+	for (i = 0; i < strlen(str); i++)
+	{
+		arr[str[i]]++;
+	}
+
+	for (i = 0; i < strlen(str); i++)
+	{
+		if (arr[str[i]] == 1)
+		{
+			printf("%c\n", str[i]);
+			break;
+		}
+	}
+	/*for (i = 0; i < len-1; i++)
+	{
+		res ^= str[i];
+	}
+	printf("%c ", res);
+	*/
+
+	system("pause");
+	return 0;
+}
+//8 求出现次数超过数组一半的数字
+int main8()
 {
 	int a[] = { 1, 2, 3, 2, 2, 2, 5, 4, 2 };
 	int num = sizeof(a) / sizeof(a[0]);
