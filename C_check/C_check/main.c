@@ -2,12 +2,84 @@
 #include<string.h>
 #include<Windows.h>
 #pragma warning(disable:4996)
+int main()
+{
+	char a[1000];
+	int i;
+	for (i = 0; i < 1000; i++)
+	{
+		a[i] = (char)(-1 - i);
+	}
+	printf("%d\n", strlen(a));
+	system("pause");
+	return 0;
+}
+char *mystring10_1()
+{
+	char buffer[6] = { 0 };
+	char *s = "hello world!";
+	for (int i = 0; i < sizeof(buffer)-1; i++)
+	{
+		buffer[i] = *(s + i);
+	}
+	return buffer;
+}
+int main10_1()
+{
+	printf("%s\n", mystring());
+	system("pause");
+	return 0;
+}
+
+
+int main10_2()
+{
+	char *str[3] = { "stra", "strb", "strc" };
+	char *p = str[0];
+	int i = 0;
+	while (i < 3)
+	{
+		printf("%s ", p++);
+		i++;
+	}
+	system("pause");
+	return 0;
+}
+
+
+int main9_3()
+{
+	int a[5] = { 1, 2, 3, 4, 5 };
+	int *p1 = (int *)(&a + 1);
+	int *p2 = (int *)((int)a + 1);
+	int *p3 = (int *)(a + 1);
+	printf("%d,%x,%d\n", p1[-1], p2[0], p3[1]);
+	system("pause");
+	return 0;
+}
+void func(char str_arg[2])
+{
+	int m = sizeof(str_arg);
+	int n = strlen(str_arg);
+	printf("%d\n", m);//4首先数组名作为实参传递，退化为指针，传递的是地址，
+	//而接收的形参虽然写成数组形式，但同样也看成指针，所以里面的2没有任何意义。
+	printf("%d\n", n);//5
+    //sizeof一个指针，在32位系统里面永远都是4个字节。strlen则求的是实际字符串的长度，不包括最后的'\0'。
+}
+int main9_1()
+{
+	char str[]="Hello";
+	func(str);
+	system("pause");
+	return 0;
+}
+
 void foo(int b[][3])
 {
 	++b;
 	b[1][1] = 9;
 }
-int main()
+int main———()
 {
 	int a[3][3] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	foo(a);
@@ -60,10 +132,18 @@ int main4()
 }
 #pragma pack()
 
+int main8_()
+{
+	typedef char str[255];//str代表 一个数组类型是char [255]
+	str s;//s是字符数组变量
+}
 int main8_5()
 {
+	//char s[] = "\\123456\123";
+
 	char s[] = "\\123456\123456\t";
-	printf("%d\n", strlen(s));
+	printf("%d\n", strlen(s));//12
+	puts(s);
 	system("pause");
 	return 0;
 }
