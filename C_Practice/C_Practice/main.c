@@ -2,6 +2,19 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 #define MAX 256
+//14.判断是否为回文数121 1221 顺读逆读一样
+int fun(num)
+{
+	num=
+
+}
+int main()
+{
+	int num = 121;
+
+	fun(num);
+}
+
 //13.两个字符串，从第一个字符串中删除第二个字符串中所有的字符
 char *DeleteChars(char *str1,char *str2)
 {
@@ -32,7 +45,7 @@ char *DeleteChars(char *str1,char *str2)
 	*q = '\0';
 	return str1;
 }
-int main()
+int main13()
 {
 	char str1[] = "They are students.";
 	char str2[]= "aeiou";
@@ -137,6 +150,62 @@ int main10()
 	printf("%c ", res);
 	*/
 
+	system("pause");
+	return 0;
+}
+//9.数组中一个或连续的多个整数组成的子数组，求所有子树组的和的最大值
+//因为时间复杂度为O(n)，则只能遍历一次数组，这里同时使用两个变量sum和max，
+//其中sum保存的是当前的和，若sum<0，则从下一个位置从新记录，
+//max记录的是历史的最大值，只有当sum>max时用sum替换max。
+int FindAddMax(int *arr, int len)
+{
+	if (*arr == NULL || len == 0)
+	{
+		return;
+	}
+	int sum = 0;
+	int max = arr[0];
+	int i = 0;
+
+	for (i = 0; i < len; i++)
+	{
+		if (sum <= 0)//上次循环所得的值<0,说明加的是负数
+		{
+			sum = arr[i];//从当前的数字重新开始累加
+		}
+		else
+		{
+			sum += arr[i];
+		}
+
+		if (sum>max)
+		{
+			max = sum;
+		}
+	}
+
+	//for (i = 0; i < len; i++)
+	//{
+	//	sum +=arr[i];
+	//	if (sum < 0)
+	//	{
+	//		sum = 0;//sum重新初始化
+	//	}
+	//	if (sum>max)
+	//	{
+	//		max = sum;
+	//	}
+	//}
+
+	return max;
+}
+
+int main9()
+{
+	int arr[] = { 1. - 2, 3, 10, -4, 7, 2, -5 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int res = FindAddMax(arr, len);
+	printf("%d", res);
 	system("pause");
 	return 0;
 }
