@@ -2,17 +2,108 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 #define MAX 256
-//14.判断是否为回文数121 1221 顺读逆读一样
-int fun(num)
+//19字符串压缩
+//18.如何判断一个数是否是2的k次方
+//17.求一个有序数组中两个元素相加为k的数字，返回这两个元素的下标。o（n) o(1)
+void SumK(int *arr, int len, int k, int *num1, int* num2)
 {
-	num=
+	int low = 0;//从前往后遍历
+	int high = len - 1;//从后往前遍历
+	int sum;
+	while (low <= high)
+	{
+		sum = arr[low] + arr[high];
+		if (sum < k)
+		{
+			low++;
+		}
+		else if (sum>k)
+		{
+			high--;
+		}
+		else
+		{
+			*num1 = low;
+			*num2 = high;
+			break;
+		}
+	}
+}
+
+int main17()
+{
+	int arr[] = { 1, 3, 4, 5, 7, 8, 9, 10 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int low, high;//对应的下标
+	int sum = 9;
+	SumK(arr, len,sum, &low, &high);
+	printf("%d,%d", low, high);
+	//不一定是连续的两个数
+	/*int i = 0;
+	int sum = 9;
+	for(i = 0; i < len-1; i++)
+	{
+		if ((arr[i] + arr[i + 1]) == sum)
+		{
+			printf("%d,%d", i, i + 1);
+		}
+	}*/
+	system("pause");
+	return 0;
+}
+//16.模拟实现pow（x，y)函数
+int Mypow(int x, int y)
+{
+	int result = 0;
+	int tmp = 0;
+	if (y == 1)
+	{
+		return x;
+	}
+	tmp = Mypow(x, y / 2);
+	if (y&1!=0)//奇数
+	{
+		result = x*tmp*tmp;
+	}
+	else{
+		result = tmp*tmp;
+	}
+	return result;
+}
+int main16()
+{
+	int x = 2;
+	int y = 3;
+	int sum = 1;
+	for (; y > 0; y--)
+	{
+		sum *= x;
+	}
 
 }
-int main()
+//14.判断是否为回文数121 1221 顺读逆读一样
+int Palindromenumber(num)
 {
-	int num = 121;
+	int newnum = 0;
+	for (; num > 0; num /= 10)
+	{
+		newnum = newnum * 10 + num % 10;
+	}
+	return newnum;
+}
+int main14()
+{
+	int num = 1231;
 
-	fun(num);
+	if (num == Palindromenumber(num))
+	{
+		printf("%d是回文数\n", num);
+	}
+	else{
+		printf("%d不是回文数\n", num);
+	}
+	system("pause");
+	return 0;
 }
 
 //13.两个字符串，从第一个字符串中删除第二个字符串中所有的字符
