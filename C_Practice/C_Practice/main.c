@@ -2,6 +2,81 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 #define MAX 256
+//20.删除首位空格，中间的连续空格只留一个，原来字符串的顺序不变
+void DelBlack1(char *str)
+{
+	int flag = 0;
+	int p = 0;
+	int i = 0;
+
+	while (str[i] != '\0')
+	{
+		if (!flag&&str[i] == '*')//最开始的*号
+		{
+			i++;
+		}
+		else if (!flag&&str[i] != '*')
+		{
+			flag = 1;
+			str[p++] = str[i++];
+		}
+		else if (flag&&str[i] == '*')
+		{
+			flag = 0;
+			str[p++] = str[i++];
+		}
+		else{
+			str[p++] = str[i++];
+			flag = 1;
+		}
+	}
+
+	if (str[p - 1] == '*')
+	{
+		str[p - 1] = '\0';
+	}
+	else{
+		str[p] = '\0';
+	}
+
+}
+void DelBlack(char *str)
+{
+	char *pos=str;
+	int flag = 0;
+
+	while (*pos != '\0')
+	{
+		if (!flag&&*pos == '*')
+		{
+			pos++;
+		}
+		else if (!flag&&*pos != '*')
+		{
+			flag = 1;
+			*str ++= *pos++;
+		}
+       else if (flag&&*pos == '*')
+		{
+		   flag = 0;
+		   *str++ = *pos++;
+	   }
+	   else{
+		   *str++ = *pos++;
+		   flag= 1;
+	   }
+	}
+
+	
+}
+int main()
+{
+	char str[] = "*****as*****adadp*****";
+	DelBlack(str);
+	puts(str);
+	system("pause");
+	return 0;
+}
 //19字符串压缩
 //18.如何判断一个数是否是2的k次方
 //17.求一个有序数组中两个元素相加为k的数字，返回这两个元素的下标。o（n) o(1)
