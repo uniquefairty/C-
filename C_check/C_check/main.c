@@ -2,7 +2,68 @@
 #include<string.h>
 #include<Windows.h>
 #pragma warning(disable:4996)
+
 int main()
+{
+	int a[5][5];
+	int (*p)[4];
+	p=a;
+	printf("%p,%d\n",&p[4][2]-&a[4][2],&p[4][2]-&a[4][2]);
+	system("pause");
+	return 0;
+}
+#if 0
+struct Test
+{
+	int num;
+	char *pcname;
+	short sdate;
+	char cha[2];
+	short sba[4];
+}*p;
+
+int main()
+{
+	printf("%p\n", p + 0x1);
+	printf("%p\n", (unsigned long)p + 0x1);
+	printf("%p\n", (unsigned int*)p + 0x1);
+
+	system("pause");
+	return 0;
+}
+#endif
+#if 0
+int main()
+{
+#if 0
+	char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
+	printf("%d\n", strlen(arr));
+	printf("%d\n", strlen(arr+0));
+    //printf("%d\n", strlen(*arr));
+	//printf("%d\n", strlen(arr[1]));
+	printf("%d\n", strlen(&arr));
+	printf("%d\n", strlen(&arr+1));
+	printf("%d\n", strlen(&arr[0] + 1));
+#endif
+
+	/*char arr[] = "abcdef";
+	printf("%d\n", strlen(&arr));
+	printf("%d\n", strlen(&arr + 1));
+	printf("%d\n", strlen(&arr[0] + 1));*/
+
+	char *p = "abcdef";
+//	printf("%d\n", strlen(*p));
+//	printf("%d\n", strlen(p[0]));
+	printf("%d\n", strlen(&p));
+	printf("%d\n", strlen(&p+1));
+	printf("%d\n", strlen(&p[0]+1));
+	system("pause");
+	return 0;
+}
+#endif
+
+#if 0
+int main¡ª¡ª()
 {
 	char a[1000];
 	int i;
@@ -257,3 +318,5 @@ int main1()
 	system("pause");
 	return 0;
 }
+
+#endif
