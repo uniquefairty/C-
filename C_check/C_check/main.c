@@ -3,12 +3,26 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 
+enum color
+{
+	red = 6,
+	gr = 7,
+	bl = 4,
+};
+
+
 int main()
 {
-	int a[5][5];
+	enum color e = gr;
+	e = 0;
+	printf("%d\n", red);
+	printf("%d\n", e);
+
+
+	/*int a[5][5];
 	int (*p)[4];
 	p=a;
-	printf("%p,%d\n",&p[4][2]-&a[4][2],&p[4][2]-&a[4][2]);
+	printf("%p,%d\n",&p[4][2]-&a[4][2],&p[4][2]-&a[4][2]);*/
 	system("pause");
 	return 0;
 }
