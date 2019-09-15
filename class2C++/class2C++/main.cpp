@@ -2,6 +2,71 @@
 using namespace std;
 
 #if 0
+namespace N1
+{
+	//命名空间中的内容，可以定义变量，也可以定义函数
+	int a; 
+	int Add(int left, int right)
+	{
+		return left + right;
+	}
+}
+//2.命名空间可以嵌套
+namespace N2
+{
+	int a;
+	int b;
+	int Add(int left, int right)
+	{
+		return left + right;
+	}
+}
+namespace N3
+{
+	int c;
+	int d;
+	int sub(int left, int right)
+	{
+		return left - right;
+	}
+}
+//3.同一个工程中允许存在多个命名空间
+//编译器最后会合成同一个命名空间。
+namespace N1
+{
+	int Mul(int left, int right)
+	{
+		return left * right;
+	}
+}
+#endif
+
+namespace N
+{
+	int a=10; 
+	int b = 20;
+	int Add(int left, int right)
+	{
+		return left + right;
+	}
+	int sub(int left, int right)
+	{
+		return left - right;
+	}
+}
+
+//using N::b;
+using namespace N;
+int main()
+{
+	printf("%d\n", N::a);
+	printf("%d\n", b);
+	Add(10, 20);
+	return 0;
+}
+
+
+#if 0
 //函数重载：必须在相同的作用域，函数名字必须相同，参数列表（个数，类型，类型顺序）不同
 int Add(int left, int right)
 {

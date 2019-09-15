@@ -3,6 +3,26 @@
 #include<Windows.h>
 #pragma warning(disable:4996)
 
+int i = 10;
+#define PRINT(FORMAT,VALUE) printf("the value of "#VALUE" is "FORMAT"  \n"£¬VALUE);
+int main()
+{
+	PRINT("%d",i+3);
+	system("pause");
+	return 0;
+}
+#if 0
+int main()
+{
+	char *p = "hello""bit\n";
+	printf("hello", "bit\n");
+	printf("%s", p);
+	system("pause");
+	return 0;
+}
+
+#endif
+#if 0
 enum color
 {
 	red = 6,
@@ -26,6 +46,7 @@ int main()
 	system("pause");
 	return 0;
 }
+#endif
 #if 0
 struct Test
 {
