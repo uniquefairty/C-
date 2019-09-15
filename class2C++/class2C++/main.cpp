@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+
 #if 0
 namespace N1
 {
@@ -40,7 +41,7 @@ namespace N1
 	}
 }
 #endif
-
+#if 0
 namespace N
 {
 	int a=10; 
@@ -63,6 +64,34 @@ int main()
 	printf("%d\n", b);
 	Add(10, 20);
 	return 0;
+}
+#endif
+
+#if 0
+int main()
+{
+	int a;
+	double b;
+	char c;
+	cin >> a;
+	cin >> b >> c;
+	cout << a << endl;
+	cout << b << " " << c << endl;
+	return 0;
+}
+#endif
+
+void TestFunc(int a = 0,int b=20,int c=30)//全缺省参数
+{
+	cout <<"a="<<a<< endl;
+	cout << "b=" << b << endl;
+	cout << "c=" << c << endl;
+}
+void TestFunc(int a, int b = 10, int c = 20)//半缺省参数
+{
+	cout << "a=" << a << endl;
+	cout << "b=" << b << endl;
+	cout << "c=" << c << endl;
 }
 
 
@@ -115,7 +144,6 @@ extern "C" int Add(int left, int right);//将函数按照C风格编译
 //	return left + right;
 //}
 //double Add(double a, double b);
-
 int main()
 {
 	Add(1, 3);
@@ -197,7 +225,6 @@ int main()
 	int& ra = a;
 	int& rra = a;
 	int& rrra = ra;
-
 	rrra = 100;
 	return 0;
 }
@@ -207,14 +234,10 @@ int main()
 {
 	const int a = 10;
 	const int& ra = a;
-
 	const int& b = 100;
-
 	double d = 12.34;
 	const int &rd = d;
-
 	d = 56.78;
-
 	return 0;
 }
 #endif
@@ -480,7 +503,6 @@ int main()
 	cout << typeid(b).name() << endl;
 	cout << typeid(c).name() << endl;
     cout << typeid(d).name() << endl;
-
 	system("pause");
 	return 0;
 }
@@ -547,7 +569,6 @@ int main()
 	{
 		cout << e << " ";
 	}
-
 	system("pause");
 	return 0;
 }
