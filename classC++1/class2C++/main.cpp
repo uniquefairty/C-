@@ -81,6 +81,8 @@ int main()
 }
 #endif
 
+#if 0
+
 void TestFunc(int a = 0,int b=20,int c=30)//全缺省参数
 {
 	cout <<"a="<<a<< endl;
@@ -93,7 +95,7 @@ void TestFunc(int a, int b = 10, int c = 20)//半缺省参数
 	cout << "b=" << b << endl;
 	cout << "c=" << c << endl;
 }
-
+#endif
 
 #if 0
 //函数重载：必须在相同的作用域，函数名字必须相同，参数列表（个数，类型，类型顺序）不同
@@ -591,3 +593,22 @@ int main()
 	return 0;
 }
 #endif
+
+void Test(int)
+{
+	cout << "Test(int)" << endl;
+}
+
+void Test(int *)
+{
+	cout <<"Test()" << endl;
+}
+
+int  main()
+{
+	int *p = nullptr;
+	Test(0);
+	Test(NULL);
+	Test(nullptr);
+	return 0;
+}
