@@ -1,0 +1,15 @@
+﻿生成启动时间为 2019/9/21 9:08:26。
+     1>项目“D:\代码\C++4\C++4\C++4.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>d:\代码\c++4\c++4\main.cpp(380): error C2065: “_year”: 未声明的标识符
+     1>d:\代码\c++4\c++4\main.cpp(380): error C2065: “_month”: 未声明的标识符
+     1>d:\代码\c++4\c++4\main.cpp(380): error C2065: “_day”: 未声明的标识符
+     1>d:\代码\c++4\c++4\main.cpp(388): error C2011: “Date”:“class”类型重定义
+                 d:\代码\c++4\c++4\main.cpp(196) : 参见“Date”的声明
+     1>已完成生成项目“D:\代码\C++4\C++4\C++4.vcxproj”(Rebuild 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.53
