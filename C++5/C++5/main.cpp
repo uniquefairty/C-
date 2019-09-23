@@ -127,6 +127,8 @@ int main()
 }
 #endif
 
+#if 0
+//*******************************************************************
 void * operator new(size_t size,const char* filename,const char * funName,size_t lineNo)
 {
 	cout << filename << "-" << funName << "-" << lineNo << size << endl;
@@ -144,4 +146,81 @@ int main()
 	int *p = new(_FILE_, _FUNCDNAME_, _LINE_) int;
 	delete p;
 	return 0;
+}
+#endif
+
+#if 0
+struct ListNode
+{
+	ListNode *_next;
+	ListNode *_prev;
+	int _data;
+
+	void* operator new(size_t n)
+	{
+		void* p = nullptr;
+		p = allocator<ListNode>().allocate(1);
+		cout << "memory pool allocate" << endl;
+		return p;
+	}
+		void operator delete(void* p)
+	{
+		allocator<ListNode>().deallocate((ListNode*)p, 1);
+		cout << "memory pool deallocate" << endl;
+	}
+};
+class List
+{
+public:
+	List()
+	{
+		_head = new ListNode;
+		_head->_next =_head;
+		_head->_prev = _head;
+	}
+	~List()
+	{
+		ListNode *cur = _head->_next;
+		while (cur != _head)
+		{
+			ListNode * next = cur->_next;
+			delete cur;
+			cur = next;
+		}
+		delete _head;
+		_head = nullptr;
+	}
+private:
+	ListNode *_head;
+};
+void TestList()
+{
+	List l;
+}
+int main()
+{
+	TestList();
+	return 0;
+}
+#endif
+
+//设计一个类，该类只能在堆上创建对象
+class Object
+{
+public:
+	Object* GetObject(int data)
+	{
+		return new Object(data);
+	}
+	~Object()
+	{}
+private:
+	Object(int data)
+	{}
+};
+
+int main()
+{
+	Object *p = Object::GetObject(10);
+	delete p;
 }
