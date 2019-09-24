@@ -204,16 +204,24 @@ int main()
 }
 #endif
 
+#if 0
 //设计一个类，该类只能在堆上创建对象
 class Object
 {
 public:
-	Object* GetObject(int data)
+	static Object* GetObject(int data)
 	{
 		return new Object(data);
 	}
 	~Object()
 	{}
+	//C++98
+//private:
+//	Object(const Object& o);
+	//C++11
+	//1.释放new的空间
+	//2.在默认成员函数后跟上=delete,删除默认的拷贝构造函数
+	Object(const Object& o) = delete;
 private:
 	Object(int data)
 	{}
@@ -223,4 +231,29 @@ int main()
 {
 	Object *p = Object::GetObject(10);
 	delete p;
+
+	return 0;
+}
+#endif
+
+#if 0
+//只能在栈上创建对象
+//只要将new功能屏蔽掉即可。即屏蔽掉operator new和定位new表达式。
+//注意：屏蔽了operator new，实际也将定位new屏蔽掉
+class Object
+{
+public:
+	Object() {}
+private:
+	void* operator new(size_t size);
+	void operator delete(void *p);
+};
+#endif
+
+//只能在x64位的进程下运行
+int main()
+{
+	void* p = new char[0xfffffffful];
+	cout << "new:" << p << endl;
+	return 0;
 }
