@@ -1,8 +1,9 @@
 #include<iostream>
 using namespace std;
 
+#if 0
 #include<string>
-
+#endif
 #if 0
 void TestString1()
 {
@@ -330,6 +331,7 @@ void Fun(string s1, string s2)
 }
 #endif
 
+#if 0
 #include<iostream>
 using namespace std;
 #include<string>
@@ -369,3 +371,267 @@ int main()
 	Fun(s1, s2, size1, size2);
 	return 0;
 }
+#endif
+
+#if 0
+//借助string来解决浅拷贝问题
+//string类动态管理字符串
+//#include<assert.h>
+#include<string.h>
+namespace bite
+{
+
+	class string
+	{
+	public:
+		string(const char * str = "")
+		{
+			if (nullptr == str)
+				str = "";
+			//申请空间
+			_str = new char[strlen(str) + 1];
+			//存放str中的字符
+			strcpy(_str, str);
+		}
+		
+		//将s对象中内容原封不动的拷贝到新的对象中去
+		//值的拷贝--比特位的拷贝
+		string(string& s)
+			:_str(s._str)
+		{}
+		//编译器生成的默认构造函数--浅拷贝&资源泄漏
+		string& operator=(const string& s)
+		{
+			_str = s._str;
+			return *this;
+		}
+		~string()
+		{
+			if (_str)
+			{
+				delete[] _str;
+				_str = nullptr;
+			}
+		}
+	private:
+		char* _str;
+	};
+	
+}
+void TestString()
+{
+	bite::string s1("hello");
+	bite::string s2(nullptr);
+	//bite::string s3(s1);//默认的拷贝构造函数时浅拷贝
+	//s2 = s1;//发生浅拷贝问题
+}
+int main()
+{
+	TestString();
+	return 0;
+}
+#endif
+
+#if 0
+#include<string.h>
+namespace bite
+{
+	class string
+	{
+	public:
+		string(const char * str = "")
+		{
+			if (nullptr == str)
+				str = "";
+			_str = new char[strlen(str) + 1];
+			strcpy(_str, str);
+		}
+		//拷贝构造函数
+		string(string& s)
+			:_str(new char[strlen(s._str) + 1])
+		{
+			strcpy(_str, s._str);
+		}
+		//赋值=运算符重载
+		//
+		string& operator=(const string& s)
+		{
+			if (this != &s)
+			{
+				char * tmp = new char[strlen(s._str) + 1];//1.开辟新空间
+				strcpy(tmp, s._str);//2.拷贝元素
+				delete[] _str;//3.释放旧空间
+				_str = tmp;//4.指向新空间
+
+				/*_str = new char[strlen(s._str) + 1];//会导致内存泄漏
+				strcpy(_str, s._str);*/
+			}
+			
+			return *this;
+		}
+		~string()
+		{
+			if (_str)
+			{
+				delete[] _str;
+				_str = nullptr;
+			}
+		}
+	private:
+		char* _str;
+	};
+
+}
+void TestString()
+{
+	bite::string s1("hello");
+	bite::string s2(nullptr);
+	bite::string s3(s1);
+	s2 = s1;
+}
+
+int main()
+{
+	TestString();
+	return 0;
+}
+#endif
+
+#if 0
+class String
+{
+public:
+	String(const char* str = "")
+	{
+		if (str == nullptr)
+		{
+			str = "";
+		}
+		_str = new char[strlen(str) + 1];
+		strcpy(_str, str);
+	}
+	
+	//拷贝构造函数
+	String(const String& s)
+		:_str(nullptr)//必须初始化：当前对象可能是随机值
+	{
+		String strTmp(s._str);
+		swap(_str, strTmp._str);
+	}
+
+#if 0
+	//赋值运算符重载
+	String& operator=(String& s)
+	{
+		if (this != &s)
+		{
+			String strTmp(s);
+			swap(_str, strTmp._str);//函数调完自动释放临时空间s
+		}
+		return *this;
+#endif
+		String& operator=(String s)
+		{
+			swap(_str, s._str);
+			return *this;
+		}//函数调完自动释放临时空间s
+		~String()
+		{
+			if (_str)
+			{
+				delete[] _str;
+				_str = nullptr;
+			}
+			
+		}
+private:
+	char* _str;
+};
+
+	void TestString()
+	{
+		String s1("hello");
+		String s2(s1);
+		String s3 = s1;
+	}
+
+	int main()
+	{
+		TestString();
+		return 0;
+	}
+#endif
+
+	namespace bite
+	{
+
+		class string
+		{
+		public:
+			string(char* str = "")
+				:_pcount(new int(1))
+			{
+				if (nullptr==str)
+				   str = "";
+				_str = new char[strlen(str) + 1];
+				strcpy(_str, str);
+			}
+			
+			string(const string&s)
+				:_str(s._str)
+				, _pcount(s._pcount)
+			{
+				++*(_pcount);
+			}
+			//s2=s1
+			//1.s2原来的资源将不再使用--应该给原来计数-1
+			//2.s2应该与s1共享一份资源
+			string & operator=(const string&s)
+			{
+				if (this != &s)
+				{
+					//让当前对象与其管理资源分离开
+					if (0 == -*_pcount)
+					{
+						delete[] _str;
+						delete _pcount;
+					}
+					//与s共享资源
+					_pcount = s._pcount;
+					_str = s._str;
+					++(*_pcount);
+				}
+				return *this;
+			}
+			
+			
+			~string()
+			{
+				if (_str && 0 == --*_pcount)
+				{
+					delete[] _str;
+					_str = nullptr;
+
+					delete _pcount;
+					_pcount = nullptr;
+				}
+			}
+		private:
+			char *_str;
+			int* _pcount;
+
+		};
+
+	}
+	void TestString()
+	{
+		bite::string s1("hello");
+		bite::string s2(s1);
+		bite::string s3("world");
+		bite::string s4(s3);
+
+	}
+	int main(){
+		TestString();
+		return 0;
+	}
