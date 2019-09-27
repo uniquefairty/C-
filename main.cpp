@@ -603,7 +603,14 @@ private:
 				}
 				return *this;
 			}
-			
+			string& operator[](size_t pos)
+			{
+				*_pcount--;
+				_str = new char[strlen(_str) + 1];
+             //
+
+
+			}
 			
 			~string()
 			{
@@ -629,6 +636,11 @@ private:
 		bite::string s2(s1);
 		bite::string s3("world");
 		bite::string s4(s3);
+
+		s3 = s1;
+		s4 = s1;
+
+		s1[0] = 'H';
 
 	}
 	int main(){
