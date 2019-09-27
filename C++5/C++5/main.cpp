@@ -121,10 +121,19 @@ private:
 };
 int main()
 {
-	Test* pt = new Test[10];
-	delete[] pt;
+	//pt现在指向的只不过是与Test对象相同大小的一段空间，还不算是一个对象，因为构造函数没有执行
+	Test* pt = (Test*)malloc(sizeof(Test));
+	new(pt) Test;
+	//如果Test类的构造函数有参数时，需要传参
+	delete pt;
 	return 0;
 }
+//int main()
+//{
+//	Test* pt = new Test[10];
+//	delete[] pt;
+//	return 0;
+//}
 #endif
 
 #if 0
@@ -226,12 +235,10 @@ private:
 	Object(int data)
 	{}
 };
-
 int main()
 {
 	Object *p = Object::GetObject(10);
 	delete p;
-
 	return 0;
 }
 #endif
@@ -251,9 +258,11 @@ private:
 #endif
 
 //只能在x64位的进程下运行
+#if 0
 int main()
 {
 	void* p = new char[0xfffffffful];
 	cout << "new:" << p << endl;
 	return 0;
 }
+#endif
