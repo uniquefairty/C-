@@ -562,6 +562,7 @@ private:
 	}
 #endif
 
+#if 0
 	namespace bite
 	{
 
@@ -647,3 +648,49 @@ private:
 		TestString();
 		return 0;
 	}
+#endif
+
+#if 0
+	//·´×ª×Ö·û´®
+	class Solution {
+	public:
+		string reverseStr(string s, int k) {
+			string::iterator it = s.begin();
+			while (it<s.end() && it + k <= s.end())
+			{
+				reverse(it, it + k);
+				it = it + 2 * k;
+			}
+			if (it + k>s.end())
+				reverse(it, s.end());
+			return s;
+		}
+	};
+#endif
+
+	/*class Solution {
+	public:
+		string reverseStr(string s, int k) {
+			reverse(s.begin(), s.end());
+		}
+	};
+*/
+	
+	class Solution {
+	public:
+		string reverseWords(string s) {
+			auto it = s.begin();
+
+			while (it != s.end())
+			{
+				size_t i = 0;
+				while (*(it + i) != ' ')
+				{
+					i++;
+				}
+				reverse(it, it + i - 1);
+				it = it + i + 1;
+			}
+			return s;
+		}
+	};
