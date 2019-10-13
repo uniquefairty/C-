@@ -676,6 +676,7 @@ private:
 	};
 */
 	
+#if 0
 	class Solution {
 	public:
 		string reverseWords(string s) {
@@ -694,3 +695,148 @@ private:
 			return s;
 		}
 	};
+#endif
+
+#if 0
+//#include<string>
+	class String
+	{
+	public:
+		String(const char*str = " ")
+		{
+			if (nullptr == str)
+			{
+				str = " ";
+			}
+			_str = new char[strlen(str) + 1];
+		}
+		String(const String& s)
+			:_str(new char[strlen(s._str)+1])
+		{
+			strcpy(_str, s._str);
+		}
+		/*String(const String& s)
+			:_str(nullptr)
+		{
+			String tmp(s._str);
+			swap(_str, tmp._str);
+		}
+		String& operator=(String s)
+		{
+			swap(_str, s._str);
+			return *this;
+
+		}*/
+		String& operator=(const String & s)
+		{
+			if (this != &s)
+			{
+				char* pStr = new char[strlen(s._str) + 1];
+				strcpy(pStr, s._str);
+				delete[] _str;
+				_str = pStr;
+			}
+			return *this;
+		}
+		~String()
+		{
+			if (_str)
+			{
+				delete[] _str;
+				_str = nullptr;
+			}
+		}
+	private:
+		char* _str;
+	};
+
+	int main()
+	{
+		return 0;
+	}
+#endif
+
+	namespace bit
+	{
+		class String
+		{
+		public:
+			////拷贝构造函数
+			String(const char* str = " ")
+			{
+				_size = strlen(str);
+				_capacity = _size;
+				_str = new char[_capacity+1];
+				strcpy(_str, str);
+			}
+			String(size_t n, char ch)
+				:_size(n)
+				, _capacity(n)
+				, _str(new char[n + 1])
+			{
+				memset(_str, ch, n);
+				_str[n] = '\0';
+			}
+			String(const String&s)
+				:_size(s._size)
+				, _capacity(s._size)
+			{
+				_str = new char[_capacity + 1];
+				strcpy(_str, s._str);
+			}
+			String(char* begin, char* end)
+			{
+				_size = end - begin;
+				_capacity = _size;
+				_str = new char[_size + 1];
+				strncpy(_str, begin, _size);
+				_str[_size] = '\0';
+			}
+			String& operator=(const String& s)
+			{
+				if (this != &s)
+				{
+					int len = strlen(s._str);
+					char *p = new char[len + 1];
+					strcpy(p, s._str);
+					delete[] _str;
+
+					_str = p;
+					_size = len;
+					_capacity = len;
+				}
+				return *this;
+			}
+			~String()
+			{
+				if (_str)
+				{
+					delete[] _str;
+					_str = nullptr;
+					_capacity = 0;
+					_size = 0;
+				}
+			}
+			/*String(const String& s)
+				:_str(nullptr)
+				, _size(0)
+				, capacity(0)
+			{
+				String tmp(s);
+				this->Swap(tmp);
+			}
+*/
+			////迭代器
+			////容量操作
+			////运算符重载
+		private:
+			char* _str;
+			size_t _capacity;
+			size_t _size;
+		};
+	}
+
+	int main()
+	{
+		return 0;
+	}
