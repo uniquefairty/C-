@@ -756,87 +756,500 @@ private:
 	}
 #endif
 
-	namespace bit
-	{
-		class String
-		{
-		public:
-			////拷贝构造函数
-			String(const char* str = " ")
-			{
-				_size = strlen(str);
-				_capacity = _size;
-				_str = new char[_capacity+1];
-				strcpy(_str, str);
-			}
-			String(size_t n, char ch)
-				:_size(n)
-				, _capacity(n)
-				, _str(new char[n + 1])
-			{
-				memset(_str, ch, n);
-				_str[n] = '\0';
-			}
-			String(const String&s)
-				:_size(s._size)
-				, _capacity(s._size)
-			{
-				_str = new char[_capacity + 1];
-				strcpy(_str, s._str);
-			}
-			String(char* begin, char* end)
-			{
-				_size = end - begin;
-				_capacity = _size;
-				_str = new char[_size + 1];
-				strncpy(_str, begin, _size);
-				_str[_size] = '\0';
-			}
-			String& operator=(const String& s)
-			{
-				if (this != &s)
-				{
-					int len = strlen(s._str);
-					char *p = new char[len + 1];
-					strcpy(p, s._str);
-					delete[] _str;
 
-					_str = p;
-					_size = len;
-					_capacity = len;
-				}
-				return *this;
-			}
-			~String()
-			{
-				if (_str)
-				{
-					delete[] _str;
-					_str = nullptr;
-					_capacity = 0;
-					_size = 0;
-				}
-			}
-			/*String(const String& s)
-				:_str(nullptr)
-				, _size(0)
-				, capacity(0)
-			{
-				String tmp(s);
-				this->Swap(tmp);
-			}
-*/
-			////迭代器
-			////容量操作
-			////运算符重载
-		private:
-			char* _str;
-			size_t _capacity;
-			size_t _size;
-		};
-	}
 
+#if 0
+#include<string>
 	int main()
 	{
+		string url("http://www.cplusplus.com/reference/string/find");
+		cout << url <<endl;
+		size_t start = url.find("://");
+		if (start == string::npos)
+		{
+			cout << "invalid url" << endl;
+			return 0;
+		}
+		start += 3;
+		size_t finish = url.find('/', start);
+		string address = url.substr(start, finish - start);
+		cout << address << endl;
+
+		size_t pos = url.find("://");
+		url.erase(0, pos + 3);
+		cout << url << endl;
 		return 0;
 	}
+#endif
+	//////////////////////////////
+	//模拟实现string类
+#if 1
+
+#include<iostream>
+using namespace std;
+#include<assert.h>
+	class String
+	{
+	private:
+		char* _str;
+		size_t _capacity;
+		size_t _size;
+		static size_t npos;//静态成员变量在类外定义
+	public:
+		typedef char* iterator;
+		
+	public:
+		////拷贝构造函数
+		String(const char* str = " ")
+		{
+			_size = strlen(str);
+			_capacity = _size;
+			_str = new char[_capacity + 1];
+			strcpy(_str, str);
+		}
+		String(size_t n, char ch)
+			:_size(n)
+			, _capacity(n)
+			, _str(new char[n + 1])
+		{
+			memset(_str, ch, n);
+			_str[n] = '\0';
+		}
+		String(const String&s)
+			:_size(s._size)
+			, _capacity(s._size)
+		{
+			_str = new char[_capacity + 1];
+			strcpy(_str, s._str);
+		}
+		String(char* begin, char* end)
+		{
+			_size = end - begin;
+			_capacity = _size;
+			_str = new char[_size + 1];
+			strncpy(_str, begin, _size);
+			_str[_size] = '\0';
+		}
+		String& operator=(const String& s)
+		{
+			if (this != &s)
+			{
+				int len = strlen(s._str);
+				char *p = new char[len + 1];
+				strcpy(p, s._str);
+				delete[] _str;
+
+				_str = p;
+				_size = len;
+				_capacity = len;
+			}
+			return *this;
+		}
+		~String()
+		{
+			if (_str)
+			{
+				delete[] _str;
+				_str = nullptr;
+				_capacity = 0;
+				_size = 0;
+			}
+		}
+		/*String(const String& s)
+		:_str(nullptr)
+		, _size(0)
+		, capacity(0)
+		{
+		String tmp(s);
+		this->Swap(tmp);
+		}
+		*/
+		////迭代器
+		iterator begin()
+		{
+			return _str;
+		}
+		iterator end()
+		{
+			return _str + _size;
+		}
+		//修改操作
+		void  PushBack(char c)
+		{
+			if (_size == _capacity)
+			{
+				Reserve(_capacity * 2);
+			}
+			_str[_size++] = c;
+			_str[_size] = '\0';
+		}
+
+		String& operator+=(char c)
+		{
+			PushBack(c);
+			return *this;
+		}
+		String& operator+=(const char* str)
+		{
+			for (size_t i=0; i < strlen(str); i++)
+			{
+				PushBack(str[i]);
+			}
+			return *this;
+		}
+		String& operator+=(const String& s)
+		{
+			for (size_t i=0; i < s.Size(); i++)
+			{
+				PushBack(s[i]);
+			}
+			return *this;
+
+		}
+		void Append(const char* str)
+		{
+			for (size_t i=0; i < strlen(str); i++)
+			{
+				PushBack(str[i]);
+			}
+		}
+		void Clear()
+		{
+			_size = 0;
+			_str[_size] = '\0';
+		}
+		void Swap(String& s)
+		{
+			swap(_str, s._str);
+			swap(_size, s._size);
+			swap(_capacity, s._capacity);
+		}
+		const char* C_str()const
+		{
+			return _str;
+		}
+
+		//容量操作
+		size_t Size() const
+		{
+			return _size;
+		}
+		size_t Capacity()const
+		{
+			return _capacity;
+		}
+		bool Empty()const
+		{
+			return 0 == _size;
+		}
+		void Resize(size_t newSize,char c='h')//改变有效字符
+		{
+			size_t oldSize = _size;
+			if (newSize>oldSize)
+			{
+				if (newSize > _capacity)
+				{
+					Reserve(newSize);
+					memset(_str + _size, c, newSize - oldSize);
+				}
+			}
+			_size = newSize;
+			_str[newSize] = '\0';
+		}
+		void Reserve(size_t newCapacity)//扩容
+		{
+			size_t oldCapacity = _capacity;
+			if (newCapacity > oldCapacity)
+			{
+				char* str = new char[newCapacity+1];
+				strcpy(str, _str);
+
+				delete[] _str;
+				_str = str;
+				_capacity = newCapacity;
+			}
+		}
+		////运算符重载
+		char& operator[](size_t index)
+		{
+			assert(index < _size);
+			return _str[index];
+		}
+		const char& operator[](size_t index)const
+		{
+			assert(index < _size);
+			return _str[index];
+		}
+		bool operator<(const String& s)
+		{
+			size_t minsize = _size<s.Size() ? _size : s.Size();
+			while (s._str&&_str)
+			{
+				for (size_t i = 0; i < minsize; i++)
+				{
+					if (_str[i] < s[i])
+					{
+						return true;
+					}
+					else if (_str[i]>s[i])
+					{
+						return false;
+					}
+				}
+			}
+			if (Size() < s.Size())
+			{
+				return true;
+			}
+			return false;
+
+		}
+		bool operator<=(const String& s)
+		{
+			size_t minsize = _size<s.Size() ? _size: s.Size();
+			while (s._str&&_str)
+			{
+				for (size_t i = 0; i < minsize; i++)
+				{
+					if (_str[i] < s[i])
+					{
+						return true;
+					}
+					else if (_str[i]>s[i])
+					{
+						return false;
+					}
+				}
+			}
+			if (Size() <= s.Size())
+			{
+				return true;
+			}
+			return false;
+		}
+		bool operator>(const String& s)
+		{
+			size_t minsize = _size<s.Size() ? _size : s.Size();
+			while (s._str&&_str)
+			{
+				for (size_t i = 0; i < minsize; i++)
+				{
+					if (_str[i] >s[i])
+					{
+						return true;
+					}
+					else if (_str[i]<s[i])
+					{
+						return false;
+					}
+				}
+			}
+			if (Size() > s.Size())
+			{
+				return true;
+			}
+			return false;
+		}
+		bool operator>=(const String& s)
+		{
+			size_t minsize = _size<s.Size() ? _size : s.Size();
+			while (s._str&&_str)
+			{
+				for (size_t i = 0; i < minsize; i++)
+				{
+					if (_str[i] >s[i])
+					{
+						return true;
+					}
+					else if (_str[i]<s[i])
+					{
+						return false;
+					}
+				}
+			}
+			if (Size() >= s.Size())
+			{
+				return true;
+			}
+			return false;
+		}
+		bool operator==(const String& s)
+		{
+			if (Size() == s.Size())
+			{
+				for (size_t i = 0; i < Size(); i++)
+				{
+					if (_str[i] != s._str[i])
+						return false;
+				}
+			}
+			return true;
+		}
+		bool operator!=(const String& s)
+		{
+			if (Size() == s.Size())
+			{
+				for (size_t i = 0; i < Size(); i++)
+				{
+					if (_str[i] != s._str[i])
+						return true;
+				}
+			}
+			return false;
+		}
+		//查找
+		//返回ch在string中第一次出现的位置
+		size_t Find(char ch, size_t pos = 0)const
+		{
+			for (size_t i = pos; i < _size; i++)
+			{
+				if (ch == _str[i])
+					return i;
+			}
+			return npos;
+		}
+		//返回子串在string中第一次出现的位置
+		size_t Find(const char*s, size_t pos = 0)const
+		{
+			//char *ret = strstr(_str, s);
+			size_t i = 0;
+			size_t j = 0;
+			size_t len = strlen(s);
+			while (i < _size&&j <len )
+			{
+				if (_str[i] == s[j])
+				{
+					i++;
+					j++;
+				}
+				else
+				{
+					i++;
+					j = 0;
+				}
+			}
+			if (j == len)
+				return i-j;
+			else
+				return -1;
+
+		}
+		//从pos位往前找ch
+		size_t RFind(char ch, size_t pos = npos)
+		{
+			if (pos == npos)
+				pos = _size - 1;
+
+			for (int i = pos; i >= 0; i--)
+			{
+				if (ch == _str[i])
+				{
+					return i;
+				}
+			}
+			return npos;
+		}
+		//在str中pos位置开始截取n个字符
+		String substr(size_t pos = 0, size_t n = npos)
+		{
+			if (n == npos)
+				n = _size;
+			String temp(_str + pos, _str + pos + n);//区间构造
+			return temp;
+		}
+
+		String& Insert(size_t pos, char c)
+		{
+			if (pos < _size)
+			{
+				if (_size + 1 < _capacity)
+					Reserve(_capacity * 2);
+
+				for (int i = _size-1; i >= pos; i--)
+				{
+					_str[i + 1] = _str[i];
+				}
+			}
+				_str[pos] = c;
+				_size++;
+				_str[_size] = '\0';
+				return *this;
+		}
+		String& Insert(size_t pos, char* str)
+		{
+			while (_size + strlen(str) > _capacity)
+			{
+				Reserve(_capacity * 2);
+			}
+			for (size_t i = _size - 1, j = _size + strlen(str) - 1; i >= pos; i--, j--)
+			{
+				_str[j] = _str[i];
+			}
+			
+			for (size_t i = pos, j = 0; j <strlen(str); i++, j++)
+			{
+				_str[i] = str[j];
+			}
+			_size += strlen(str);
+		
+			_str[_size] = '\0';
+
+			return *this;
+		}
+
+		//删除pos位置的元素，并返回该元素的下一个位置
+		String& Erase(size_t pos, size_t len);
+
+		friend ostream& operator<<(ostream& _cout, const String& s)
+		{
+			_cout << s.C_str();
+			return _cout;
+		}
+
+	};
+	size_t String::npos = -1;
+	void TestString()
+	{
+		String s1("hello");
+		String s2("xixi");
+		s1.PushBack(' ');
+		s1.PushBack('b');
+
+		s1.Append("it");
+
+		s1 += "hehe";
+		s1 += s2;
+
+		if (s1 > s2)
+		{
+			cout << "s1>s2" << endl;
+		}
+		else
+		{
+			cout << "s1<s2" << endl;
+		}
+
+		cout << s1 << endl;
+
+		size_t pos1 = s1.Find('e');
+		cout << pos1 << endl;
+		size_t pos2= s1.Find("ll");
+		cout << pos2 << endl;
+
+		cout << s2.RFind('x') << endl;
+	
+		s1.Insert(4, 'j');
+		s2.Insert(2, "jiang");
+
+
+		cout << s1 << endl;
+		cout << s2 << endl;
+
+
+	}
+	int main()
+	{
+		TestString();
+		return 0;
+	}
+#endif
