@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-#include<vector>
+//#include<vector>
 #if 0
 void TestVector1()
 {
@@ -456,6 +456,7 @@ int main()
 	}
 #endif
 
+#if 0
 	int main()
 	{
 		int a[] = { 1, 2, 3, 4 };
@@ -471,6 +472,7 @@ int main()
 		}
 		cout << '\n';
 
+		//vector<int>::iterator it=v.begin();
 		auto it = v.begin();
 		while (it != v.end())
 		{
@@ -478,10 +480,361 @@ int main()
 			it++;
 		}
 		cout << '\n';
+
 		for (auto e : v)
 		{
 			cout << e << " ";
 		}
 
+		pos = find(v.begin(), v.end(), 30);
+		v.erase(pos);
+
+		for (auto e : v)
+		{
+			cout << e << " ";
+		}
+
+
+		return 0;
+	}
+#endif
+
+#if 0
+	int main()
+	{
+		int a[] = { 1, 2, 3, 4 };
+		vector<int> v(a, a + sizeof(a) / sizeof(int));
+
+		vector<int>::iterator pos = find(v.begin(), v.end(),3);
+		/*v.erase(pos);
+		cout << *pos << endl;*/
+
+		//在pos添加数据，导致pos迭代器失效
+		//insert会导致迭代器失效，是因为insert可能会导致增容，增容后pos还指向原来的空间
+		//而原来的空间已将释放
+		v.insert(pos, 30);
+		cout << *pos << endl;
+		/*v.insert(pos, 30);
+		cout << *pos << endl;*/
+
+
+		return 0;
+	}
+#endif
+
+#if 0
+	int main()
+	{
+		int a[] = { 1,2,3,4 };
+		vector<int> v(a, a + sizeof(a) / sizeof(int));
+		//erase会返回删除位置的下一个位置                                  
+
+		/*auto it = v.begin();
+		while (it != v.end())
+		{
+		if (*it % 2 == 0)
+		v.erase(it);
+
+		++it;
+		}*/
+		//程序崩溃
+
+		auto it = v.begin();
+		while (it != v.end())
+		{
+			if (*it % 2 == 0)
+			{
+				it = v.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
+
+		return 0;
+
+	}
+#endif
+
+#include<assert.h>
+	namespace bit
+	{ 
+		template<class T>
+		class vector
+		{
+		public:
+			//vector迭代器是一个原生指针
+			typedef T iterator;
+			typedef const T* const_iterator;
+
+			//////构造与销毁
+			vector()
+				:_start(nullptr)
+				, _finish(nullptr)
+				, _endofStoragr(nullptr)
+			{}
+
+			vector(int n, const T&data)
+				:_start(new T[n])
+			{
+				for (size_t i = 0; i < n; ++i)
+				{
+					_start[i] = data;
+				}
+				_finish = _start + n;
+				_endofStorage = _finish;
+			}
+
+			//vector(int n, const T&value = T())
+			//	:_start(nullptr)
+			//	, _finish(nullptr)
+			//	, endofStorage(nullptr)
+			//{
+			//	reserve(n);
+			//	while (n--)
+			//	{
+			//		push_back(value);
+			//	}
+			//}
+
+			//如果使用iterator做迭代器，会导致初始化的迭代器[first，last）只能是vector的迭代器
+			//重新声明迭代器，迭代器区间[firsr，last]可以是任意容器的迭代器
+
+			template<class InputIterator>
+			vector(InputIterator first, InputIterator last)
+			{
+				size_t n = 0;//计算[first,last)区间中元素的个数
+				auto it = first;
+				while (it != last)
+				{
+					++it;
+					++n;
+				}
+
+				_start = new T[n];//申请空间
+
+				for (size_t i = 0; i < n; i++)
+				{
+					_start[i] = *first++;
+				}
+				_finish = _start + n;
+				_endofStorage = _start + n;
+			}
+			//vector(IntputIterator first, IntputIterator last)
+			//{
+			//	reserve(last - first);//扩容
+			//	while (first != last)
+			//	{
+			//		push_back(*first);
+			//		first++;
+			//	}
+			//}
+
+			vector(const vector<T>& v)//拷贝构造
+				:_start(nullptr)
+				, _finish(nullptr)
+				, _endofStorage(nullptr)
+			{
+				reserve(v.capacity());//申请相同的容量大小
+				iterator it = begin();//it指向需要拷贝的对象
+				const_iterator vit = v.cbegin();//vit指向被拷贝的对象
+
+				while (vit != v.cend())
+				{
+					*it++ = *vit++;
+				}
+
+				_finish = _start + v.size();
+				_endofStorage = _start + v.capacity();
+			}
+
+			vector<T>& operator=(vector<T> v)
+			{
+				swap(v);
+				retirn *this;
+			}
+
+			~vector()
+			{
+				if (_start)
+				{
+					delete[] _start;
+					_start = _finish = _endofStorage = nullptr;
+				}
+			}
+			//////迭代器
+			iterator begin()
+			{
+				return _start;
+			}
+			iterator end()
+			{
+				return _finish;
+			}
+
+			const_iterator cbegin()
+			{
+				return _start;
+			}
+			const_iterator cend()
+			{
+				return _finish;
+			}
+
+			//////容量
+			size_t size()const
+			{
+				return _finish - start;
+			}
+			size_t capacity()const
+			{
+				return _endofStorage - _start;
+			}
+			bool empty()const
+			{
+				return _start == _finish;
+			}
+
+			void reserve(size_t newcapacity)
+			{
+				if (newcapacity > capacity())
+				{
+					
+					T* temp = new T[newcapacity];//1.申请空间
+					//2.拷贝元素
+					//memset（temp，_start, size()*sizeof(T));
+					size_t oldsize = size();
+
+					if (_start)//如果start指向的空间存在
+					{
+						for (size_t i = 0; i < oldsize; i++)
+							tmp[i] = _start[i];
+					}
+
+					_start = tmp;
+					_finish = _start + oldsize;
+					_endofStorage = _start + newcapacity;
+				}
+			}
+
+			void resize(size_t n, const T& value = T())
+			{
+				//1.如果小于当前的size，则数据个数缩小
+				if (n <= size())
+				{
+					_finish = _start + n;
+					return;
+				}
+
+				//2.空间不够则扩容
+				if (n > capacity())
+				{
+					reserve(n);
+				}
+
+				//3.将size扩大到n
+				iterator it = _finish;
+				iterator _finish = _start + n;
+				while (it != _finish)
+				{
+					*it = value;
+					it++;
+				}
+			}
+			//////访问操作
+			T& operator[](size_t pos)
+			{
+				assert(pos < size());
+				return _start[pos];
+			}
+			const T& operator[](size_t pos)const
+			{
+				assert(pos < size());
+				return _start[pos];
+			}
+			T& front()
+			{
+				return *_start;
+			}
+			const T& front()const
+			{
+				return *_start;
+			}
+			T& back()
+			{
+				return *(_finish - 1);
+			}
+			const T&back()const
+			{
+				return *(finish - 1);
+			}
+			//////修改操作
+
+			void push_back(const T& x)
+			{
+				insert(end(), x);
+			}
+			void pop_back()
+			{
+				erase(--end());
+			}
+			void swap(vector<T>& v)
+			{
+				swap(_start, v._start);
+				swap(_finish, v._finish);
+				swap(_endofStorage, v._endofStorage);
+			}
+
+			iterator insert(iterator pos, const T& x)
+			{
+				assert(pos <= _finish);
+
+				//空间不够进行增容
+				if (_finish == _endofStorage)//检测是否需要扩容
+				{
+					//size_t size = size();
+					size_t newcapacity = (0 == capacity()) ? 1 : capacity() * 2;
+					reserve(newcapacity);
+
+					//如果发生扩容，需要重置pos????/？?????????????????????????????????????????????????????
+					//pos = _start + size;
+
+				}
+				iterator end = _finish - 1;
+				while (end >= pos)
+				{
+					*(end + 1) = *end;
+					--end;
+				}
+
+				//插入新元素
+				*pos = x;
+				++_finish;
+				return pos;
+			}
+
+			//返回删除数据的下一个数据
+			iterator erase(iterator pos)
+			{
+				auto it = pos + 1;//pos代表待搬移元素的位置
+				while (it != _finish)
+				{
+					*(it - 1) = *it;
+					++it;
+				}
+				--_finish;
+				return pos;
+			}
+
+		private:
+			iterator _start;//指向数据块的开始
+			iterator _finish;//指向有效数据的尾
+			iterator _endofStorage;//指向存储容量的尾
+		};
+
+	}
+	int main()
+	{
 		return 0;
 	}
