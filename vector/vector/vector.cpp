@@ -1,5 +1,5 @@
-#include<iostream>
-using namespace std;
+//#include<iostream>
+//using namespace std;
 //#include<vector>
 #if 0
 void TestVector1()
@@ -557,8 +557,35 @@ int main()
 	}
 #endif
 
+
+#if 0
+#include<iostream>
+	using namespace std;
+#include<vector>
+#include<list>
+#include<string>
+	int main()
+	{
+		vector<const char*> oldstyle;
+		oldstyle.push_back("getout!");
+		oldstyle.push_back("ok");
+		oldstyle.push_back("now!");	
+		list<string> names; 	
+		//范围for	
+		for (auto i : oldstyle)        //这里的auto自动判定对象类型	
+		{		
+			cout << i << endl;	
+		}   
+		return 0;
+	}
+#endif
+
+
+#if 1
 #include<assert.h>
-	namespace bit
+#include<iostream>
+using namespace std;
+	namespace bite
 	{ 
 		template<class T>
 		class vector
@@ -601,26 +628,28 @@ int main()
 			//如果使用iterator做迭代器，会导致初始化的迭代器[first，last）只能是vector的迭代器
 			//重新声明迭代器，迭代器区间[firsr，last]可以是任意容器的迭代器
 
-			template<class InputIterator>
-			vector(InputIterator first, InputIterator last)
-			{
-				size_t n = 0;//计算[first,last)区间中元素的个数
-				auto it = first;
-				while (it != last)
-				{
-					++it;
-					++n;
-				}
+			//template<class InputIterator>
+			//vector(InputIterator first, InputIterator last)
+			//{
+			//	size_t n = 0;//计算[first,last)区间中元素的个数
+			//	auto it = first;
+			//	while (it != last)
+			//	{
+			//		++it;
+			//		++n;
+			//	}
 
-				_start = new T[n];//申请空间
+			//	_start = new T[n];//申请空间
 
-				for (size_t i = 0; i < n; i++)
-				{
-					_start[i] = *first++;
-				}
-				_finish = _start + n;
-				_endofStorage = _start + n;
-			}
+			//	for (size_t i = 0; i < n; i++)
+			//	{
+			//		_start[i] = *first++;
+			//	}
+			//	_finish = _start + n;
+			//	_endofStorage = _start + n;
+			//}
+
+
 			//vector(IntputIterator first, IntputIterator last)
 			//{
 			//	reserve(last - first);//扩容
@@ -630,6 +659,24 @@ int main()
 			//		first++;
 			//	}
 			//}
+
+			template<class Iterator>
+			vector(Iterator first, Iterator last)
+			{
+				size_t n = 0;
+				auto it = first;
+				while (it != last)
+				{
+					++it;
+					++n;
+				}
+
+				_start = new T[n];
+				for (size_t i = 0; i < n; i++)
+					_start[i] = *first++;
+				_finish = _start + n;
+				_endofStorage = _start + n;
+			}
 
 			vector(const vector<T>& v)//拷贝构造
 				:_start(nullptr)
@@ -827,14 +874,58 @@ int main()
 				return pos;
 			}
 
+			void clear()
+			{
+				_finish = _start;
+			}
+			friend ostream operator << (ostream _cout, vector& v)
+			{
+				_cout << v << endl;
+				return _cout;
+			}
 		private:
-			iterator _start;//指向数据块的开始
-			iterator _finish;//指向有效数据的尾
-			iterator _endofStorage;//指向存储容量的尾
+			T* _start;//指向数据块的开始
+			T* _finish;//指向有效数据的尾
+			T* _endofStorage;//指向存储容量的尾
 		};
 
+	}
+
+	void TestVector()
+	{
+		bite::vector<int> first;
+		bite::vector<int> second(4, 100);
+		bite::vector<int> third(second.begin(), second.end());
+		bite::vector<int> fourth(third);
+
+
+		int myints[] = { 18, 2, 77, 29 };
+		bite::vector<int> fifth(myints, myints + sizeof(myints) / sizeof(int));
+
+		cout << "The contents of fifth are:";
+		//bite::vector<int>::iterator it = fifth.begin();
+
+		auto it = fifth.end();
+		while (it != fifth.end())
+		{
+			cout << *it << endl;
+			++it;
+		}
+		cout << endl;
+
+		for (auto &e : fifth)
+			e *= 3;
+
+		for (auto e : fifth)
+			cout << e << " ";
+		cout << endl;
 	}
 	int main()
 	{
 		return 0;
 	}
+
+#endif
+
+
+		
