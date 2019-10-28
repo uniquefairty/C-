@@ -592,14 +592,14 @@ using namespace std;
 		{
 		public:
 			//vector迭代器是一个原生指针
-			typedef T iterator;
+			typedef T* iterator;
 			typedef const T* const_iterator;
 
 			//////构造与销毁
 			vector()
 				:_start(nullptr)
 				, _finish(nullptr)
-				, _endofStoragr(nullptr)
+				, _endofStorage(nullptr)
 			{}
 
 			vector(int n, const T&data)
@@ -684,6 +684,7 @@ using namespace std;
 				, _endofStorage(nullptr)
 			{
 				reserve(v.capacity());//申请相同的容量大小
+
 				iterator it = begin();//it指向需要拷贝的对象
 				const_iterator vit = v.cbegin();//vit指向被拷贝的对象
 
@@ -878,11 +879,6 @@ using namespace std;
 			{
 				_finish = _start;
 			}
-			friend ostream operator << (ostream _cout, vector& v)
-			{
-				_cout << v << endl;
-				return _cout;
-			}
 		private:
 			T* _start;//指向数据块的开始
 			T* _finish;//指向有效数据的尾
@@ -905,7 +901,7 @@ using namespace std;
 		cout << "The contents of fifth are:";
 		//bite::vector<int>::iterator it = fifth.begin();
 
-		auto it = fifth.end();
+		auto it = fifth.begin();
 		while (it != fifth.end())
 		{
 			cout << *it << endl;
@@ -922,10 +918,10 @@ using namespace std;
 	}
 	int main()
 	{
+		TestVector();
 		return 0;
 	}
 
 #endif
 
 
-		

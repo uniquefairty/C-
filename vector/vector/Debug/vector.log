@@ -1,14 +1,29 @@
-﻿生成启动时间为 2019/10/25 19:09:29。
+﻿生成启动时间为 2019/10/26 10:16:34。
      1>项目“E:\githab代码\C-\vector\vector\vector.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt vector.cpp
          vector.cpp
-     1>e:\githab代码\c-\vector\vector\vector.cpp(911): error C2100: 非法的间接寻址
-     1>e:\githab代码\c-\vector\vector\vector.cpp(911): error C2088: “<<”: 对于 class 非法
-     1>e:\githab代码\c-\vector\vector\vector.cpp(916): error C2100: 非法的间接寻址
-     1>e:\githab代码\c-\vector\vector\vector.cpp(919): error C2100: 非法的间接寻址
+     1>e:\githab代码\c-\vector\vector\vector.cpp(608): warning C4018: “<”: 有符号/无符号不匹配
+                 e:\githab代码\c-\vector\vector\vector.cpp(605): 编译类 模板 成员函数“bite::vector<int>::vector(int,const T &)”时
+                 with
+                 [
+                     T=int
+                 ]
+                 e:\githab代码\c-\vector\vector\vector.cpp(893): 参见对正在编译的函数 模板 实例化“bite::vector<int>::vector(int,const T &)”的引用
+                 with
+                 [
+                     T=int
+                 ]
+                 e:\githab代码\c-\vector\vector\vector.cpp(892): 参见对正在编译的类 模板 实例化“bite::vector<int>”的引用
+     1>e:\githab代码\c-\vector\vector\vector.cpp(689): error C2662: “const int *bite::vector<int>::cbegin(void)”: 不能将“this”指针从“const bite::vector<int>”转换为“bite::vector<int> &”
+                 转换丢失限定符
+                 e:\githab代码\c-\vector\vector\vector.cpp(681): 编译类 模板 成员函数“bite::vector<int>::vector(const bite::vector<int> &)”时
+                 e:\githab代码\c-\vector\vector\vector.cpp(895): 参见对正在编译的函数 模板 实例化“bite::vector<int>::vector(const bite::vector<int> &)”的引用
+     1>e:\githab代码\c-\vector\vector\vector.cpp(691): error C2662: “const int *bite::vector<int>::cend(void)”: 不能将“this”指针从“const bite::vector<int>”转换为“bite::vector<int> &”
+                 转换丢失限定符
+     1>e:\githab代码\c-\vector\vector\vector.cpp(691): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
      1>已完成生成项目“E:\githab代码\C-\vector\vector\vector.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
 生成失败。
 
-已用时间 00:00:00.74
+已用时间 00:00:01.56
