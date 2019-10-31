@@ -150,6 +150,28 @@ int main()
 }
 #endif
 
+#if 0
+#include <iostream>
+#include <list>
+
+int main ()
+{
+	std::list<int> mylist;
+
+	for (int i=1; i<10; ++i) mylist.push_back(i);
+
+	mylist.reverse();
+
+	std::cout << "mylist contains:";
+	for (std::list<int>::iterator it=mylist.begin(); it!=mylist.end(); ++it)
+		std::cout << ' ' << *it;
+
+	std::cout << '\n';
+
+	return 0;
+}
+#endif
+#if 1
 namespace bit
 {
 	//list:带头结点双向循环列表
@@ -159,7 +181,7 @@ namespace bit
 	{
 		ListNode(const T&data = T())
 			:_pNext(nullptr)
-			, _pPer(nullptr)
+			, _pPre(nullptr)
 			, _data(data)
 		{}
 		ListNode<T> * _pNext;
@@ -200,13 +222,13 @@ namespace bit
 		}
 		Self& operator--()
 		{
-			_pCur = _pcur->_pPer;
+			_pCur = _pCur->_pPre;
 			return *this;
 		}
 		Self operator--(int)
 		{
 			Self temp(*this);
-			_pCur = _pCur->__pPer;
+			_pCur = _pCur->__pPre;
 			return temp;
 		}
 		//4.比较
@@ -244,7 +266,7 @@ namespace bit
 		//3.移动
 		Self& operator++()
 		{
-			--it;
+			--_it;
 			return *this;
 		}
 		Self operator++(int)
@@ -255,13 +277,13 @@ namespace bit
 		}
 		Self& operator--()
 		{
-			++it;
+			++_it;
 			return(*this);
 		}
 		Self operator--(int)
 		{
 			Self temp(*this);
-			++it;
+			++_it;
 			return temp;
 		}
 		//4.比较
@@ -311,7 +333,7 @@ namespace bit
 			Node *pCur = L._pHead->_pNext;
 			while (pCur != L._pHead)
 			{
-				push_back(pCur->data);
+				push_back(pCur->_data);
 				pCur = pCur->_pNext;
 			}
 		}
@@ -329,7 +351,7 @@ namespace bit
 			{
 				clear();
 				Node* pCur = L._pHead->_pNext;
-				while (pCur != _pHead)
+				while (pCur != L._pHead)
 				{
 					push_back(pCur->_data);
 					pCur = pCur->_pNext;
@@ -337,11 +359,11 @@ namespace bit
 			}
 			return *this;
 		}
-		list<T>& operator=(const list<T> L)
+		/*list<T>& operator=(const list<T> L)
 		{
 			this->swap(L);
 			return *this;
-		}
+		}*/
 		~list()
 		{
 			clear();
@@ -402,19 +424,19 @@ namespace bit
 		//元素访问
 		T& front()
 		{
-			return _pHead->_pNext->data;
+			return _pHead->_pNext->_data;
 		}
 		const T& front()const
 		{
-			return _pHead->_pNext->data;
+			return _pHead->_pNext->_data;
 		}
 		T& back()
 		{
-			return _pHead->_pPer->_data;
+			return _pHead->_pPre->_data;
 		}
 		const T& back()const
 		{
-			return _pHead->_pPPer->_data;
+			return _pHead->_pPre->_data;
 		}
 		///////////////////////////////////
 		//修改
@@ -435,17 +457,17 @@ namespace bit
 			erase(begin());
 		}
 		//在pos为之前插入值为data的结点
-		iterator insert(iterator pos, const T& data)
+		iterator insert(iterator pos, const T& data)		
 		{
-			Node* pNewNode = new Node(data);
-			Node* pCur = pos._pCur;
-			pNewNode->_pPre = pCur->_pPre;
-			pNewNode->_pNext = pCur;
-			pNewNode->_pPre->_pNext = pNewNode;
-			pCur->_pPre = pNewNode;
-
-			return iterator(pNewNode);
+			Node* pNewNode = new Node(data);		
+			Node* pCur = pos._pCur;		
+			pNewNode->_pPre = pCur->_pPre;	
+			pNewNode->_pNext = pCur;		
+			pNewNode->_pPre->_pNext = pNewNode;		
+			pCur->_pPre = pNewNode;		
+			return iterator(pNewNode); 
 		}
+		
 		//删除pos位置的结点，返回该节点的下一个位置
 		iterator erase(iterator pos)
 		{
@@ -466,7 +488,7 @@ namespace bit
 			{
 				_pHead->_pNext = pCur->_pNext;
 				delete pCur;
-				pCur = pHead->_pNext;
+				pCur = _pHead->_pNext;
 			}
 			_pHead->_pNext = _pHead;
 			_pHead->_pPre = _pHead;
@@ -486,7 +508,97 @@ namespace bit
 			Node* _pHead;
 	};
 }
+
+
+#include<vector>
+//检测list的构造
+void TestList1()
+{
+	bit::list<int> L1;
+	bit::list<int> L2(10, 5);
+	PrintList(L2);
+	auto it = L2.begin();
+	while (it != L2.end())
+	{
+		cout << *it << " ";
+		++it;
+	}
+	cout << endl;
+
+	vector<int> v{ 1, 2, 3, 4, 5 };
+	bit::list<int> L3(v.begin(),v.end());
+	//PrintList(L3);
+
+	for (auto e : L3)
+		cout << e<<" ";
+	cout << endl;
+
+	bit::list<int> L4(L3);
+	//PrintList(L4);
+	auto rit = L4.rbegin();
+	while (rit != L4.rend())
+	{
+		cout << *rit << " ";
+		++rit;
+	}
+	cout << endl;
+
+	L1 = L4;
+	//PrintList(L1);
+	for (auto e : L1)
+		cout << e<<" ";
+	cout << endl;
+
+}
+void TestList2()
+{
+	bit::list<int> L;
+	L.push_back(1);
+	L.push_back(2);
+	L.push_back(3);
+	L.push_back(4);
+
+	cout << L.size() << endl;
+	cout << L.front() << endl;
+	cout << L.back() << endl;
+	L.push_front(0);
+	cout << L.size() << endl;
+	cout << L.front() << endl;
+	cout << L.back() << endl;
+	L.pop_back();
+	cout << L.size() << endl;
+	cout << L.front() << endl;
+	cout << L.back() << endl;
+	L.pop_front();
+	cout << L.size() << endl;
+	cout << L.front() << endl;
+	cout << L.back() << endl;
+	L.clear();
+	if (L.empty())
+	{
+		cout << "clear is Ok" << endl;
+	}
+}
+void TestList3()
+{
+	bit::list<int> L;
+	L.push_back(1);
+	L.push_back(2);
+	L.push_back(3);
+	L.resize(10, 5);
+	for (auto e : L)
+		cout << e << " ";
+	cout << endl;
+	L.resize(2);
+	for (auto e : L)
+		cout << e << " ";
+	cout << endl;
+}
 int main()
 {
+	TestList1();
+	//TestList2();
+	//TestList3();
 	return 0;
 }
+#endif

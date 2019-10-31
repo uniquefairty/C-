@@ -1,13 +1,37 @@
-﻿生成启动时间为 2019/10/30 0:50:26。
+﻿生成启动时间为 2019/10/30 10:12:48。
      1>项目“E:\githab代码\C-\List\List\List.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt list.cpp
          list.cpp
-       Link:
-         D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\githab代码\C-\List\Debug\List.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\githab代码\C-\List\Debug\List.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\githab代码\C-\List\Debug\List.lib" /MACHINE:X86 Debug\list.obj
-         List.vcxproj -> E:\githab代码\C-\List\Debug\List.exe
-     1>已完成生成项目“E:\githab代码\C-\List\List\List.vcxproj”(Rebuild 个目标)的操作。
+     1>e:\githab代码\c-\list\list\list.cpp(318): warning C4018: “<”: 有符号/无符号不匹配
+                 e:\githab代码\c-\list\list\list.cpp(315): 编译类 模板 成员函数“bit::list<int>::list(int,const T &)”时
+                 with
+                 [
+                     T=int
+                 ]
+                 e:\githab代码\c-\list\list\list.cpp(535): 参见对正在编译的函数 模板 实例化“bit::list<int>::list(int,const T &)”的引用
+                 with
+                 [
+                     T=int
+                 ]
+                 e:\githab代码\c-\list\list\list.cpp(534): 参见对正在编译的类 模板 实例化“bit::list<int>”的引用
+     1>e:\githab代码\c-\list\list\list.cpp(517): error C2662: “bit::list_iterator<T> bit::list<T>::begin(void)”: 不能将“this”指针从“const bit::list<int>”转换为“bit::list<int> &”
+                 with
+                 [
+                     T=int
+                 ]
+                 转换丢失限定符
+                 e:\githab代码\c-\list\list\list.cpp(536): 参见对正在编译的函数 模板 实例化“void PrintList<int>(const bit::list<int> &)”的引用
+     1>e:\githab代码\c-\list\list\list.cpp(518): error C3536: “it”:  初始化之前无法使用
+     1>e:\githab代码\c-\list\list\list.cpp(518): error C2662: “bit::list_iterator<T> bit::list<T>::end(void)”: 不能将“this”指针从“const bit::list<int>”转换为“bit::list<int> &”
+                 with
+                 [
+                     T=int
+                 ]
+                 转换丢失限定符
+     1>e:\githab代码\c-\list\list\list.cpp(518): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
+     1>已完成生成项目“E:\githab代码\C-\List\List\List.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:01.78
+已用时间 00:00:00.74
