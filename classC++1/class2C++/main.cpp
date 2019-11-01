@@ -579,7 +579,7 @@ int main()
 #if 0
 void TestFor(int array[])//退化成指针  for循环迭代的范围必须明确
 {
-	for (auto& e : array)
+	for (auto& e : array)//编译不通过
 	{
 		cout << e << " ";
 	}
@@ -594,6 +594,7 @@ int main()
 }
 #endif
 
+#if 0
 void Test(int)
 {
 	cout << "Test(int)" << endl;
@@ -612,3 +613,4 @@ int  main()
 	Test(nullptr);
 	return 0;
 }
+#endif

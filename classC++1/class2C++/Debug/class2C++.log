@@ -1,14 +1,15 @@
-﻿生成启动时间为 2019/9/17 14:51:15。
-     1>项目“E:\githab代码\C-\classC++1\class2C++\class2C++.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2019/10/28 21:24:43。
+     1>项目“E:\githab代码\C-\classC++1\class2C++\class2C++.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
-         D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /Zi /nologo /W3 /WX- /sdl /Od /Ob1 /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /Zi /nologo /W3 /WX- /sdl /Od /Ob1 /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt a.cpp main.cpp
          main.cpp
-       Link:
-         D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\githab代码\C-\classC++1\Debug\class2C++.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\githab代码\C-\classC++1\Debug\class2C++.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\githab代码\C-\classC++1\Debug\class2C++.lib" /MACHINE:X86 Debug\a.obj
-         Debug\main.obj
-         class2C++.vcxproj -> E:\githab代码\C-\classC++1\Debug\class2C++.exe
-     1>已完成生成项目“E:\githab代码\C-\classC++1\class2C++\class2C++.vcxproj”(Build 个目标)的操作。
+     1>main.cpp(583): error C3312: 未找到类型“int []”的可调用“begin”函数
+     1>main.cpp(583): error C3312: 未找到类型“int []”的可调用“end”函数
+     1>main.cpp(584): error C2065: “e”: 未声明的标识符
+         a.cpp
+         正在生成代码...
+     1>已完成生成项目“E:\githab代码\C-\classC++1\class2C++\class2C++.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:01.52
+已用时间 00:00:03.18

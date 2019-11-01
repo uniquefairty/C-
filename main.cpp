@@ -774,7 +774,6 @@ private:
 		size_t finish = url.find('/', start);
 		string address = url.substr(start, finish - start);
 		cout << address << endl;
-
 		size_t pos = url.find("://");
 		url.erase(0, pos + 3);
 		cout << url << endl;
@@ -783,7 +782,7 @@ private:
 #endif
 	//////////////////////////////
 	//模拟实现string类
-#if 1
+#if 0
 
 #include<iostream>
 using namespace std;
@@ -1253,3 +1252,93 @@ using namespace std;
 		return 0;
 	}
 #endif
+
+#if 0
+	class Solution {
+	public:
+		void reverseString(vector<char>& s) {
+			if (s.size()>0)
+			{
+
+				auto start = s.begin();
+				auto end = s.end() - 1;
+
+				while (start != end)
+				{
+					char temp = *start;
+					*start = *end;
+					*end = temp;
+					start++;
+					end--;
+				}
+
+			}
+
+
+		}
+	};
+
+#endif
+
+#include<string>
+	class Solution {
+	public:
+		string reverseVowels(string s) {
+
+			string a;
+			a.append("aoeiuAOEIU");
+
+			size_t i = 0;
+			size_t j = s.size() - 1;
+
+			while (i<j)
+			{
+				if (a.find(s[i]) && a.find(s[j]))
+					swap(s[i++], s[j--]);
+				else
+				{
+					i++;
+					j--;
+				}
+			}
+
+			return s;
+
+		}
+	};
+		
+	int main()
+	{
+		string s("hello");
+		string a;
+		a.append("aoeiuAOEIU");
+
+		size_t i = 0;
+		size_t j = s.size() - 1;
+
+		while (i<j)
+		{
+			while (a.find(s[i]) == string::npos&&i<j)
+				i++;
+			
+			while (a.find(s[j]) == string::npos&&i<j)
+				j--;
+			char temp = s[i];
+			s[i] = s[j];
+			s[j] = temp;
+			//swap(s[i++], s[j--]);
+			i++;
+			j--;
+
+			
+			/*if (a.find(s[i]) != string::npos && a.find(s[j]) != string::npos)
+				swap(s[i++], s[j--]);
+			else
+			{
+				i++;
+				j--;
+			}*/
+		}
+		cout << s << endl;
+		return 0;
+	}
