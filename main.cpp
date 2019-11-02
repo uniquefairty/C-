@@ -1342,3 +1342,99 @@ using namespace std;
 		cout << s << endl;
 		return 0;
 	}
+
+	class Solution {
+	public:
+		string reverseVowels(string s) {
+
+			string a;
+			a.append("aoeiuAOEIU");
+
+			size_t i = 0;
+			size_t j = s.size() - 1;
+
+
+
+			while (i<j)
+			{
+				while (a.find(s[i]) == string::npos&&i<j)
+					i++;
+
+				while (a.find(s[j]) == string::npos&&i<j)
+					j--;
+				swap(s[i++], s[j--]);
+
+			}
+			return s;
+		}
+	};
+
+	class Solution {
+
+	public:
+		bool Test(char c)
+		{
+			return c == 'a' || c == 'o' || c == 'e' || c == 'i' || c == 'u'
+				|| c == 'A' || c == 'O' || c == 'E' || c == 'I' || c == 'U';
+		}
+		string reverseVowels(string s) {
+			int left = 0;
+			int right = s.size() - 1;
+
+			while (left<right)
+			{
+				if (Test(s[left]))
+				{
+					if (Test(s[right]))
+					{
+						swap(s[left++], s[right++]);
+					}
+					else
+					{
+						right++;
+					}
+				}
+				else
+				{
+					left++;
+				}
+
+			}
+
+			return s;
+		}
+	};
+
+
+	class Solution {
+
+	public:
+
+		string reverseVowels(string s) {
+
+			int left = 0, right = s.size() - 1;
+			while (left < right)
+			{
+				if (isVowel(s[left]) && isVowel(s[right]))
+				{
+					swap(s[left++], s[right--]);
+				}
+				else if (isVowel(s[left]))
+				{
+					--right;
+				}
+				else
+				{
+					++left;
+				}
+			}
+			return s;
+		}
+
+		bool isVowel(char c)
+		{
+			return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'
+				|| c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
+		}
+
+	};
