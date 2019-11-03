@@ -1280,6 +1280,7 @@ using namespace std;
 
 #endif
 
+#if 0
 #include<string>
 	class Solution {
 	public:
@@ -1438,3 +1439,134 @@ using namespace std;
 		}
 
 	};
+#endif
+
+#if 0
+	
+#include<string>
+
+	bool isLetterOrNumber(char ch)
+	{
+		return (ch >= '0'&&ch <= '9') || (ch>'a'&&ch<'z');
+	}
+	bool isPalindrome(string s)
+	{
+		int left = 0;
+		int right = s.size() - 1;
+
+		for (int i = 0; i<s.size(); i++)
+		{
+			if (s[i]>'A'&&s[i]<'Z')
+			{
+				s[i] = s[i] + 32;
+			}
+		}
+
+
+
+		while (left < right)
+		{
+			if (isLetterOrNumber(s[left]) && left <= right)
+			{
+				if (isLetterOrNumber(s[right]) && left <= right)
+				{
+					if (s[left] == s[right])
+					{
+						left++;
+						right--;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					right--;
+				}
+			}
+			else
+			{
+				left++;
+			}
+		}
+		return true;
+
+	}
+
+
+	int main()
+	{
+		string s("race a car");
+		isPalindrome(s);
+		cout << isPalindrome(s);
+		return 0;
+	}
+#endif
+
+#if 0
+	//字符串相加
+	class Solution {
+	public:
+		string addStrings(string num1, string num2) {
+			string s;
+			int end1 = num1.size() - 1;
+			int end2 = num2.size() - 1;
+			int value1 = 0, value2 = 0, count = 0;
+
+			while (end1 >= 0 || end2 >= 0)
+			{
+				//num1十进制的数值
+				if (end1 >= 0)
+					value1 = num1[end1--] - '0';
+				else
+					value1 = 0;
+
+				//num2十进制的数值
+				if (end2 >= 0)
+					value2 = num2[end2--] - '0';
+				else
+					value2 = 0;
+
+				int sum = value1 + value2 + count;
+				if (sum>9)
+				{
+					count = 1;
+					sum -= 10;
+				}
+				else
+				{
+					count = 0;
+				}
+				s.insert(s.begin(), sum + '0');
+			}
+
+
+
+			if (count == 1)
+				s.insert(s.begin(), '1');
+
+
+			return s;
+
+		}
+	};
+
+#endif
+	//字符串相乘
+
+	string multiply(string num1, string num2)
+	{
+		string s;
+		int end1 = num1.size() - 1;
+		int end2 = num2.size() - 1;
+
+		int longer = end1 > end2 ? end1 : end2;
+		int small = end1 > end2 ? end2 : end1;
+
+		for (; longer >= 0;longer--)
+		{
+
+		}
+		
+	}
