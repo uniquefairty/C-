@@ -720,3 +720,192 @@ void Print()
 }
 #endif
 
+#if 0
+
+//统计一个类创建了多少对象
+class Person
+{
+public:
+	Person(const string& name, const string& gender, int age)
+		:_name(name)
+		, _gender(gender)
+		, _age(age)
+	{
+		++_count;
+	}
+	Person(const Person& p)
+		:_name(p._name)
+		, _gender(p._gender)
+		, _age(p._age)
+	{
+		++_count;
+	}
+	~Person()
+	{
+		--_count;
+	}
+protected:
+	string _name;
+	string _gender;
+	int _age;
+public:
+	static size_t _count;
+};
+size_t Person::_count = 0;
+
+class Student :public Person
+{
+public:
+	Student(const string& name,const string& gender,int age,int stuld)
+		:Person(name,gender,age)
+		, _stuld(stuld)
+	{}
+	Student(const Student& s)
+		:Person(s)
+		, _stuld(s._stuld)
+	{}
+protected:
+	int _stuld;
+};
+class Teacher :public Person
+{
+public:
+	Teacher(const string& name,const string gender,int age,int stuld)
+		:Person(name,gender,age)
+		, _stuld(stuld)
+	{}
+	Teacher(const Teacher& s)
+		:Person(s)
+		, _stuld(s._stuld)
+	{}
+protected:
+	int _stuld;
+};
+
+void TestPerson()
+{
+	Person p("111", "男", 18);
+	Student s("222", "女", 34, 23);
+
+	cout << Person::_count << endl;
+	cout << Student::_count << endl;
+	Student::_count = 0;
+	cout << Person::_count << endl;
+
+	cout << &Person::_count << endl;
+	cout << &Student::_count << endl;
+	cout << &Teacher::_count << endl;
+}
+int main()
+{
+	TestPerson();
+	return 0;
+}
+#endif 
+
+
+#if 0
+class B
+{
+public:
+	int _b;
+};
+
+class C1 :public B
+{
+public:
+	int _c1;
+};
+
+class C2 :public B
+{
+public:
+	int _c2;
+};
+
+class D :public C1, public C2
+{
+public:
+	int _d;
+};
+int main()
+{
+	cout << sizeof(D) << endl;
+	D d;
+	//d._b = 2; //菱形继承缺陷：会存在二义性
+	d.C1::_b = 1;
+	d._c1 = 4;
+
+	d.C2::_b = 3;
+	d._c2 = 5;
+
+	d._d = 5;
+	return 0;
+
+}
+#endif
+
+#if 0
+class B
+{
+public:
+	int _b;
+};
+
+class C1 :virtual public B
+{
+public:
+	int _c1;
+};
+
+class C2 :virtual public B
+{
+public:
+	int _c2;
+};
+
+class D : public C1, public C2
+{
+public:
+	int _d;
+};
+int main()
+{
+	cout << sizeof(D) << endl;
+	D d;
+	d._b = 1; 
+	d._c1 = 2;
+	d._c2 = 3;
+    d._d = 4;
+	return 0;
+
+}
+#endif
+
+
+// Car和BMW Car和Benz构成is-a的关系
+class Car{
+protected:
+	string _colour = "白色"; // 颜色
+	string _num = "陕ABIT00"; // 车牌号
+};
+class BMW : public Car{
+public:
+	void Drive() { cout << "好开-操控" << endl; }
+};
+class Benz : public Car{
+public:
+	void Drive() { cout << "好坐-舒适" << endl; }
+};
+// Tire和Car构成has-a的关系
+class Tire{
+protected:
+	string _brand = "Michelin"; // 品牌
+	size_t _size = 17; // 尺寸
+};
+class Car{
+protected:
+	string _colour = "白色"; // 颜色
+	string _num = "陕ABIT00"; // 车牌号
+	Tire _t; // 轮胎
+};
