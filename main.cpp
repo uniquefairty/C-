@@ -1554,19 +1554,35 @@ using namespace std;
 
 #endif
 	//字符串相乘
-
+	//先用num1的每个数乘以num2存入一个string中
+	//push_back('0')
+	//再字符串相加
 	string multiply(string num1, string num2)
 	{
 		string s;
 		int end1 = num1.size() - 1;
 		int end2 = num2.size() - 1;
 
-		int longer = end1 > end2 ? end1 : end2;
-		int small = end1 > end2 ? end2 : end1;
+		int value1= 0, value2 = 0;
+		//int count = 0;
 
-		for (; longer >= 0;longer--)
+		for (; end1 >= 0;end1--)
 		{
+			value1 = num1[end1]-'0';
+			int sum = 0, next = 0;
+			for (; end2 >= 0; end2--)
+			{
+				
+				value2 = num2[end2] - '0';
+				sum = value1*value2+next;
 
+				while (sum > 9)
+				{
+					sum -= 10;
+					next++;
+				}
+				s += (sum + '0');
+			}
 		}
 		
 	}
