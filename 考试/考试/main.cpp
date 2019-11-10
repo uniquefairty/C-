@@ -1,66 +1,29 @@
 #include<iostream>
 using namespace std;
+
+#if 0
+//////消除字符后面重复的字符
 #include<string>
-#if 0
 int main()
 {
 	string s;
-	cin >> s;
-	int j = 0;;
-	int a[256] = { 0 };
-	for (size_t i = 0; i < s.size(); i++)
-			{
-					a[s[i]]++;
-					if (a[s[i]] == 1)
-					{
-						j++;
-						cout << s[i];
-					}
-						
-			}
-	s[j] = '\0';
-	
-
-//	//for (size_t i = 0; i < s.size(); i++)
-//	{
-//		a[s[i]]++;
-//	}
-//	for (size_t i = 0; i < s.size(); i++)
-//	{
-//		while (s[i] && a[s[i]] == 1)
-//			cout << s[i];
-//	}
-//*/
-	return 0;
-}
-#endif
-
-#if 0
-int main()
-{
-	string s;
-	cin >> s;
-
-	for (size_t i = 0; i < s.size(); i++)
+	while(cin >> s)
 	{
-
-		for (size_t j = i+1; j < s.size(); j++)
+		int a[256] = { 0 };//用256的数组进行标记
+		for (size_t i = 0; i < s.size(); i++)
 		{
-			if (s[j] == s[i])
+			a[s[i]]++;
+			if (a[s[i]] == 1)
 			{
-				s.erase(j);
+				cout << s[i];
 			}
 		}
-
-
+		cout<<endl;
 	}
-
-	cout << s;
-	system("pause");
 	return 0;
 }
-
 #endif
+
 
 #if 0
 #include<iostream>
@@ -234,6 +197,324 @@ int main()
 }
 #endif
 
+#if 0
+//反转字符串
+class Solution {
+public:
+	void reverseString(vector<char>& s) {
+		if (s.size()>0)
+		{
+			vector<char>::iterator p;
+			vector<char>::iterator q;
+			p = s.begin();
+			q = s.end() - 1;
+			while (p < q)
+			{
+				char tmp = *p;
+				*p = *q;
+				*q = tmp;
+				p++;
+				q--;
+			}
+		}
+	}
+};
+
+class Solution {
+public:
+	void reverseString(vector<char>& s) {
+
+		if (s.size()>0)
+		{
+			size_t start = 0;
+			size_t end = s.size() - 1;
+
+			while (start != end)
+			{
+				char temp = s[start];
+				s[start] = s[end];
+				s[end] = temp;
+				start++;
+				end--;
+			}
+		}
+
+
+	}
+};
+#endif
+
+#if 0
+#include<string>
+
+bool isLetterOrNumber(char ch)
+{
+	return (ch >= '0'&&ch <= '9') || (ch>'a'&&ch<'z');
+}
+bool isPalindrome(string s)
+{
+	int left = 0;
+	int right = s.size() - 1;
+
+	for (int i = 0; i<s.size(); i++)
+	{
+		if (s[i]>'A'&&s[i]<'Z')
+		{
+			s[i] = s[i] + 32;
+		}
+	}
+
+
+
+	while (left < right)
+	{
+		if (isLetterOrNumber(s[left]) && left <= right)
+		{
+			if (isLetterOrNumber(s[right]) && left <= right)
+			{
+				if (s[left] == s[right])
+				{
+					left++;
+					right--;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				right--;
+			}
+		}
+		else
+		{
+			left++;
+		}
+	}
+	return true;
+
+}
+
+
+int main()
+{
+	string s("race a car");
+	isPalindrome(s);
+	cout << isPalindrome(s);
+	return 0;
+}
+#endif
+
+#if 0
+//#include<iostream>
+//using namespace std;
+#include<stdio.h>
+#include<vector>
+int main()
+{
+	int n = 0;
+	cin >> n;
+	int count = n * 3;
+	int sum = 0;
+	vector<int> v;
+	v.reserve(n * 3);
+	while (count--)
+	{
+		int val;
+		//scanf("%d", &val);
+		cin >> val;
+		v.push_back(val);
+	}
+	//qsort(v.begin(), v.end());//排序
+
+	for (auto i = v.begin(); i != v.end(); i++)
+	{
+		for (auto j = i + 1; j != v.end(); j++)
+		{
+			if (*i > *j)
+			{
+				swap(*i, *j);
+			}
+		}
+	}
+	auto rit = v.begin() + n;
+	while (n--)
+	{
+		sum += *rit;
+	}
+	cout << sum;
+
+	return 0;
+}
+#endif
+
+#if 0
+#include<iostream>
+using namespace std;
+#include<string>
+
+////////c错误
+int main()
+{
+	string s1;
+	string s2;
+	//cin >> s1;
+	//cin >> s2;
+	s1 += "i an jiangliang";
+	s2 += "ang";
+
+	for (int i = 0; i < s2.size(); i++)
+	{
+		int pos = s1.find(s2[i]);
+		if (pos != string::npos)
+		{
+			s1.erase(pos, 1);
+			pos = s1.find(s2[i]);
+		}
+	}
+
+	cout << s1 << endl;
+
+	return 0;
+}
+
+#endif
+
+#if 0
+#include<string>
+int main()
+{
+	string s1;
+	string s2;
+	while (getline(cin, s1))
+	{
+		getline(cin, s2);
+		for (int i = 0; i < s2.size(); i++)
+		{
+			int pos = s1.find(s2[i]);
+			while (pos != string::npos)
+			{
+				s1.erase(pos, 1);
+				pos = s1.find(s2[i]);
+			}
+		}
+		cout << s1 << endl;
+	}
+
+	return 0;
+}
+#endif
+
+#if 0
+//反转字符串中的单词
+#include<iostream>
+using namespace std;
+#include<string>
+
+int main()
+{
+	string s1;
+	string s2;
+	//while (getline(cin, s1))
+	//{
+	getline(cin, s1);
+	while (!s1.empty())
+	{
+		size_t pos = s1.rfind(" ");
+		if (pos != string::npos)
+		{
+			s2 += s1.substr(pos);
+			s2 += ' ';
+			s1.erase(pos);
+		}
+		else
+		{
+			s2.append(s1.begin(), s1.end());
+			break;
+		}
+	}
+	s2 += '\0';
+	cout << s2 << endl;
+	//}
+	return 0;
+}
+#endif
+
+#include<iostream>
+using namespace std;
+#include<vector>
+
+int main()
+{
+	int num;
+	int count = 0;
+	vector<int> v;
+	cin >> num;
+	//v.reserve(num);
+	for (int i = 0; i<num; i++)
+	{
+		int x; cin >> x;
+		v.push_back(x);
+	}
+	auto it = v.begin() + 1;
+	while (it != v.end())
+	{
+		while (*(it - 1) < *it&&it != v.end()) it++;
+		count++;
+		while (*(it - 1) >= *it&&it != v.end())  it++;
+		count++;
+	}
+	cout << count << endl;
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
+//分糖果
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a, b, c;
+	int num1, num2, num3, num4;
+	while (cin >> num1 >> num2 >> num3 >> num4)
+	{
+		if ((num1 + num3) % 2 != 0 || (num2 + num4) % 2 != 0 ||
+			num1>30 || num1<-30 || num2>30 || num2<-30 ||
+			num3>30 || num3<-30 || num4>30 || num4<-30)
+		{
+			cout << "No" << endl;
+		}
+		else
+		{
+			a = (num1 + num3) / 2;
+			b = num3 - a;
+			c = num4 - b;
+			cout << a << " " << b << " " << c;
+		}
+	}
+
+
+	return 0;
+}
+
+#endif
+
+#if 0
 #include<iostream>
 using namespace std;
 #include<vector>
@@ -251,4 +532,25 @@ int main()
 		m = m - m%n;
 	}
 	return 0;
+}
+#endif
+
+#if 0
+int main(void)
+{
+	printf("%s , %5.3s\n", "computer", "computer");
+	return 0;
+}
+#endif
+
+int main()
+{
+	int year = 1009;
+	int* p = &year;
+	//*p +=1;
+	*p++;
+	cout << p<<endl;
+	cout << year;
+	return 0;
+
 }
