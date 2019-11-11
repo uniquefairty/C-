@@ -441,6 +441,7 @@ int main()
 }
 #endif
 
+#if 0
 #include<iostream>
 using namespace std;
 #include<vector>
@@ -470,7 +471,7 @@ int main()
 	return 0;
 }
 
-
+#endif
 
 
 
@@ -543,6 +544,7 @@ int main(void)
 }
 #endif
 
+#if 0
 int main()
 {
 	int year = 1009;
@@ -554,3 +556,143 @@ int main()
 	return 0;
 
 }
+#endif
+
+////11.10///////////////////////////////////////////////
+#if 0
+//统计回文
+#include<iostream>
+using namespace std;
+#include<string>
+bool Func(string s)
+{
+	size_t start = 0, end = s.size() - 1;
+	for (; start <= end; start++, end--)
+	{
+		if (s[start] != s[end])
+			return false;
+	}
+	return true;
+}
+int main()
+{
+	string str1, str2, str3;
+	while (cin >> str1 >> str2)
+	{
+		int count = 0;
+		int i = 0;
+		str3 = str1;
+		if (str1.empty() || str2.empty())
+			return 0;
+		while (i <= str1.size())
+		{
+			if (!str3.empty())
+			{
+				str3.erase(str3.begin(), str3.end());
+			}
+			str3 = str1;
+			str3.insert(i, str2);
+			if (Func(str3))
+				count++;
+			i++;
+		}
+		cout << count << endl;
+	}
+	return 0;
+}
+
+#endif
+
+#if 0
+//连续最大和
+#include<iostream>
+using namespace std;
+#include<vector>
+int main()
+{
+	int n;
+	vector<int> v;
+	cin >> n;
+	v.resize(n);
+	for (size_t i = 0; i<n; i++)
+		cin >> v[i];
+	int sum = v[0], res = v[0];
+	for (size_t i = 1; i<n; i++)
+	{
+		sum += v[i];
+		if (sum<v[i])
+			sum = v[i];
+		if (sum>res)
+			res = sum;
+	}
+	cout << res << endl;
+	return 0;
+}
+#endif
+/////////11.11/////////////////////
+#if 0
+class Solution {
+public:
+	int StrToInt(string str) {
+		if (str.empty())
+			return 0;
+		int symbol = 1;
+		if (str[0] == '-')
+		{
+			symbol = -1;
+			str[0] = '0';
+		}
+		else if (str[0] == '+')
+		{
+			symbol = 1;
+			str[0] = '0';
+		}
+
+		int sum = 0;
+		for (int i = 0; i<str.size(); i++)
+		{
+			if (str[i]<'0' || str[i]>'9')
+			{
+				sum = 0;
+				break;
+			}
+			sum = sum * 10 + str[i] - '0';
+		}
+		return symbol*sum;
+	}
+};
+#endif
+
+#if 0
+////分蛋糕
+#include<iostream>
+using namespace std;
+#include<vector>
+int main()
+{
+	int w, h, res = 0;
+	cin >> w >> h;
+	vector<vector<int>> a;
+	a.resize(w);
+	for (auto& e : a)
+		e.resize(h, 1);
+
+	for (int i = 0; i<w; i++)
+	{
+		for (int j = 0; j<h; j++)
+		{
+			if (a[i][j] == 1)
+			{
+				res++;
+				if ((i + 2)<w)
+					a[i + 2][j] = 0;
+				if ((j + 2)<h)
+					a[i][j + 2] = 0;
+			}
+		}
+	}
+	cout << res;
+	return 0;
+}
+
+#endif
