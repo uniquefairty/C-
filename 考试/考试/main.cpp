@@ -490,22 +490,36 @@ int main()
 using namespace std;
 int main()
 {
+	int num1, num2, num3, num4;
+	cin >> num1 >> num2 >> num3 >> num4;
+	int a = (num1 + num3) / 2;
+	int c = (num4 - num2) / 2;
+	int b1 = (num3 - num1) / 2;
+	int b2 = (num2 + num4) / 2;
+	if (b1 != b2)
+		cout << "No";
+	else
+		cout << a << " " << b1 << " " << c;
+	return 0;
+}
+int main1()
+{
 	int a, b, c;
 	int num1, num2, num3, num4;
 	while (cin >> num1 >> num2 >> num3 >> num4)
 	{
-		if ((num1 + num3) % 2 != 0 || (num2 + num4) % 2 != 0 ||
-			num1>30 || num1<-30 || num2>30 || num2<-30 ||
-			num3>30 || num3<-30 || num4>30 || num4<-30)
-		{
-			cout << "No" << endl;
-		}
-		else
+		//用两组不同的数据计算的b值要相同。
+		//如果相等就说明数字有效，但如果不相等，则说明给出的数字是有误的，不满足题意
+		if ((num3 - num1) / 2 == (num4 + num2) / 2)
 		{
 			a = (num1 + num3) / 2;
 			b = num3 - a;
 			c = num4 - b;
 			cout << a << " " << b << " " << c;
+		}
+		else
+		{
+			cout << "No" << endl;
 		}
 	}
 
@@ -631,6 +645,7 @@ int main()
 #endif
 /////////11.11/////////////////////
 #if 0
+//字符串转整数
 class Solution {
 public:
 	int StrToInt(string str) {
@@ -696,3 +711,243 @@ int main()
 }
 
 #endif
+
+#if 0
+
+//在32位cpu上选择缺省对齐的情况下，有如下结构体定义：
+struct A{
+	unsigned a : 19;
+	unsigned b : 11;
+	unsigned c : 4;
+	unsigned d : 29;
+	char index;
+};
+int main(){
+	cout << sizeof(struct A) << endl;
+	return 0;
+}
+//则sizeof（struct A）的值为（）
+#endif
+
+#if 0
+////////////f斐波那契额
+#include<iostream>
+using namespace std;
+#include<vector>
+//1.排列出数jv  2.找区间  3.找差值
+int main()
+{
+	int N, res1, res2, i;
+	cin >> N;
+	vector<int> v;
+	if (N == 1)
+		cout << 0;
+	v.push_back(0);
+	v.push_back(1);
+	for (i = 2; i<N; i++)
+	{
+		v.push_back(v[i - 1] + v[i - 2]);
+		if (v[i] == N)
+		{
+			cout << "0";
+			break;
+		}
+		else if (v[i]>N)
+		{
+			res1 = v[i] - N;
+			res2 = N - v[i - 1];
+			if (res1<res2)
+				cout << res1;
+			else cout << res2;
+
+			break;
+		}
+	}
+	return 0;
+}
+#endif
+
+#if 0
+///////匹配括号
+bool chkParenthesis(string A, int n) {
+	// write code here
+	int left = 0;
+	int right = 0;
+	for (int i = 0; i<n; i++)
+	{
+		if (A[i] == '(')
+			left++;
+		else if (A[i] == ')')
+			right++;
+		else return false;
+
+		if (right>left)
+			return false;
+	}
+	if (left == right)
+		return true;
+}
+int main()
+{
+	int res=chkParenthesis("()(w))", 6);
+	cout << res;
+	return 0;
+}
+#endif
+
+#if 0 
+//最小公倍数
+#include<iostream>
+using namespace std;
+//两个数相乘除以他俩的公倍数
+int main()
+{
+	int A, B;
+	cin >> A >> B;
+	int min = A;
+	int max = B;
+	int tmp;
+	if (A>B)
+	{
+		tmp = min;
+		min = max;
+		max = tmp;
+	}
+	tmp = min;
+	//计算出公约数
+	for (; tmp; tmp--)
+	{
+		if (min%tmp == 0 && max%tmp == 0)
+		{
+			break;
+		}
+	}
+	cout << min*max / tmp;
+	return 0;
+}
+#endif
+
+#if 1
+/////////////////错误////////////////////////
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<string>
+//1.按字典排序--》strcmp
+bool Func1(vector<vector<char>> v,int n)
+{
+	int i = 0;
+	int j = 0;
+	for (j = 0; j < v[j].size(); j++)
+	{
+		for (i = 0; i < v.size()-1; i++)
+		{
+			if (v[i][j] > v[i+1][j])
+			{
+				return false;
+			}
+		}
+		if (j == v[n-1].size() - 1)
+			return true;
+	}
+}
+//2，按长度排序的
+bool Func2(vector<vector<char>> v,int n)
+{
+	for (int i = 0; i < v.size()-1&&i<n; i++)
+	{
+		if (v[i].size()>v[i + 1].size())
+			return false;
+	}
+}
+int main()
+{
+	int n;
+	cin >> n;
+	int i = 0;
+	int j = 0;
+	vector<vector<char>> v;
+	v.resize(n);
+	for (i = 0; i < n; i++)
+	{
+		string s;
+		cin >> s;
+		for (j = 0; j < s.size(); j++)
+		{
+			//v[i].push_back(s[j]);
+			v[i].resize(s.size());
+			v[i][j] = s[j];
+		}
+	}
+
+	Func1(v, n);
+	/*if (Func1(v,n) && Func2(v,n))
+		cout << "both";
+	else if (Func1(v,n))
+		cout << "lexicographically";
+	else if (Func2(v,n))
+		cout << "lengths";
+	else cout << "none";
+	*/
+	return 0;
+}
+#endif
+
+
+#if 0
+int addAB(int A, int B) {
+	// write code here
+	//分别异或：保留 
+	//与运算：扩大两倍
+	int res;
+	int a = A&B;//相同的部分
+	int b = A^B;//不同的部分
+	for (; a || b; a = A&B, b = A^B)
+	{
+		if (a != 0 && b != 0)
+		{
+			a <<= 1;
+			A = a;
+			B = b;
+		}
+		else if (a == 0)
+		{
+			res = b;
+			return res;
+		}
+		else if (b == 0)
+		{
+			res = a;
+			return res;
+		}
+	}
+}
+
+int main()
+{
+	cout << addAB(2, 3);
+	return 0;
+}
+#endif
+
+#if 0
+//只能往向下和向右走
+#include<iostream>
+using namespace std;
+int Func(int n, int m)
+{
+	if ((n >= 1) && (m == 1) || (n == 1) && (m >= 1))
+		return n + m;
+	else if (n>1 && m>1)
+		return Func(n - 1, m) + Func(n, m - 1);
+	else return 0;
+}
+int main()
+{
+	int n, m;
+	while (cin >> n >> m)
+		cout << Func(n, m) << endl;
+	return 0;
+}
+#endif
+
