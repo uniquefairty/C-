@@ -827,7 +827,7 @@ int main()
 }
 #endif
 
-#if 1
+#if 0
 /////////////////错误////////////////////////
 #include<iostream>
 using namespace std;
@@ -951,3 +951,359 @@ int main()
 }
 #endif
 
+
+#if 0
+////////////////////////////////cuowu 
+//下棋
+//class Board {
+//	//三竖 三横 两条对角线
+//public:
+//	bool checkWon(vector<vector<int> > board) {
+//		int i = 0, j = 0;
+//		if (board[1][1] == 1)
+//		{
+//			if (board[0][0] == 1 && board[2][2] == 1 ||
+//				board[0][2] == 1 && board[2][0] == 1 ||
+//				board[1][0] == 1 && board[1][2] == 1 ||
+//				board[0][1] == 1 && board[2][1] == 1)
+//				return true;
+//		}
+//		if (board[0][0] == 1)
+//		{
+//			if (board[0][1] == board[0][2] == 1 ||
+//				board[1][0] == board[2][0] == 1)
+//				return true;
+//		}
+//		if (board[2][2] == 1)
+//		{
+//			if (board[0][2] == board[1][2] == 1 ||
+//				board[2][0] == board[2][1] == 1)
+//				return true;
+//		}
+//		return false;
+//	}
+//};
+
+#endif
+
+
+#if 0
+///密码保护问题
+#include<iostream>
+using namespace std;
+#include<string>
+int numchar(string str,int k)
+{
+	int small = 0;
+	int big = 0;
+	for (int i = 0; i<k; i++)
+	{
+		if (str[i] >= 65 && str[i] <= 90)
+			big++;
+		else if (str[i]>97 && str[i] <= 122)
+			small++;
+	}
+	if ((small + big) == 0)
+		return 0;
+	else if (small == k || big == k)
+		return 10;
+	else if (small>0 && big>0)
+		return 20;
+
+	return 0;
+}
+
+int numNumber(string str, int k)
+{
+	int num = 0;
+	for (int i = 0; i<k; i++)
+	{
+		if (str[i] - '0' >= 0 && str[i] - '0' <= 9)
+			num++;
+	}
+	if (num == 0)
+		return 0;
+	else if (num == 1)
+		return 10;
+	else return 20;
+}
+
+int numSymbal(string str, int k)
+{
+	int num = 0;
+	for (int i = 0; i<k; i++)
+	{
+		if (!(str[i] >= 65 && str[i] <= 90)
+			&& !(str[i] >= 97 && str[i] <= 122)
+			&& !(str[i] - '0' >= 0 && str[i] - '0' <= 9))
+			num++;
+	}
+	if (num == 0) return 0;
+	else if (num == 1)
+		return 10;
+	else return 25;
+}
+
+int main()
+{
+	string s;
+	cin >> s;
+	int sum1 = 0;
+	int sum2 = 0;
+	int sum3 = 0;
+	int sum4 = 0, sum5 = 0;
+	int k = s.size();
+	if (k<5) sum1 += 5;
+	else if (k < 8)sum1 += 10;
+	else sum1 += 25;
+
+	sum2 = numchar(s, k);
+	sum3 = numNumber(s, k);
+	sum4 = numSymbal(s, k);
+
+	if ((sum2>0) && (sum3>0) && (sum4>0))
+	{
+		if (sum2 == 10)
+		{
+			sum5 = 3;
+		}
+		else sum5 = 5;
+	}
+	else if (sum2>0 && sum3>0 && sum4 == 0)
+		sum5 = 3;
+
+	int sum = sum1 + sum2 + sum3 + sum4 + sum5;
+	if (sum >= 90) cout << "VERY_SECURE" << endl;
+	else if (sum >= 80) cout << "SECURE" << endl;
+	else if (sum >= 70) cout << "VERY_STRONG" << endl;
+	else if (sum >= 60) cout << "STRONG" << endl;
+	else if (sum >= 50) cout << "AVERAGE" << endl;
+	else if (sum >= 25) cout << "WEAK" << endl;
+	else cout << "VERY_WEAK" << endl;
+
+	return 0;
+
+}
+#endif
+
+#if 0
+#include<iostream>
+using namespace std;
+#include<string>
+int main()
+{
+	string s;
+	cin >> s;
+	int i;
+	for (i = 0; i < s.size(); i++)
+	{
+		if (s[i] == 'a' || s[i] == 'o' ||
+			s[i] == 'e' || s[i] == 'i' || s[i] == 'u')
+		{
+			cout << s[i];
+			break;
+		}
+	}
+	if (i == s.size())
+	{
+		cout << "n";
+	}
+	return 0;
+}
+#endif
+
+#if 0
+////6.
+#include<iostream>
+using namespace std;
+bool Func(int num)
+{
+	for (;num; num /= 10)
+	{
+		if (num % 10 == 2)
+			return false;
+	}
+	return true;
+}
+int main()
+{
+	int n;
+	cin >> n;
+	int num;
+	int count = 0;
+	for (num = 1; num <= n; num++)
+	{
+		if (Func(num))
+			count++;
+	}
+	cout << count;
+	return 0;
+}
+#endif
+
+#if 0
+///6
+#include<iostream>
+using namespace std;
+#include<vector>
+int main()
+{
+	int n, a, b, c, i;
+	int count = 0;
+	cin >> n;
+	cin >> a>>b>> c;
+
+	for (i = 1; i <= n; i++)
+	{
+		if (i%a != 0 && i%b != 0 && i%c != 0)
+			count++;
+	}
+	cout << count;
+	return 0;
+}
+#endif
+
+
+//int main()
+//{
+//	int n, m, r, c;
+//	cin >> n >> m;
+//	cin >> r >> c;
+//	
+//
+//	return 0;
+//}
+
+
+#if 1
+#include<iostream>
+using namespace std;
+#include<vector>
+
+//长度
+double len(vector<int> a, vector<int> b)
+{
+	double sum = pow(b[0] - a[0], 2) + pow(b[1] - a[1], 2) + pow(b[2] - a[2], 2);
+	return sqrt(sum);
+}
+bool Fun(vector<int> a, vector<int> b)
+{
+	if (a[2] > b[2])
+		return true;
+}
+int  main()
+{
+	int n,d;
+	double res=0;
+	double length = 0;
+	cin >> n;
+	vector<vector<int>> v;
+	v.resize(n);
+	for (int i = 0; i < v.size(); i++)
+	{
+		v[i].resize(3);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cin >> v[i][j];
+		}
+	}
+	cin >> d;
+
+	//排序数组
+
+	for (int i = 1; i < v.size(); i++)
+	{
+		length = 0;
+		length = len(v[0], v[i]);
+		if (length <= d)
+		{
+			//res += length;
+			for (int j = i + 1; j < v.size() && i < v.size(); j++, i = j)
+			{
+				if (len(v[i], v[j]) <= d&&Fun(v[i], v[j]))
+					length += len(v[i], v[j]);
+			}
+		}
+		if (length > res)
+		{
+			res = length;
+		}
+	}
+
+		/*for (int j = i + 1; j < v.size(); j++)
+		{
+			length += len(v[i], v[j]);
+		}
+		if (length > res)
+		{
+			res = length;
+		}*/
+	//}
+
+
+	/*for (int i = 0; i < v.size(); i++)
+	{
+		for (int j = i+1; j < v.size(); j++)
+		{
+			if (Fun(v[i], v[j]))
+			{
+				double length = len(v[i], v[j]);
+				if (length <= d)
+				{
+					if (length > res)
+					{
+						res = length;
+					}
+				}
+			}
+			
+		}
+	}*/
+	
+	cout << res;
+	//两个点之间的距离>d;
+
+	return 0;
+}
+#endif
+
+
+
+#if 0
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+	int n, m, k;
+	double sum = 0;
+	int arr[10][3], a[10] = { 0 };
+	cin >> n;
+	for (int i = 0; i < n; i++){
+		cin >> arr[i][0] >> arr[i][1] >> arr[i][2];
+	}
+	cin >> k;
+	double ree;
+	for (int i = 0; i < n; ++i){
+		m = i + 1;
+		if (arr[i + 1][2] > arr[i][2]){
+			m++;
+		}
+		if (a[i] != 0){
+			continue;
+		}
+		if (arr[i + 1][2] <= arr[i][2]){
+			ree = sqrt(pow((arr[i][0] - arr[m][0]), 2) + pow((arr[i][1] - arr[m][1]), 2) + pow((arr[i][2] - arr[m][2]), 2));
+
+			if (ree <= k){
+				sum += ree;
+				a[i]++;
+			}
+		}
+	}
+	printf("%.2f", sum);
+	return 0;
+}
+#endif
