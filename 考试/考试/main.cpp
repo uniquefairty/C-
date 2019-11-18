@@ -81,6 +81,7 @@ int main()
 }
 
 #endif
+
 #if 0
 #include<iostream>
 using namespace std;
@@ -1175,7 +1176,8 @@ int main()
 //}
 
 
-#if 1
+#if 0
+//修水道的题
 #include<iostream>
 using namespace std;
 #include<vector>
@@ -1307,3 +1309,123 @@ int main(){
 	return 0;
 }
 #endif
+
+#if 0
+
+#include <iostream>
+using namespace std;
+void func(char **m){
+	++m;
+	cout << *m << endl;//afternoon
+}
+int main(){
+	static char *a[] = { "morning", "afternoon", "evening" };
+	char **p;
+	p = a;
+	func(p);
+	return 0;
+}
+#endif
+
+
+//class Test{
+//public:
+//	int a;
+//	int b;
+//	virtual void fun() {}
+//	Test(int temp1 = 0, int temp2 = 0)
+//	{
+//		a = temp1;
+//		b = temp2;
+//	}
+//	int getA()
+//	{
+//		return a;
+//	}
+//	int getB()
+//	{
+//		return b;
+//	}
+//};
+//int main()
+//{
+//	Test obj(5, 10);
+//	// Changing a and b
+//	int* pInt = (int*)&obj;
+//	*(pInt + 0) = 100;
+//	*(pInt + 1) = 200;
+//	cout << "a=" << obj.getA() << endl;
+//	cout << "b = " << obj.getB() << endl;
+//	return 0;
+//}
+
+#if 0
+//找最近的祖先
+#include<vector>
+class LCA {
+public:
+	int Func(vector<int> v, int max)
+	{
+		for (int i = 0; i<v.size(); i++)
+		{
+			if (max == v[i])
+				return v[i];
+		}
+		return 0;
+	}
+public:
+	int getLCA(int a, int b) {
+		//先遍历出最小节点数的所有祖先节点
+		//遍历较大数的节点祖先数与其进行比较
+		int min = a;
+		int max = b;
+		vector<int> v;
+		if (a>b) swap(min, max);
+		int res = min;
+		while (min)
+		{
+			v.push_back(min);
+			min /= 2;
+		}
+		while (max)
+		{
+			if (Func(v, max))
+			{
+				return max;
+			}
+			max /= 2;
+		}
+
+	}
+};
+#endif
+
+#if 0
+#include<iostream>
+using namespace std;
+///找出二进数的中最大的连续1的个数
+int main()
+{
+	int num;
+	while (cin >> num)
+	{
+		int res = 0;
+		int count = 0;
+		for (; num; num >>= 1)
+		{
+			while (num && (num & 1 == 1))
+			{
+				count++;
+				num >>= 1;
+			}
+			if (res<count)
+				res = count;
+			count = 0;
+		}
+		cout << res << endl;
+	}
+
+	return 0;
+}
+#endif
+
