@@ -1,14 +1,16 @@
-﻿生成启动时间为 2019/11/18 22:47:03。
+﻿生成启动时间为 2019/11/19 21:52:01。
      1>项目“E:\githab代码\C-\考试\考试\考试.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
-         D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp test.cpp
+         test.cpp
+     1>e:\githab代码\c-\考试\考试\test.cpp(112): fatal error C1004: 发现意外的文件尾
          main.cpp
-     1>e:\githab代码\c-\考试\考试\main.cpp(1410): warning C4554: “&”: 检查运算符优先级可能存在的错误；使用圆括号阐明优先级
-     1>e:\githab代码\c-\考试\考试\main.cpp(1414): error C2143: 语法错误 : 缺少“;”(在“}”的前面)
-     1>e:\githab代码\c-\考试\考试\main.cpp(1415): error C2065: “res”: 未声明的标识符
-     1>e:\githab代码\c-\考试\考试\main.cpp(1416): error C2065: “res”: 未声明的标识符
+     1>e:\githab代码\c-\考试\考试\main.cpp(874): error C2563: 在形参表中不匹配
+     1>e:\githab代码\c-\考试\考试\main.cpp(874): error C2568: “<<”: 无法解析函数重载
+                 d:\vs\新建文件夹\vc\include\ostream(997): 可能是“std::basic_ostream<_Elem,_Traits> &std::endl(std::basic_ostream<_Elem,_Traits> &)”
+         正在生成代码...
      1>已完成生成项目“E:\githab代码\C-\考试\考试\考试.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
 生成失败。
 
-已用时间 00:00:01.03
+已用时间 00:00:01.89

@@ -731,7 +731,7 @@ int main(){
 #endif
 
 #if 0
-////////////f斐波那契额
+//斐波那契额数中距离这个数最小差值
 #include<iostream>
 using namespace std;
 #include<vector>
@@ -767,6 +767,36 @@ int main()
 	return 0;
 }
 #endif
+#if 0
+//斐波那契额数中距离这个数最小差值
+#include<iostream>
+using namespace std;
+int main()
+{
+	int N, res1 = 0, res2 = 0, f, f0 = 0, f1 = 1;
+	cin >> N;
+	while (1)
+	{
+		f = f0 + f1;
+		f0 = f1;
+		f1 = f;
+		if (f<N)
+		{
+			res1 = N - f;
+		}
+		else
+		{
+			//找到比N大的数
+			res2 = f - N;
+			break;
+		}
+	}
+
+	if (res1>res2) cout << res2 << endl;
+	else cout << res1 << endl;
+	return 0;
+}
+#endif
 
 #if 0
 ///////匹配括号
@@ -795,7 +825,36 @@ int main()
 	return 0;
 }
 #endif
-
+#if 0
+//匹配括号
+#include<stack>
+class Parenthesis {
+public:
+	bool chkParenthesis(string A, int n) {
+		stack<char> sc;
+		for(auto ele:A)
+		{
+			switch(ele)
+			{
+			case '(':
+				sc.push(ele);
+				break;
+			case')':
+			{
+				if(sc.empty()||sc.top()!='(')
+					return false;
+				else 
+					sc.pop();
+			}
+			break;
+			default:
+				return false;
+			}
+		}
+		return true;
+	}
+};
+#endif
 #if 0 
 //最小公倍数
 #include<iostream>
@@ -816,6 +875,7 @@ int main()
 	}
 	tmp = min;
 	//计算出公约数
+
 	for (; tmp; tmp--)
 	{
 		if (min%tmp == 0 && max%tmp == 0)
@@ -826,70 +886,63 @@ int main()
 	cout << min*max / tmp;
 	return 0;
 }
+/*int gcd(int a, int b)
+{
+int r;
+while(r = a%b){
+a = b;
+b = r;
+}
+return b;
+}*///辗转相除法
+//碾转相除法进行最大公约数的求解：即a与b的
+//最大公约数可以转化为a、b之间的余数为两者之间最小的数之间的公约数。所以对于输入的两个
+//数进行连续求余，直到余数为0，求余的分母即为结果。
 #endif
 
 #if 0
-/////////////////错误////////////////////////
+//字典排序问题
 #include<iostream>
 using namespace std;
-#include<vector>
 #include<string>
-//1.按字典排序--》strcmp
-bool Func1(vector<vector<char>> v,int n)
-{
-	int i = 0;
-	int j = 0;
-	for (j = 0; j < v[j].size(); j++)
-	{
-		for (i = 0; i < v.size()-1; i++)
-		{
-			if (v[i][j] > v[i+1][j])
-			{
-				return false;
-			}
-		}
-		if (j == v[n-1].size() - 1)
-			return true;
-	}
-}
-//2，按长度排序的
-bool Func2(vector<vector<char>> v,int n)
-{
-	for (int i = 0; i < v.size()-1&&i<n; i++)
-	{
-		if (v[i].size()>v[i + 1].size())
-			return false;
-	}
-}
+#include<vector>
 int main()
 {
 	int n;
 	cin >> n;
-	int i = 0;
-	int j = 0;
-	vector<vector<char>> v;
+	vector<string> v;
 	v.resize(n);
-	for (i = 0; i < n; i++)
+
+	for (auto& str : v)
+		cin >> str;
+
+	bool lenSym = true, lexSym = true;
+	//从i-1开始遍历，前后比较，比较长度
+	for (size_t i = 0; i<v.size(); i++)
 	{
-		string s;
-		cin >> s;
-		for (j = 0; j < s.size(); j++)
+		if (v[i - 1].size() >= v[i].size())
 		{
-			//v[i].push_back(s[j]);
-			v[i].resize(s.size());
-			v[i][j] = s[j];
+			lenSym = false;
+			break;
 		}
 	}
-
-	Func1(v, n);
-	/*if (Func1(v,n) && Func2(v,n))
-		cout << "both";
-	else if (Func1(v,n))
-		cout << "lexicographically";
-	else if (Func2(v,n))
-		cout << "lengths";
-	else cout << "none";
-	*/
+	//比较ASCII码
+	for (size_t i = 0; i<v.size(); i++)
+	{
+		if (v[i - 1] >= v[i])
+		{
+			lexSym = false;
+			break;
+		}
+	}
+	if (lenSym&&lexSym)
+		cout<<"both"<<endl;
+	else if(!lenSym&&lexSym)
+		cout<<"lexicographically"<<endl;
+	else if(lenSym&&!lexSym)
+		cout<<"lengths"<<endl;
+	else if(!lenSym&&!lexSym)
+		cout<<"none"<<endl;
 	return 0;
 }
 #endif
@@ -897,7 +950,6 @@ int main()
 
 #if 0
 int addAB(int A, int B) {
-	// write code here
 	//分别异或：保留 
 	//与运算：扩大两倍
 	int res;
@@ -1327,38 +1379,6 @@ int main(){
 }
 #endif
 
-
-//class Test{
-//public:
-//	int a;
-//	int b;
-//	virtual void fun() {}
-//	Test(int temp1 = 0, int temp2 = 0)
-//	{
-//		a = temp1;
-//		b = temp2;
-//	}
-//	int getA()
-//	{
-//		return a;
-//	}
-//	int getB()
-//	{
-//		return b;
-//	}
-//};
-//int main()
-//{
-//	Test obj(5, 10);
-//	// Changing a and b
-//	int* pInt = (int*)&obj;
-//	*(pInt + 0) = 100;
-//	*(pInt + 1) = 200;
-//	cout << "a=" << obj.getA() << endl;
-//	cout << "b = " << obj.getB() << endl;
-//	return 0;
-//}
-
 #if 0
 //找最近的祖先
 #include<vector>
@@ -1429,3 +1449,51 @@ int main()
 }
 #endif
 
+#if 0
+#include<iostream>
+using namespace std;
+//判断是不是素数
+bool Fun(int n)
+{
+	for (int i = 2; i<n; i++)
+	{
+		if (n % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+int main()
+{
+	int num;
+	while (cin >> num)
+	{
+		int res = num;
+		int dif = num;
+		int a1 = 0;
+		int b1 = 0;
+		int a, b;
+		for (int i = 1; i<num / 2; i++)
+		{
+			a = i;
+			b = num - i;
+			if (Fun(a) && Fun(b))
+			{
+				dif = b - a;
+				if (dif < res)
+				{
+					res = dif;
+					a1 = a;
+					b1 = b;
+				}
+			}
+		}
+		cout << a1 << endl;
+		cout << b1 << endl;
+	
+	}
+
+	return 0;
+}
+#endif
