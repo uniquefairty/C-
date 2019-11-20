@@ -106,6 +106,7 @@ int main(int argc, char* argv[])
 	A*p = new B;
 	p->test();
 	return 0;
-}#endif
+}
+#endif
 
 

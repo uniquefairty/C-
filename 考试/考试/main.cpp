@@ -1497,3 +1497,87 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+#include<iostream>
+using namespace std;
+#include<string>
+#include<vector>
+//1.找出每个单词长度
+//2.输出
+
+int main()
+{
+	string str;
+	string resstr;
+	vector<string> v;
+	int count = 0;
+	while (getline(cin, str))
+	{
+		for (size_t i = 0; i<str.size(); i++)
+		{
+			size_t j = i;
+			if (str[j] != '"')
+			{
+				while (str[j] && str[j] != ' ')
+					j++;
+			}
+			else
+			{
+				j = j + 1;
+				while (str[j] && str[j] != '"')
+					j++;
+				j = j + 1;
+			}
+			resstr = str.substr(i, j - i);
+			v.push_back(resstr);
+			i = j;
+		}
+
+		cout << v.size()<<endl;
+		for (auto& str : v)
+			cout << str << endl;
+	}
+	return 0;
+}
+#endif
+
+
+#include<string>
+#include<vector>
+///跳石板
+//列出当前数的约束  
+//从最大开始加
+void Func(vector<int>& v, int n)
+{
+	//v.resize(n);
+	for (size_t i = 2; i<sqrt(n); i++)
+	{
+		if (n%i == 0)
+		{
+			v.push_back(n / i);
+		}
+	}
+}
+int main()
+{
+	int n, m, count = 0;
+		cin >> n >> m;
+
+	while (n != m)
+	{
+		vector<int> v;
+		Func(v, n);
+		while (n + v[0] < m)
+		{
+			count++;
+			n = n + v[0];
+			v.resize(n, 0);
+			Func(v, n);
+		}
+		
+	}
+	cout << count << endl;
+
+	return 0;
+}
