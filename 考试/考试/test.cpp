@@ -109,4 +109,49 @@ int main(int argc, char* argv[])
 }
 #endif
 
+#if 0
+int main()
+{
+	int *p[3][4];
+	int *(*a)[3][4];
+	int ** c[3][4];
+	printf("sizeof(p)=%d\n", sizeof(p));
+	printf("sizeof(a)=%d\nsizeof(*a)=%d\n", sizeof(a), sizeof(*a));
+	printf("sizeof(c)=%d\nsizeof(*c)=%d\n", sizeof(c), sizeof(*c));
+	return 0;
+}
+#endif
 
+#if 0
+template<class T> class Foo{
+	T tVar;
+public:
+	Foo(T t) : tVar(t) { }
+};
+template<class T> class FooDerived :public Foo<T>
+{
+};
+int main()
+{
+	return 0;
+}#endifstruct A
+{
+	int a;
+	short b;
+	int c;
+	char d;
+};
+
+struct B
+{
+	int a;
+	short b;
+	char c;
+	int d;
+};
+int main()
+{
+	cout << sizeof(A) << endl;
+	cout << sizeof(B) << endl;
+	return 0;
+}

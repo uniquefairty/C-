@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
 #if 0
@@ -65,6 +66,7 @@ int main()
 		}
 		if (count1 < count2)
 		{
+
 			str2.erase(str2.begin(), str2.end());
 			while (start1!=str.end()&&*start1<='9'&&*start1>='0')
 			{
@@ -1543,41 +1545,231 @@ int main()
 #endif
 
 
-#include<string>
+//#include<string>
+//#include<vector>
+/////跳石板
+////列出当前数的约束  
+////从最大开始加
+//void Func(vector<int>& v, int n)
+//{
+//	//v.resize(n);
+//	for (size_t i = 2; i<sqrt(n); i++)
+//	{
+//		if (n%i == 0)
+//		{
+//			v.push_back(n / i);
+//		}
+//	}
+//}
+//int main()
+//{
+//	int n, m, count = 0;
+//		cin >> n >> m;
+//
+//	while (n != m)
+//	{
+//		vector<int> v;
+//		Func(v, n);
+//		while (n + v[0] < m)
+//		{
+//			count++;
+//			n = n + v[0];
+//			v.resize(n, 0);
+//			Func(v, n);
+//		}
+//		
+//	}
+//	cout << count << endl;
+//
+//	return 0;
+//}
+
+#if 0
+//////计算天数
+#include<iostream>
+using namespace std;
 #include<vector>
-///跳石板
-//列出当前数的约束  
-//从最大开始加
-void Func(vector<int>& v, int n)
+//判断是闰年的函数
+bool Func(int year)
 {
-	//v.resize(n);
-	for (size_t i = 2; i<sqrt(n); i++)
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 	{
-		if (n%i == 0)
-		{
-			v.push_back(n / i);
-		}
+		return true;
 	}
+	return false;
+}
+int getOutDay(int year, int month, int day)
+{
+	vector<int> v{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int res=0;
+	if ((year <= 0 && year>12) || (month <= 0 && month>12))
+	{
+		return -1;
+	}
+	if (Func(year))
+		v[2]++;
+
+	if (day>v[month]) return -1;
+
+	for (int i = 1; i<month; i++)
+	{
+		res += v[i];
+	}
+	res += day;
+	return res;
 }
 int main()
 {
-	int n, m, count = 0;
-		cin >> n >> m;
-
-	while (n != m)
+	int year, month, day, res = 0;;
+	while (cin >> year >> month >> day)
 	{
-		vector<int> v;
-		Func(v, n);
-		while (n + v[0] < m)
-		{
-			count++;
-			n = n + v[0];
-			v.resize(n, 0);
-			Func(v, n);
-		}
-		
+		cout << getOutDay(year, month, day) << endl;
+
 	}
-	cout << count << endl;
+
 
 	return 0;
 }
+#endif
+#if 0
+//#include<iostream>
+//using namespace std;
+//#include<vector>
+////1.所有数相加
+////2.所有数相乘
+//int Add(vector<int> v)
+//{
+//	int add = 0;
+//	for (int i = 0; i<v.size(); i++)
+//	{
+//		add += v[i];
+//	}
+//	return add;
+//}
+//int Mul(vector<int> v)
+//{
+//
+//	int mul = 1;
+//	for (int i = 0; i<v.size(); i++)
+//	{
+//		mul *= v[i];
+//	}
+//	return mul;
+//}
+//int main()
+//{
+//	int n, count;
+//	vector<int> v;
+//	cin >> n;
+//	v.resize(n);
+//	for (auto& it : v)
+//		cin >> it;
+//	//移除0个 1个 ..n-1个
+//	//删除下标【1-n-1】
+//
+//
+//
+//
+//	return 0;
+//}
+#endif
+
+//#include<algorithm>
+
+//typedef unsigned long long ull;
+//int n = 0;
+//int a[1024] = { 0 };
+//int startIndex[1024] = { 0 };
+//int endIndex[1024] = { 0 };
+//ull ans = 0;
+//
+//void dfs(ull sum, ull product, int index)
+//{
+//	int i = index;
+//	while (i < n)
+//	{
+//
+//	}
+//}
+//int main()
+//{
+//	cin >> n;
+//	for (int i = 0; i < n; i++)
+//	{
+//		cin >> a[i];
+//	}
+//	sort(a, a + n);
+//
+//	startIndex[a[0]] = 0;
+//	endIndex[a[n - 1]] = n - 1;
+//
+//	for (int i = 1; i < n; i++)
+//	{
+//		if (a[i] == a[i - 1])
+//			continue;
+//		else
+//		{
+//			startIndex[a[i]] = i;
+//			endIndex[a[i - 1]] = i - 1;
+//		}
+//	}
+//	dfs(1, 1, 1);
+//	cout << ans;
+//	return 0;
+//}
+
+#if 0
+////////////////////////////////////////////////////////////////////////数组的子集
+int *x = NULL;
+int n;
+int count(int pos, int add, long long mul)
+{
+	int num = 0;
+	for (int i = pos; i<n; ++i)
+	{
+		add += x[i];
+		mul *= x[i];
+
+		if (add>mul)
+			num += 1 + count(i + 1, add, mul);
+		else if (x[i] == 1)
+			num += count(i + 1, add, mul);
+		else
+			break;
+
+		add -= x[i];
+		mul /= x[i];
+
+		while (x[i + 1] == x[i] && i + 1<n)
+		{
+			++i;
+		}
+	}
+	return num;
+}
+int main()
+{
+	cin >> n;
+	x = new int[n];
+	int add = 0;//和
+	long long mul = 1;//积
+
+	for (int i = 0; i<n; ++i)
+	{
+		cin >> x[i];
+	}
+	sort(x, x + n);
+	int num = count(0, add, mul);
+	cout << num;
+
+	if (x != NULL)
+	{
+		delete[]x;
+		x = NULL;
+	}
+
+	return 0;
+
+}
+#endif
+
