@@ -134,7 +134,11 @@ template<class T> class FooDerived :public Foo<T>
 int main()
 {
 	return 0;
-}#endifstruct A
+}
+#endif
+
+#if 0
+struct A
 {
 	int a;
 	short b;
@@ -151,7 +155,114 @@ struct B
 };
 int main()
 {
-	cout << sizeof(A) << endl;
-	cout << sizeof(B) << endl;
+	cout << sizeof(A) << endl;//16
+	cout << sizeof(B) << endl;//12
 	return 0;
 }
+#endif
+
+#if 0
+class A
+{
+public:
+	virtual void func(int val = 1)
+	{
+		std::cout << "A->" << val << std::endl;
+	}
+	virtual void test()
+	{
+		func();
+	}
+};
+class B : public A
+{
+public:
+	void func(int val = 0)
+	{
+		std::cout << "B->" << val << std::endl;
+	}
+};
+int main(int argc, char* argv[])
+{
+	B*p = new B;
+	p->test();
+	return 0;
+}
+#endif
+
+#if 0
+class A
+{
+public:
+	void foo()
+	{
+		printf("1");
+	}
+	virtual void fun()
+	{
+		printf("2");
+	}
+};
+class B : public A
+{
+public:
+	void foo()
+	{
+		printf("3");
+	}
+	void fun()
+	{
+		printf("4");
+	}
+};
+int main(void)
+{
+	A a;
+	B b;
+	A *p = &a;
+	p->foo();
+	p->fun();
+	p = &b;
+	p->foo();
+	p->fun();
+	A *ptr = (A *)&b;
+	ptr->foo();
+	ptr->fun();
+	return 0;
+}
+#endif
+
+#if 0
+struct st_task
+{
+	uint16_t id;
+	uint32_t value;
+	uint64_t timestamp;
+};
+void fool()
+{
+	st_task task = {};
+	uint64_t a = 0x00010001;
+	memcpy(&task, &a, sizeof(uint64_t));
+	printf("%11u,%11u,%11u", task.id, task.value, task.timestamp);
+}
+#endif
+
+#if 0
+#include <iostream>
+using namespace std;
+//void func(int v1, int v2)
+void func(const int& v1, const int& v2)
+{
+	cout << v1 << ' ' << &v1 << endl;
+	cout << v2 << ' ' << &v2 << endl;
+}
+int main()
+{
+	int i = 0;
+	//func(++i, i++);
+	func(++i, i);
+	return 0;
+}
+#endif
+

@@ -1773,3 +1773,114 @@ int main()
 }
 #endif
 
+#if 0
+////一个数1的个数
+#include<iostream>
+using namespace std;
+int main()
+{
+	int num;
+	while (cin >> num)
+	{
+		int count = 0;
+		while (num)
+		{
+			count++;
+			num = num&(num - 1);
+			
+		}
+		cout << count << endl;
+	}
+
+	return 0;
+}
+#endif
+
+#if 0
+#include<vector>
+int findMinimum(int n, vector<int> left, vector<int> right) {
+	//1.一个数组中至少拿一个，另一个数组至少每种都拿到
+	int i = 0, sum = 0;
+	int lmin = left[0];
+	int rmax = right[0];
+	for (int i = 0; i<n; i++)
+	{
+		if (left[i] == 0)
+		{
+			sum += right[i];
+		}
+		else if (left[i] != 0)
+		{
+			if (lmin == 0)
+			{
+				lmin = left[i];
+			}
+			else if (lmin > left[i])
+			{
+				lmin = left[i];
+			}
+			
+		}
+	}
+	sum += lmin;
+	
+	for (int i = 0; i<n; i++)
+	{
+		if (right[i] == 0)
+			sum += left[i];
+		else if (right[i] != 0 && left[i] != 0)
+		{
+			sum += right[i];
+		}
+		if (right[i]>rmax&&left[i] != 0)
+			rmax = right[i];
+	}
+
+	sum -= rmax;
+	sum--;
+
+	return sum;
+}
+int main()
+{
+	vector<int> left{ 0, 7, 1, 6 };
+	vector<int> right{ 1, 5, 0, 6 };
+	cout<<findMinimum(4, left, right);
+	return 0;
+}
+#endif
+
+#include<vector>
+
+class Gloves {
+public:
+	int min(int num1, int num2)
+	{
+		if (num1<num2)
+			return num1;
+		else return num2;
+	}
+public:
+	int findMinimum(int n, vector<int> left, vector<int> right) {
+		//1.一个数组中至少拿一个，另一个数组至少每种都拿到
+		int left_sum = 0, left_min = INT_MAX;
+		int right_sum = 0, right_min = INT_MAX;
+		int sum = 0;
+		for (int i = 0; i<n; i++)
+		{
+			if (left[i] * right[i] == 0)
+			{
+				sum += left[i] + right[i];
+				//对于左右手都有的颜色，执行累加-最小值+1
+			}
+			else
+			{
+				left_sum += left[i];
+				right_sum += right[i];
+				left_min = min(left_min, left[i]);
+				right_min = min(right_min, right[i]);
+			}
+		}
+		return sum + min(left_sum - left_min + 1, right_sum - right_min + 1) + 1;
+	}
+};
