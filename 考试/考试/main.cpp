@@ -1850,6 +1850,7 @@ int main()
 }
 #endif
 
+#if 0
 #include<vector>
 
 class Gloves {
@@ -1884,3 +1885,279 @@ public:
 		return sum + min(left_sum - left_min + 1, right_sum - right_min + 1) + 1;
 	}
 };
+#endif
+
+#if 0
+//计算n以内完全数的个数
+#include<iostream>
+using namespace std;
+bool Fun(int n)
+{
+	int sum = 0;
+	int a = n;
+	while (a)
+	{
+		if (n%a == 0)
+		{
+			sum += a;
+		}
+		a--;
+	}
+	if (sum - n == n)
+	{
+		return true;
+	}
+	else return false;
+}
+int count(int n)
+{
+	int i, num = 0;
+	for (i = 1; i <= n; i++)
+	{
+		if (Fun(i))
+		{
+			num++;
+		}
+	}
+	if (num)  return num;
+	else return -1;
+}
+int main()
+{
+	int n, i;
+	int num = 0;
+	while (cin >> n)
+	{
+		cout << count(n) << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<string>
+#define joker j
+#define JOKER J
+//个子，对子，三个--比较牌面大小
+//顺子（连续五张）--比较最小牌大小
+//三个，炸弹，对王
+
+//对王的函数
+string King(string str1, string str2)
+{
+	if (str1.find("J"))
+	{
+		return str1;
+	}
+	else if (str2.find("J"))
+	{
+		return str2;
+	}
+	else if (str1.find("j"))
+	{
+		return str2;
+	}
+	else if ( str2.find("j"))
+	{
+		return str1;
+	}
+	return "";
+}
+//炸弹
+int count(string str,char ch)//数目
+{
+	int count=0;
+	for (size_t i = 0; i < str.size(); i++)
+	{
+		if (str[i] == ch)
+		{
+			count++;
+		}
+	}
+	return count;
+}
+void Bomb(string str1, string str2,int size1,int size2)
+{
+	if (str1.size() < 4 || str2.size() < 4)
+		return;
+
+	vector<char> v1;
+	vector<char> v2;//分别记录str1和str2中是炸弹字符
+
+	//计数器
+	for (size_t i = 0; i < str1.size(); i++)
+	{
+		if (count(str1,str1[i]) == 4)
+		{
+			v1.push_back(str1[i]);//就是把四个相同得元素全存在了v中
+		}
+	}
+	
+	for (size_t i = 0; i < str2.size(); i++)
+	{
+		if (count(str2, str2[i]) == 4)
+		{
+			v2.push_back(str2[i]);//就是把四个相同得元素全存在了v中
+		}
+	}
+
+	sort(v1.begin(), v1.end());
+	sort(v2.begin(), v2.end());
+
+	
+
+
+
+	
+}
+int main()
+{
+	string str;
+	string str1, str2;
+	int size1, size2;
+
+	while (getline(cin, str))
+	{
+		size_t pos = str.find('-');
+		str1 = str.substr(0, pos);
+		str2 = str.substr(pos + 1, str.size() - 1);
+		size1 = str1.size();
+		size2 = str2.size();
+		if (King(str1, str2) != "")
+		{
+			cout << King(str1, str2) << endl;
+		}
+		else if ()
+		{
+
+		}
+
+
+	}
+	return 0;
+}
+
+#endif
+
+#if 0
+#include<iostream>
+using namespace std;
+#include<vector>
+vector<int>& Fun(vector<vector<int>>& v, int line)
+{
+	size_t i, j;
+	for (i = 0; i<line; i++)
+	{
+		v[i][0] = 1;
+		v[i][1] = i;
+	}
+
+	for (i = 1, j = 2; i<line; i++,j++)
+	{
+		for (j = 2; j < v[i].size(); j++)
+		{
+			v[i][j] = v[i - 1][j - 2] + v[i - 1][j - 1] + v[i - 1][j];
+		}
+	}
+
+	return v[line - 1];
+
+}
+int main()
+{
+	int line,i;
+	cin >> line;
+	vector<vector<int>> v;
+	v.resize(line);
+
+	for (i = 0; i < v.size(); i++)
+	{
+		v[i].resize(2 * line - 1, 0);
+	}
+	
+
+	vector<int> res = Fun(v, line);
+
+	for (i = 0; i<res.size(); i++)
+	{
+		if (res[i] % 2 == 0)
+		{
+			cout << i+1 << endl;
+			break;
+		}
+	}
+
+	if (i == res.size())
+		cout << "-1" << endl;
+
+	return 0;
+}
+
+#endif
+
+#if 0
+//两个字符串相加
+#include<iostream>
+#include <algorithm> 
+using namespace std;
+#include<string>
+string AddLongInteger(string s1, string s2)
+{
+	int size1 = s1.size() - 1;
+	int size2 = s2.size() - 1;
+	string res = "";
+
+	int carry = 0;//进位
+	while (size1 >= 0 || size2 >= 0)
+	{
+		if (size1 >= 0 && size2<0)
+		{
+			int sum = s1[size1] - '0' + carry;
+			carry = 0;
+			carry = sum / 10;
+			res += (char)(sum % 10+'0');
+			size1--;
+		}
+		else if (size2 >= 0 && size1<0)
+		{
+			int sum = s2[size2] - '0' + carry;
+			carry = 0;
+			carry = sum / 10;
+			res += (char)(sum % 10 + '0');
+			size2--;
+		}
+		else
+		{
+			int sum = s1[size1] + s2[size2] - '0' - '0' + carry;
+			carry = 0;
+			carry = sum / 10;
+			res += (char)(sum % 10 + '0');
+			size1--;
+			size2--;
+		}
+		
+	}
+	if (carry == 1)
+	{
+		res += '1';
+	}
+	reverse(res.begin(), res.end());
+	return res;
+}
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		AddLongInteger(s1, s2);
+		cout << AddLongInteger(s1, s2) << endl;
+	}
+
+	return 0;
+}
+#endif
+
+
