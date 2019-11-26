@@ -266,3 +266,39 @@ int main()
 }
 #endif
 
+#if 0
+
+#include<stdio.h>
+struct str_t{
+	long long len;
+	char data[32];
+};
+struct data1_t{
+	long long len;
+	int data[2];
+};
+struct data2_t{
+	long long len;
+	char *data[1];
+};
+struct data3_t{
+	long long len;
+	void *data[];
+};
+int main(void)
+{
+	struct str_t str;
+	memset((void*)&str, 0, sizeof(struct str_t));
+	str.len = sizeof(struct str_t) - sizeof(int);
+	//snprintf(str.data, str.len, "hello");//VSÏÂÎª_snprintf
+	
+	struct data3_t *pData = (struct data3_t*)&str; 
+	printf("data:%s%s\n", str.data, (char*)(&(pData->data[0])));
+
+	//____________________________________;
+	//____________________________________;
+	return 0;
+}
+#endif
+
+

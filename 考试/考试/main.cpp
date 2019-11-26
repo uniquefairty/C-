@@ -2160,4 +2160,173 @@ int main()
 }
 #endif
 
+#if 0
+int main()
+{
+	int n;
+	while(cin>>n)
+	{
+		int f1=1,f2=1,fn=0;
+		while((n-2)>0)
+		{
+			fn=f1+f2;
+			f1=f2;
+			f2=fn;
+			n--;
+		}
+		cout<<fn<<endl;
+	}
+}
+#endif
 
+#if 0
+#include<iostream>
+using namespace std;
+#include<string>
+
+int main()
+{
+	string str1, str2;
+	while (cin >> str1 >> str2)
+	{
+		size_t i = 0, j = 0;
+		for (; i<str1.size() && j<str2.size(); i++, j++)
+		{
+			if (str1[i] != '?' && str1[i] != '*')
+			{
+				if (str1[i] != str2[j])
+				{
+					cout << "false" << endl;
+					break;
+				}
+			}
+			else if (str1[i] == '*')
+			{
+				i++;
+				while ((str2[j] >= 'a' || str2[j] <= 'z'
+					|| str2[j] >= 'A' || str2[j] <= 'Z'
+					|| str2[j] >= '0' || str2[j] <= '9') && (str1[i] != str2[j]))
+				{
+					j++;
+				}
+				if (str1[i] == str2[j])
+				{
+					continue;
+				}
+				else
+				{
+					cout << "false" << endl;
+					break;
+				}
+			}
+		}
+
+		if (i == str1.size())
+			cout << "true" << endl;
+	}
+	return 0;
+}
+
+#endif
+
+#if 1
+#include<iostream>
+using namespace std;
+#include<string>
+
+int main()
+{
+	string str1, str2;
+	while (cin >> str1 >> str2)
+	{
+		size_t i = 0, j = 0;
+		for (; i < str1.size() && j < str2.size(); i++, j++)
+		{
+			if (str1[i] != '?' && str1[i] != '*')
+			{
+				if (str1[i] != str2[j])
+				{
+					cout << "false" << endl;
+					break;
+				}
+			}
+			else if (str1[i] == '*'&&i != str1.size() - 1)
+			{
+				i++;
+				while ((str2[j] >= 'a' || str2[j] <= 'z'
+					|| str2[j] >= 'A' || str2[j] <= 'Z'
+					|| str2[j] >= '0' || str2[j] <= '9') && (str1[i] != str2[j]))
+				{
+					j++;
+				}
+				if (str1[i] == str2[j])
+				{
+					continue;
+				}
+				else
+				{
+					cout << "false" << endl;
+					break;
+				}
+			}
+			else if (str1[i] == '*'&&i == str1.size() - 1)
+			{
+				while ((str2[j] >= 'a' || str2[j] <= 'z'
+					|| str2[j] >= 'A' || str2[j] <= 'Z'
+					|| str2[j] >= '0' || str2[j] <= '9') && (j != str2.size()))
+				{
+					j++;
+				}
+				if (j != str2.size())
+				{
+					cout << "false" << endl;
+					break;
+				}
+			}
+
+			if (i == str1.size() && j == str2.size())
+				cout << "true" << endl;
+		}
+	}
+	return 0;
+	}
+
+#endif
+
+#if 0
+#include<iostream>
+	using namespace std;
+#include<string>
+
+	bool match(const char* pattern, const char* str)
+	{
+		if (*pattern == '\0' || *str == '\0')
+			return true;
+
+		if (*pattern == '\0' || *str == '\0')
+			return false;
+
+		if (*pattern == '?')
+			return match(pattern + 1, str + 1);
+		else if (*pattern == '*')
+			return match(pattern + 1, str) || match(pattern + 1, str + 1) || match(pattern, str + 1);
+		else if (*pattern == *str)
+			return match(pattern + 1, str + 1);
+
+			return false;
+	}
+
+	int main()
+	{
+		string pattern, str;
+		while (cin >> pattern >> str)
+		{
+			bool ret = match(pattern.c_str(), str.c_str());
+			if (ret)
+				cout << "true" << endl;
+			else
+				cout << "false" << endl;
+		}
+		return 0;
+	}
+#endif
