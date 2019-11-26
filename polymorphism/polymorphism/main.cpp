@@ -154,33 +154,103 @@ int main()
 }
 #endif
 
-#if 1
-class Car
+//#if 1
+//class Car
+//{
+//public:
+//	virtual void Drive() = 0;
+//};
+//class Benz :public Car
+//{
+//public:
+//	virtual void Drive()
+//	{
+//		cout << "Benz-ÊæÊÊ" << endl;
+//	}
+//};
+//
+//class BMW :public Car
+//{
+//public:
+//	virtual void Drive()
+//	{
+//		cout << "BMW-²Ù¿Ø" << endl;
+//	}
+//};
+//
+//void Test()
+//{
+//	Car* pBenz = new Benz;
+//	pBenz->Drive();
+//	Car* pBMW = new BMW;
+//	pBMW->Drive();
+//}
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+//#endif
+
+#if 0
+class Person
 {
 public:
-	virtual void Drive() = 0;
-};
-class Benz :public Car
-{
-public:
-	virtual void Drive()
+	virtual void BuyTicket()
 	{
-		cout << "Benz-ÊæÊÊ" << endl;
+		cout << "ÂòÆ±-È«¼Û" << endl;
+	}
+};
+class Student :public Person
+{
+public:
+	/*virtual void BuyTicket()
+	{
+		cout << "ÂòÆ±-°ë¼Û" << endl;
+	}*/
+	void BuyTicket()
+	{
+		cout << "ÂòÆ±-°ë¼Û" << endl;
+	}
+};
+void Fun(Person& p)
+{
+	p.BuyTicket();
+}
+
+int main()
+{
+	Person ps;
+	Student st;
+
+	Fun(ps);
+	Fun(st);
+	return 0;
+}
+#endif
+
+
+class A{};
+class B :public A {};
+
+class Person{
+public:
+	virtual A* f()
+	{
+		return new A;
 	}
 };
 
-class BMW :public Car
+class Student :public Person
 {
 public:
-	virtual void Drive()
+	virtual B* f()
 	{
-		cout << "BMW-²Ù¿Ø" << endl;
+		return new B;
 	}
 };
 
-void Test()
+int main()
 {
-	Car* pBenz = new Benz;
-	pBenz->Drive();
-	Car* pBMW = new BMW;	pBMW->Drive();
-}int main(){	Test();	return 0;}#endif
+	return 0;
+}
