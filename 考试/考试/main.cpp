@@ -2229,7 +2229,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 #include<iostream>
 using namespace std;
 #include<string>
@@ -2330,3 +2330,117 @@ int main()
 		return 0;
 	}
 #endif
+
+#if 0
+	///三个换一个瓶子
+#include<iostream>
+	using namespace std;
+	int main()
+	{
+		int num;
+		while (cin >> num)
+		{
+			int total = num;//总共剩余的瓶数
+			int exchage = 0;//换汽水的瓶数
+			while (total >= 3)
+			{
+				exchage += total / 3;
+				total = total % 3 + total / 3;
+			}
+			if (total == 2)
+				exchage++;
+			cout << exchage << endl;
+
+		}
+		return 0;
+	}
+#endif
+
+#if 0
+#include<iostream>
+	using namespace std;
+#include<string>
+	//在s长的str中一直查找短的str每个元素
+	//查找每个字符并往后遍历，返回相同字串
+	string Fun(string str_min, string str_max, int i, int pos)
+	{
+		string res;
+		while (i < str_min.size() && pos < str_max.size())
+		{
+			if (str_min[i] == str_max[pos])
+			{
+				res += str_min[i];
+			}
+			else
+			{
+				break;
+			}
+		}
+		return res;
+	}
+
+	int main()
+	{
+		string s1, s2;
+		while (cin >> s1 >> s2)
+		{
+			string res,tmp;
+			string str_min, str_max;
+			str_min = s1; str_max = s2;
+			if (s1.size()>s2.size())  swap(str_min, str_max);
+
+			for (size_t i = 0; i<str_min.size(); i++)
+			{
+				size_t pos = str_max.find(str_min[i]);
+				if (pos != string::npos)
+				{
+					tmp = Fun(str_min, str_max, i, pos);
+					if (tmp.size() > res.size())
+						res = tmp;
+				}
+			}
+
+			cout << res << endl;
+
+		}
+		return 0;
+	}
+#endif
+
+#include<vector>
+#include<string>
+	void find(string s1, string s2)
+	{
+		int l1 = s1.size(), l2 = s2.size(), max = 0, start = 0;
+		vector<vector<int>> lcs(l1 + 1, vector<int>(l2 + 1, 0));
+
+		for (int i = 1; i <= l1; i++)
+		{
+			for (int j = 1; j <= l2; j++)
+			{
+				if (s1[i - 1] == s2[j - 1])
+				{
+					lcs[i][j] = lcs[i - 1][j - 1] + 1;
+				}
+				if (lcs[i][j] > max)
+				{
+					max = lcs[i][j];
+					start = i - max;
+				}
+			}
+		}
+		cout << s1.substr(start, max) << endl;
+	}
+
+	int main()
+	{
+		string s1, s2;
+		while (getline(cin, s1) && getline(cin, s2))
+		{
+			if (s1.size() < s2.size())
+				find(s1, s2);
+			else
+				find(s2, s1);
+		}
+		return 0;
+	}

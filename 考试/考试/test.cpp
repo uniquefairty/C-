@@ -301,4 +301,41 @@ int main(void)
 }
 #endif
 
+#if 0
+int Function(unsigned int n) {
+	n = (n & 0x55555555) + ((n >> 1) & 0x55555555);
+	cout << n << endl;
+	n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
+	cout << n << endl;
+	n = (n & 0x0f0f0f0f) + ((n >> 4) & 0x0f0f0f0f);
+	cout << n << endl;
+	n = (n & 0x00ff00ff) + ((n >> 8) & 0x00ff00ff);
+	cout << n << endl;
+	n = (n & 0x0000ffff) + ((n >> 16) & 0x0000ffff);
+	return n;
+}
 
+int main()
+{
+	cout<<Function(197);
+	return 0;
+}
+#endif
+#if 0
+//数组得全排列
+void perm(int list[], int k, int m)
+{
+	if (k == m)
+	{
+		copy(list, list + m, ostream_iterator<int>(cout, " "));
+		cout << endl;
+		return;
+	}
+	for (int i = k; i <= m; i++)
+	{
+		swap(&list[k], &list[i]);
+		perm(list，k + 1，m);
+		swap(&list[k], &list[i]);
+	}
+}
+#endif
