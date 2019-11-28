@@ -2407,9 +2407,10 @@ int main()
 	}
 #endif
 
+#if 0
 #include<vector>
 #include<string>
-	void find(string s1, string s2)
+	void find(string s1, string s2)//s1是较短的子串 s2是较长的子串
 	{
 		int l1 = s1.size(), l2 = s2.size(), max = 0, start = 0;
 		vector<vector<int>> lcs(l1 + 1, vector<int>(l2 + 1, 0));
@@ -2444,3 +2445,135 @@ int main()
 		}
 		return 0;
 	}
+
+#endif
+
+#if 0
+//字符串反转
+#include<iostream>
+#include <algorithm>
+using namespace std;
+#include<string>
+	int main()
+	{
+		string str;
+		while (cin >> str)
+		{
+			//string res = 
+			reverse(str.begin(), str.end());
+			cout <<str << endl;
+		}
+		return 0;
+	}
+#endif
+
+#if 0
+	//求两个字符串子串的最长长度
+#include<string>
+#include<vector>
+	int conSubStr(string s1, string s2)//s2较短 s1较长
+	{
+		int len1 = s1.size();
+		int len2 = s2.size();
+
+		//储存子串长度的数组
+		vector<int> count(len2 + 1, 0);
+		//记录目前为止最长字串的长度和s2中的位置
+		int maxlen = 0;
+		int endpos = 0;
+
+		for (int i = 0; i < len1; i++)
+		{
+			for (int j = len2; j > 0; j--)
+			{
+				if (s2[j - 1] == s1[i])
+				{
+					count[j] = count[j - 1] + 1;
+					if (count[j] > maxlen)
+					{
+						maxlen = count[j];
+						endpos = j;
+					}
+				}
+				else
+				{
+					count[j] = 0;
+				}
+
+			}
+		}
+		/*if (0 == maxlen)
+		{
+			return 0;
+		}*/
+
+		return maxlen;
+		/*substr.resize(maxlen);
+		for (int i = endpos - maxlen; i < endpos; i++)
+		{
+			substr[i - endpos + maxlen] = s2[i];
+		}*/
+
+	}
+	int main()
+	{
+		string s1, s2;
+		while (cin >> s1 >> s2)
+		{
+			cout << conSubStr(s1,s2)<<endl;
+		}
+		return 0;
+	}
+#endif
+
+#if 0
+	//求两个字符串的最长子串并输出
+#include<string>
+#include<vector>
+	string conSubStr(string s1, string s2)//s2较短 s1较长
+	{
+		int len1 = s1.size();
+		int len2 = s2.size();
+		//储存子串长度的数组
+		vector<int> count(len2 + 1, 0);
+		//记录目前为止最长字串的长度和s2中的位置
+		int maxlen = 0;
+		int endpos = 0;
+		for (int i = 0; i < len1; i++)
+		{
+			for (int j = len2; j > 0; j--)
+			{
+				if (s2[j - 1] == s1[i])
+				{
+					count[j] = count[j - 1] + 1;
+					if (count[j] > maxlen)
+					{
+						maxlen = count[j];
+						endpos = j;
+					}
+				}
+				else
+				{
+					count[j] = 0;
+				}
+
+			}
+		}
+		string substr;
+		substr.resize(maxlen);
+		for (int i = endpos - maxlen; i < endpos; i++)
+		{
+		substr[i - endpos + maxlen] = s2[i];
+		}
+		return substr;
+	}
+	int main()
+	{
+		string s1, s2;
+		while (cin >> s1 >> s2)
+		{
+			cout << conSubStr(s1, s2) << endl;
+		}
+		return 0;
+	}
+#endif
