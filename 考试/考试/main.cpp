@@ -2577,3 +2577,126 @@ using namespace std;
 		return 0;
 	}
 #endif
+
+#if 0
+#include<iostream>
+	using namespace std;
+#include<vector>
+#include <algorithm>
+
+	//反转后的序列
+	void sort(vector<int>& v)
+	{
+		int size = v.size();
+		vector<int> tmp;
+		int mid = size / 2;
+		int i = 0;
+		while (i<size / 2)
+		{
+			tmp.push_back(v[i]);
+			tmp.push_back(v[mid]);
+			i++;
+			mid++;
+		}
+		v = tmp;
+	}
+	int main()
+	{
+		int T, n, k;
+		cin >> T;
+		while (T)
+		{
+			cin >> n >> k;
+			vector<int> v(2 * n);
+			for (size_t i = 0; i<2 * n; i++)
+			{
+				cin >> v[i];
+			}
+			while (k)
+			{
+				sort(v);
+				k--;
+			}
+
+			for (int i = 0; i<v.size(); i++)
+			{
+				cout << v[i] << " ";
+
+				*if(i!=v.size()-1)
+				{
+					cout<<v[i]<<" ";
+				}
+				else 
+				{
+					cout<<v[i];
+				}*/
+			}
+
+		}
+		return 0;
+	}
+#endif
+
+#if 0
+#include<iostream>
+	using namespace std;
+#include<vector>
+#include<String>
+#include <algorithm>
+	//输出列表[start,end][i,+4]
+	void Print(vector<int> v, int start, int end)
+	{
+		for (int i = start; i<end; i++)
+		{
+			cout << v[i] << " ";
+		}
+	}
+	void Fun1(vector<int> v, string s)
+	{
+		int i, j;
+		int res = v[0];
+		for (i = 0, j = 0;; i<s.size(); i++)
+		{
+			if (s[i] = 'U')
+			{
+				if (j == 0)
+				{
+					j = v.size() - 1;
+				}
+				else
+					j--;
+			}
+			else if (s[i] = 'D')
+			{
+				if (j == v.size() - 1)
+					j = 0;
+				else j++;
+			}
+			res = v[j];
+		}
+		//输出列表
+	}
+	int main()
+	{
+		int tatal;
+		string s;
+		while (cin >> tatal >> s)
+		{
+			vetctor<int> v(tatal);
+			for (int i = 0; i<tatal; i++)
+				v[i] = i + 1;//数组里存放的歌曲数目
+
+			if (tatal <= 4)
+			{
+				Fun1(v, s);
+			}
+			for (int i = 0; i<s.size(); i++)
+			{
+
+			}
+		}
+
+		return 0;
+	}
+#endif
+
