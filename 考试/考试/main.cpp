@@ -2811,3 +2811,89 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//第一次出现的字符
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string s;
+	while (cin >> s)
+	{
+		int arr[256] = { 0 };
+		int i = 0;
+		for (i = 0; i<s.size(); i++)
+		{
+			arr[s[i]]++;
+		}
+		for (i = 0; i<s.size(); i++)
+		{
+			if (arr[s[i]] == 1)
+			{
+				cout << s[i] << endl;
+				break;
+			}
+		}
+		if (i == s.size())
+			cout << "-1" << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include<iostream>
+#include<vector>
+using namespace std;
+//最大公约数--》辗转相除
+int Fun(int pow, int num)
+{
+	while (pow*num != 0)
+	{
+		if (pow>num)
+		{
+			pow %= num;
+		}
+		else if (pow<num)
+		{
+			num %= pow;
+		}
+		else
+		{
+			return num;
+		}
+	}
+
+	return num == 0 ? pow : num;
+}
+int main()
+{
+	int count, pow;
+	vector<int> v;
+	while (cin >> count >> pow)
+	{
+		v.resize(count);
+		for (int i = 0; i<count; i++)
+		{
+			cin >> v[i];
+		}
+
+		for (int i = 0; i<count; i++)
+		{
+			if (pow >= v[i])
+			{
+				pow = pow + v[i];
+			}
+			else
+			{
+				pow += Fun(pow, v[i]);
+			}
+		}
+		cout << pow << endl;
+	}
+	return 0;
+}
+#endif
+

@@ -354,3 +354,70 @@ int main()
 }
 #endif
 
+#if 0
+#include <stdio.h>
+int main(){
+	long long a = 1, b = 2, c = 3;
+	printf("%d %d %d\n", a, b, c);
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+using namespace std;
+class A {
+public:
+	~A() {
+		cout << "~A()";
+	}
+};
+class B{
+public:
+	virtual ~B() {
+		cout << "~B()";
+	}
+};
+class C : public A, public B {
+public:
+	~C() {
+		cout << "~C()";
+	}
+};
+int main() {
+	C * c = new C;
+	B * b1 = dynamic_cast<B *>(c);
+	A * a2 = dynamic_cast<A *>(b1);
+	delete a2;
+	return 0;
+}#endif
+#if 0
+#define M 5
+#define N 20
+int fun(char(*ss)[N], int *n)
+{
+	int i, k = 0, len = N;
+	for (i = 0; i < M; i++)
+	{
+		len = strlen(ss[i]);
+		if (i == 0)
+			*n = len;
+		if (len < * n)
+		{
+			*n = len;
+			k = i;
+		}
+	}
+	return *n;
+}
+main()
+{
+	char ss[M][N] = { "shanghai", "guangzhou", "beijing", "tianjing", "chongqing" };
+	int n, k, i;
+	printf("\nThe originalb stringsare:\n");
+	for (i = 0; i < M; i++)
+		puts(ss[i]);
+	k = fun(ss, &n);
+	printf("\nThe length of shortest string is: % d\n", n);
+	printf("\nThe shortest string is: % s\n", ss[k]);
+}#endif
