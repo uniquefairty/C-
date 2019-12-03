@@ -2897,3 +2897,270 @@ int main()
 }
 #endif
 
+#if 0
+//找数组中个数超过数组一半的
+//找红包
+#include<vector>
+class Gift {
+public:
+	int getValue(vector<int> gifts, int n) {
+		int count = 1, res = gifts[0];
+		sort(gifts.begin(), gifts.end());
+		for (int i = 1; i<n; i++)
+		{
+			if (gifts[i] == gifts[i - 1])
+			{
+				count++;
+			}
+			else if (gifts[i] != gifts[i - 1])
+			{
+				if (count>n / 2)
+					return gifts[i-1];
+				count = 1;
+			}
+		}
+		return 0;
+	}
+};
+
+int main()
+{
+	vector<int> v{ 1, 2, 3, 2, 2 };
+	int n = 5;
+	Gift g;
+	cout<<g.getValue(v, n);
+	return 0;
+}
+#endif
+
+#if 0
+//编译距离  错误
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+int calStringDistance(string s1, string s2)
+{
+	int count = 0;
+	int Size1 = s1.size(), Size2 = s2.size();
+
+	//判断他俩不同得字符都有哪些
+	for (int i = 0; i<s1.size(); i++)
+	{
+		if (s2.find(s1[i]) != string::npos&&s2.size())
+		{
+			s2.erase(s2.find(s1[i]), 1);
+			count++;//删除得个数是相等的个数
+		}
+	}
+	return  Size1 - count>Size2 - count ? Size1 - count : Size2 - count;
+
+	//return s2.size() + s1.size() - count;
+}
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		cout << calStringDistance(s1, s2) << endl;
+	}
+	return 0;
+}
+#endif
+#if 0
+/////要交的版本
+#include<iostream>
+#include<string>
+using namespace std;
+
+int calStringDistance(string s1, string s2)
+{
+	//if(s1.empty()&&s2.empty())
+	//return 0;
+	int count = 0;
+	int Size1 = s1.size(), Size2 = s2.size();
+	//判断他俩不同得字符都有哪些
+	for (size_t i = 0; i<s1.size(); i++)
+	{
+		if (s2.find(s1[i]) != string::npos&&s2.size())
+		{
+			s2.erase(s2.find(s1[i]), 1);
+			count++;//删除得个数是相等的个数
+		}
+	}
+	return  Size1 - count>Size2 - count ? Size1 - count : Size2 - count;
+}
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		cout << calStringDistance(s1, s2) << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//编辑距离
+#include<string>
+int min(int a, int b)
+{
+	return a < b ? a : b;
+}
+int edit(string str1, string str2)
+{
+	int max1 = str1.size();
+	int max2 = str2.size();
+
+	int **ptr = new int*[max1 + 1];
+
+	for (int i = 0; i < max1 + 1; i++)
+	{
+		ptr[i] = new int[max2 + 1];
+	}
+
+	for (int i = 0; i < max1 + 1; i++)
+	{
+		ptr[i][0] = i;
+	}
+	for (int i = 0; i < max2 + 1; i++)
+	{
+		ptr[0][i] = i;
+	}
+
+	for (int i = 1; i < max1 + 1; i++)
+	{
+		for (int j = 1; j < max2 + 1; j++)
+		{
+			int d;
+			int temp = min(ptr[i - 1][j] + 1, ptr[i][j - 1] + 1);
+			if (str1[i - 1] == str2[j - 1])
+			{
+				d = 0;
+			}
+			else
+			{
+				d = 1;
+			}
+			ptr[i][j] = min(temp, ptr[i - 1][j - 1] + d);
+		}
+	}
+	//cout << "********" << endl;
+	//for (int i = 0; i < max1 + 1; i++)
+	//{
+	//	for (int j = 0; j < max2 + 1; j++)
+	//	{
+	//		cout << ptr[i][j] << " ";
+	//	}
+	//	cout << endl;
+	//}
+	//		cout << "********" << endl;
+			int dis = ptr[max1][max2];
+
+			for (int i = 0; i < max1 + 1; i++)
+			{
+				delete[] ptr[i];
+				ptr[i] = NULL;
+			}
+
+			delete[] ptr;
+			ptr = NULL;
+
+			return dis;
+}
+int main()
+{
+	string str1 = "sailn";
+	string str2 = "failing";
+
+	int r = edit(str1, str2);
+	cout << "the dis is: " << r << endl;
+	return 0;
+}
+#endif
+
+#if 0
+//礼物的最大值
+#include <vector>
+class Bonus {
+public:
+	int getMost(vector<vector<int> > board) {
+		int rows = board.size();
+		int cols = board[0].size();
+		vector<int> v(cols, 0);
+		for (int i = 0; i<rows; i++)
+		{
+			for (int j = 0; j<cols; j++)
+			{
+				int left = 0;
+				int up = 0;
+
+				if (i>0)
+					up = v[j];
+				if (j>0)
+					left = v[j - 1];
+
+				v[j] = std::max(left, up) + board[i][j];
+			}
+		}
+
+		int res = v[cols - 1];
+		return res;
+
+	}
+};
+#endif
+
+#if 0
+//迷宫问题
+#include<iostream>
+using namespace std;
+#include<vector>
+int moving(int row, int col, int i, int j, vector<vector<int>> b, queue q)
+{
+	if ((i == row - 1) && (j == col - 1) && check(i, j, b))
+	{
+		q.push_back(i);
+		q.push_back(j);
+	}
+	moving(row, col, i - 1, j, b, q);
+
+}
+bool check(int i, int j, vector<vector<int>> b)
+{
+	if (b[i][j] == 1)
+		return false;
+	else return true;
+}
+int main()
+{
+	int row, col;
+	vector<vector<int>> v，b;
+	queue q;
+	while (cin >> row >> col)
+	{
+		int i = 0, j = 0;
+		v.resize(row);
+		for (int i = 0; i<row; i++)
+		{
+			v[i].resize(col);
+			for (int j = 0; j<col; j++)
+				cin >> v[i][j];
+		}
+		b = v;
+
+		for (int i = 0; i<row; i++)
+		{
+			for (int j = 0; j<col; j++)
+			{
+				moving(row, col, i, j, b, q)
+			}
+		}
+	}
+	return 0;
+}
+#endl
+
+

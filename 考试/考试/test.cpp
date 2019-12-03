@@ -390,7 +390,9 @@ int main() {
 	A * a2 = dynamic_cast<A *>(b1);
 	delete a2;
 	return 0;
-}#endif
+}
+#endif
+
 #if 0
 #define M 5
 #define N 20
@@ -420,4 +422,5 @@ main()
 	k = fun(ss, &n);
 	printf("\nThe length of shortest string is: % d\n", n);
 	printf("\nThe shortest string is: % s\n", ss[k]);
-}#endif
+}
+#endif
