@@ -3113,54 +3113,104 @@ public:
 };
 #endif
 
-#if 0
-//迷宫问题
-#include<iostream>
-using namespace std;
-#include<vector>
-int moving(int row, int col, int i, int j, vector<vector<int>> b, queue q)
-{
-	if ((i == row - 1) && (j == col - 1) && check(i, j, b))
-	{
-		q.push_back(i);
-		q.push_back(j);
-	}
-	moving(row, col, i - 1, j, b, q);
+//#if 1
+////迷宫问题
+//#include<iostream>
+//using namespace std;
+//#include<vector>
+//int moving(int row, int col, int i, int j, vector<vector<int>> b, queue q)
+//{
+//	if ((i == row - 1) && (j == col - 1) && check(i, j, b))
+//	{
+//		q.push_back(i);
+//		q.push_back(j);
+//	}
+//	moving(row, col, i - 1, j, b, q);
+//
+//}
+//bool check(int i, int j, vector<vector<int>> b)
+//{
+//	if (b[i][j] == 1)
+//		return false;
+//	else return true;
+//}
+//int main()
+//{
+//	int row, col;
+//	vector<vector<int>> v，b;
+//	queue q;
+//	while (cin >> row >> col)
+//	{
+//		int i = 0, j = 0;
+//		v.resize(row);
+//		for (int i = 0; i<row; i++)
+//		{
+//			v[i].resize(col);
+//			for (int j = 0; j<col; j++)
+//				cin >> v[i][j];
+//		}
+//		b = v;
+//
+//		for (int i = 0; i<row; i++)
+//		{
+//			for (int j = 0; j<col; j++)
+//			{
+//				moving(row, col, i, j, b, q)
+//			}
+//		}
+//	}
+//	return 0;
+//}
+//#endif
 
-}
-bool check(int i, int j, vector<vector<int>> b)
+#include<vector>
+
+int N, M;//分别代表行和列
+vector<vector<int>> maze;//迷宫矩阵
+vector<vector<int>> path_temp;//存储当前路径，第一维表示位置
+vector<vector<int>> path_best;//存储最佳位置
+
+void MazeTrack(int i, int j)
 {
-	if (b[i][j] == 1)
-		return false;
-	else return true;
+	maze[i][j] = 1;//表示当前节点已走，不可再走
+	path_temp.push_back({ i, j });//将当前节点加入到路径中
+	if (i == N - 1 && j == M - 1)//判断是否到达终点
+	{
+		if (path_best.empty() || path_temp.size() < path_best.size())
+		{
+			path_best = path_temp;
+		}
+	}
+
+	if (i - 1 >= 0 && maze[i - 1][j] == 0)//探索向上走是否可行
+		MazeTrack(i - 1, j);
+	if (i + 1 < N && maze[i + 1][j] == 0)//探索向下走是否可行
+		MazeTrack(i + 1, j);
+	if (j - 1 >= 0 && maze[i][j-1] == 0)//探索向左走是否可行
+		MazeTrack(i, j-1);
+	if (j + 1 <M && maze[i][j+1] == 0)//探索向右走是否可行
+		MazeTrack(i, j+1);
+
+	maze[i][j] = 0;
+	path_temp.pop_back();
 }
 int main()
 {
-	int row, col;
-	vector<vector<int>> v，b;
-	queue q;
-	while (cin >> row >> col)
+	while (cin >> N >> M)
 	{
-		int i = 0, j = 0;
-		v.resize(row);
-		for (int i = 0; i<row; i++)
+		maze = vector<vector<int>>(N, vector<int>(M, 0));
+		path_temp.clear();
+		path_best.clear();
+		for (auto& i : maze)
 		{
-			v[i].resize(col);
-			for (int j = 0; j<col; j++)
-				cin >> v[i][j];
+			for (auto &j : i)
+				cin >> j;
 		}
-		b = v;
+		MazeTrack(0, 0);//回溯寻找迷宫的最短路径
 
-		for (int i = 0; i<row; i++)
-		{
-			for (int j = 0; j<col; j++)
-			{
-				moving(row, col, i, j, b, q)
-			}
-		}
+		for (auto i : path_best)
+			cout << '(' << i[0] << ',' << i[1] << ')' << endl;//输出通路
 	}
 	return 0;
 }
-#endl
-
 
