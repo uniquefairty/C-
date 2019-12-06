@@ -3163,6 +3163,7 @@ public:
 //}
 //#endif
 
+#if 0
 #include<vector>
 
 int N, M;//分别代表行和列
@@ -3213,4 +3214,65 @@ int main()
 	}
 	return 0;
 }
+
+#endif
+
+#if 0
+class Gift {
+public:
+	int getValue(vector<int> gifts, int n) {
+		sort(gifts.begin(), gifts.end());
+		int count = 1;
+		for (int i = 1; i<n; i++)
+		{
+			if (gifts[i - 1] == gifts[i])
+			{
+				count++;
+				if (count >= n / 2)
+				{
+					return gifts[i];
+				}
+
+			}
+			else
+			{
+				count = 1;
+			}
+		}
+		return 0;
+	}
+};
+#endif
+
+#if 0
+#include<iostream>
+using namespace std;
+#include<vector>
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		vector<int> v(n);
+		for (int i = 0; i<n; i++)
+			cin >> v[i];
+		int sum = v[0];
+		int tmp = v[0];
+		for (int i = 0; i<n; i++)
+		{
+			tmp += v[i];
+			if (v[i]>tmp)
+			{
+				tmp = v[i];
+			}
+			if (tmp>sum)
+			{
+				sum = tmp;
+			}
+		}
+		cout << sum << endl;
+	}
+	return 0;
+}
+#endif
 

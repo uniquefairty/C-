@@ -424,3 +424,27 @@ main()
 	printf("\nThe shortest string is: % s\n", ss[k]);
 }
 #endif
+
+#if 0
+int main()
+{
+	int i;
+	int n = 0;         // 计数
+	int k = 10000;    // 初始值
+	// 外层遍历阶数
+	for (k; k >= 1; k--)
+	{
+		i = k;
+			// 内层遍历求每阶存在多个5的因子
+		for (; i % 5 == 0; i = i / 5)
+		{
+			n++;
+			cout << i << endl;
+		}
+	}
+	cout << n;
+	return 0;
+}
+#endif
+
+
