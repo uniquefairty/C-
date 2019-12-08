@@ -129,7 +129,7 @@ void add(string s1, string s2)
 }
 #endif
 
-#if 1
+#if 0
 //输入两个整数a和b，输出这两个整数的和。a和b都不超过100位。
 #include<iostream>
 using namespace std;
@@ -178,8 +178,64 @@ int main()
 }
 #endif
 
+#if 0
+//龟兔赛跑结果预测
+#include<iostream>
+using namespace std;
 int main()
 {
+	int v1, v2, t, s, l;
+	int d=0,s1=0,s2=0;//两者相差的距离
+	while (cin >> v1 >> v2 >> t >> s >> l)
+	{
+		int t1 = l / v2;//乌龟全程需要的时间
+		for (int i = 1; i <= t1; i++)//每次增加一秒的时间
+		{
+			s1 += v1;//兔子走的路程
+			s2 += v2;//乌龟走的路程
+			if (s1!=l&&(s1 - s2) >= t)
+			{
+				s2 = v2*s + s2;
+				i += s;
+			}
+			if (s1 >= l&&s2<l)
+			{
+				cout << "R" << endl;
+				cout << i << endl;
+				break;
+			}
+			else if(s1 >= l&&s2 >= l)
+			{
+				cout << "D" << endl;
+				cout << t1 << endl;
+			}
+			else if (s2>=l)
+			{
+				cout << "T" << endl;
+				cout << t1 << endl;
+			}
+		}
+		
+	}
 	return 0;
 }
+#endif
 
+#include<vector>
+
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		vector<vector<int>> v(n);
+		for (int i = 0; i < n; i++)
+		{
+			v[i].resize(n);
+		}
+		for (int i = 0; i < n; i++)
+		{
+			
+		}
+	}
+}
