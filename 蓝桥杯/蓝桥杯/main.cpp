@@ -221,21 +221,101 @@ int main()
 }
 #endif
 
-#include<vector>
+//#include<vector>
+//
+//int main()
+//{
+//	int n;
+//	while (cin >> n)
+//	{
+//		vector<vector<int>> v(n);
+//		for (int i = 0; i < n; i++)
+//		{
+//			v[i].resize(n);
+//		}
+//		for (int i = 0; i < n; i++)
+//		{
+//			
+//		}
+//	}
+//}
 
+#if 0
+#include<iostream>
+using namespace std;
+#include<vector>
 int main()
 {
-	int n;
+	int n ;
 	while (cin >> n)
 	{
-		vector<vector<int>> v(n);
-		for (int i = 0; i < n; i++)
+		vector<char> v;
+		vector<char> v0{ 'A', 'B', 'C', 'D', 'E', 'F' };
+		if (n < 10)
 		{
-			v[i].resize(n);
+			cout << n << endl;
+			n = 0;
 		}
-		for (int i = 0; i < n; i++)
+		for (n; n > 0; n /= 16)
 		{
-			
+			int tmp = n % 16;
+			if (tmp < 10)
+			{
+				v.push_back(tmp+'0');
+			}
+			else
+			{
+				v.push_back(v0[tmp % 10]);
+			}
+		}
+		reverse(v.begin(), v.end());
+
+		for (auto &it : v)
+		{
+			if (it < 10)
+				cout << it - '0';
+			else
+			{
+				cout << it;
+
+			}
 		}
 	}
+	return 0;
 }
+#endif
+
+#if 0
+#include <iostream>
+using namespace std;
+int main()
+{
+	int x, y, i;
+	int d, n = 1;
+	char h[16] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+
+	while (cin >> x)
+	{
+		y = x;
+		while (x >= 10)
+		{
+			x /= 10;
+			++n;
+		}
+		int *r = new int[n];
+		for (i = 0; y >= 16; ++i)
+		{
+			r[i] = y % 16;
+			y /= 16;
+		}
+		r[i++] = y;
+
+		for (i = (n - 1); i >= 0; --i)
+		{
+			cout << h[r[i]];
+		}
+	}
+	return 0;
+}
+#endif
+
