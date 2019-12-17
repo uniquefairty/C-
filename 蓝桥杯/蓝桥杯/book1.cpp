@@ -1,5 +1,5 @@
-#if 0
-//¶şÎ¬ÊıÖĞ²éÕÒ
+ï»¿#if 0
+//äºŒç»´æ•°ä¸­æŸ¥æ‰¾
 class Solution {
 public:
 	bool Find(int target, vector<vector<int> > array) {
@@ -28,20 +28,20 @@ public:
 
 #if 0
 void replaceSpace(char *str, int length) {
-	//´ÓºóÍùÇ°±éÀú£¬×Ö·ûÖ®ÒÆ¶¯Ò»±ß
-	//¶¨ÒåÁ½¸öÖ¸Õë
+	//ä»åå¾€å‰éå†ï¼Œå­—ç¬¦ä¹‹ç§»åŠ¨ä¸€è¾¹
+	//å®šä¹‰ä¸¤ä¸ªæŒ‡é’ˆ
 	if (str == nullptr || length <= 0)
 		return;
 	int oldlength = 0;
 	int numberOfBlack = 0;
 	while (*str != '\0')
 	{
-		oldlength++;//Ô­Ê¼×Ö·û´®µÄ³¤¶È
+		oldlength++;//åŸå§‹å­—ç¬¦ä¸²çš„é•¿åº¦
 		if (*str == ' ')
 			++numberOfBlack;
 		str++;
 	}
-	int newlength = oldlength + numberOfBlack * 2;//ĞÂ×Ö·û´®µÄ³¤¶È
+	int newlength = oldlength + numberOfBlack * 2;//æ–°å­—ç¬¦ä¸²çš„é•¿åº¦
 	if (newlength>length)
 		return;
 	while (oldlength >= 0 && newlength >= 0)
@@ -63,20 +63,20 @@ void replaceSpace(char *str, int length) {
 #endif
 
 #if 0
-//Ìæ»»¿Õ¸ñ
+//æ›¿æ¢ç©ºæ ¼
 class Solution {
 public:
 	void replaceSpace(char *str, int length) {
 		int i = length - 1, j, count = 0;
-		while (i >= 0){							//´ÓºóÍùÇ°É¨Ãè×Ö·û´®
-			if (str[i] == ' '){						//Èç¹ûÉ¨Ãèµ½×Ö·ûÊÇ¿Õ¸ñ
-				for (j = length; j >= i; j--){			//½«×Ö·û´®´Ó¿Õ¸ñµ½×îºóµÄ'\0'¶¼ÍùºóÒÆ¶¯Á½¸öÎ»ÖÃ£¬ÒòÎªÒªÈû %20
+		while (i >= 0){							//ä»åå¾€å‰æ‰«æå­—ç¬¦ä¸²
+			if (str[i] == ' '){						//å¦‚æœæ‰«æåˆ°å­—ç¬¦æ˜¯ç©ºæ ¼
+				for (j = length; j >= i; j--){			//å°†å­—ç¬¦ä¸²ä»ç©ºæ ¼åˆ°æœ€åçš„'\0'éƒ½å¾€åç§»åŠ¨ä¸¤ä¸ªä½ç½®ï¼Œå› ä¸ºè¦å¡ %20
 					str[j + 2] = str[j];
 				}
-				str[i] = '%';			//i¾ÍÊÇ¿Õ¸ñµÄÎ»ÖÃ£¬·Å%
-				str[i + 1] = '2';		  //i+1·Å2
-				str[i + 2] = '0';			// i+2·Å0
-				length += 2;			//³¤¶ÈÒª¼Ó¶ş
+				str[i] = '%';			//iå°±æ˜¯ç©ºæ ¼çš„ä½ç½®ï¼Œæ”¾%
+				str[i + 1] = '2';		  //i+1æ”¾2
+				str[i + 2] = '0';			// i+2æ”¾0
+				length += 2;			//é•¿åº¦è¦åŠ äºŒ
 			}
 			i--;
 		}
@@ -85,7 +85,7 @@ public:
 #endif
 
 #if 0
-//´ÓÎ²µ½Í·´òÓ¡Á´±í
+//ä»å°¾åˆ°å¤´æ‰“å°é“¾è¡¨
 /**
 *  struct ListNode {
 *        int val;
@@ -112,7 +112,7 @@ public:
 #endif
 
 #if 0
-//ÖØ½¨¶ş²æÊ÷
+//é‡å»ºäºŒå‰æ ‘
 #include<vector>
 struct TreeNode {
 	int val;
@@ -124,7 +124,7 @@ struct TreeNode {
 
 class Solution {
 public:
-	int find_int(vector<int> v, int x)//·µ»ØÖĞĞò±éÀúÖĞ¸ù½ÚµãµÄÏÂ±ê
+	int find_int(vector<int> v, int x)//è¿”å›ä¸­åºéå†ä¸­æ ¹èŠ‚ç‚¹çš„ä¸‹æ ‡
 	{
 		for (size_t i = 0; i<v.size(); i++)
 		{
@@ -133,7 +133,7 @@ public:
 		}
 		return -1;
 	}
-	vector<int> Newarr(vector<int> origin, int start, int end)//×ÓĞòÁĞµÄÊı×é
+	vector<int> Newarr(vector<int> origin, int start, int end)//å­åºåˆ—çš„æ•°ç»„
 	{
 		vector<int> tmp;
 		int now = start;
@@ -148,11 +148,11 @@ public:
 		if (pre.empty() || vin.empty())
 			return nullptr;
 		int div;
-		TreeNode* root = new struct TreeNode(0);//¸ø¸ù½ÚµãÏÈ³õÊ¼»¯
+		TreeNode* root = new struct TreeNode(0);//ç»™æ ¹èŠ‚ç‚¹å…ˆåˆå§‹åŒ–
 		root->val = pre[0];
-		root->left = root->right = nullptr;//¹¹½¨¸ù½Úµã
+		root->left = root->right = nullptr;//æ„å»ºæ ¹èŠ‚ç‚¹
 
-		div = find_int(vin, pre[0]);//ÖĞĞòÖĞ¸ù½ÚµãµÄÏÂ±ê
+		div = find_int(vin, pre[0]);//ä¸­åºä¸­æ ¹èŠ‚ç‚¹çš„ä¸‹æ ‡
 		root->left = reConstructBinaryTree(Newarr(pre, 1, div), Newarr(vin, 0, div - 1));
 		root->right = reConstructBinaryTree(Newarr(pre, div + 1, pre.size() - 1), Newarr(vin, div + 1, vin.size() - 1));
 		return root;
@@ -161,12 +161,12 @@ public:
 #endif
 
 #if 0
-//¸ø¶¨Ò»¸ö¶ş²æÊ÷µÄÇ°Ğò±éÀúºÍÖĞĞò±éÀúµÄĞòÁĞ£¬Êä³ö¶ÔÓ¦Õâ¸ö¶ş²æÊ÷µÄºóĞø±éÀúĞòÁĞ¡£
+//ç»™å®šä¸€ä¸ªäºŒå‰æ ‘çš„å‰åºéå†å’Œä¸­åºéå†çš„åºåˆ—ï¼Œè¾“å‡ºå¯¹åº”è¿™ä¸ªäºŒå‰æ ‘çš„åç»­éå†åºåˆ—ã€‚
 #include<iostream>
 using namespace std;
 #include<string>
-//¹¹½¨¶ş²æÊ÷
-//ºóĞò±éÀú¶ş²æÊ÷
+//æ„å»ºäºŒå‰æ ‘
+//ååºéå†äºŒå‰æ ‘
 struct BTreeNode
 {
 	BTreeNode *left;
@@ -181,7 +181,7 @@ BTreeNode *CreatTree(string pre, string vin)
 	BTreeNode *root = new BTreeNode(pre[0]);
 	root->val = val;
 	root->left = root->right = nullptr;
-	int div = vin.find(val);//´æ·ÅÖĞĞòÖĞ¸ùµÄÏÂ±ê
+	int div = vin.find(val);//å­˜æ”¾ä¸­åºä¸­æ ¹çš„ä¸‹æ ‡
 	if (div == string::npos)
 		return nullptr;
 	int preleftlength = div;
@@ -212,13 +212,13 @@ int main()
 #endif
 
 #if 0
-//¸ø¶¨Ò»¸ö¶ş²æÊ÷µÄÇ°Ğò±éÀúºÍÖĞĞò±éÀúµÄĞòÁĞ£¬Êä³ö¶ÔÓ¦Õâ¸ö¶ş²æÊ÷µÄºóĞø±éÀúĞòÁĞ¡£
+//ç»™å®šä¸€ä¸ªäºŒå‰æ ‘çš„å‰åºéå†å’Œä¸­åºéå†çš„åºåˆ—ï¼Œè¾“å‡ºå¯¹åº”è¿™ä¸ªäºŒå‰æ ‘çš„åç»­éå†åºåˆ—ã€‚
 #include<iostream>
 #include<vector>
 #include<string>
 using namespace std;
 
-//¹¹½¨¶ş²æÊ÷½áµã
+//æ„å»ºäºŒå‰æ ‘ç»“ç‚¹
 struct BTreeNode
 {
 	char data;
@@ -227,13 +227,13 @@ struct BTreeNode
 	BTreeNode(char x) :data(x), left(NULL), right(NULL){}
 };
 
-//¸ù¾İ¸¸½Úµã½«¶ş²æÊ÷·ÖÎª×óÓÒ×ÓÊ÷
+//æ ¹æ®çˆ¶èŠ‚ç‚¹å°†äºŒå‰æ ‘åˆ†ä¸ºå·¦å³å­æ ‘
 vector<char> m_copy(vector<char> &v, int l, int r)
 {
 	return vector<char>(v.begin() + l, v.begin() + r);
 }
 
-//¸ù¾İÇ°ĞòĞòÁĞºÍÖĞĞòĞòÁĞÖØ½¨¶ş²æÊ÷
+//æ ¹æ®å‰åºåºåˆ—å’Œä¸­åºåºåˆ—é‡å»ºäºŒå‰æ ‘
 BTreeNode* reConstructBTree(vector<char> pre, vector<char> vin)
 {
 	if (pre.size() == 0 || vin.size() == 0)
@@ -252,7 +252,7 @@ BTreeNode* reConstructBTree(vector<char> pre, vector<char> vin)
 	return node;
 }
 
-//ºóĞò±éÀú¶ş²æÊ÷
+//ååºéå†äºŒå‰æ ‘
 void PastOrder(BTreeNode* p)
 {
 	if (p == NULL)
@@ -286,7 +286,7 @@ int main()
 
 #if 0
 #include<stack>
-//ÓÃÁ½¸öÕ»À´ÊµÏÖÒ»¸ö¶ÓÁĞ£¬Íê³É¶ÓÁĞµÄPushºÍPop²Ù×÷¡£ ¶ÓÁĞÖĞµÄÔªËØÎªintÀàĞÍ¡£
+//ç”¨ä¸¤ä¸ªæ ˆæ¥å®ç°ä¸€ä¸ªé˜Ÿåˆ—ï¼Œå®Œæˆé˜Ÿåˆ—çš„Pushå’ŒPopæ“ä½œã€‚ é˜Ÿåˆ—ä¸­çš„å…ƒç´ ä¸ºintç±»å‹ã€‚
 class Solution
 {
 public:
@@ -333,7 +333,7 @@ int minNumberInRotateArray(vector<int> rotateArray)
 			return rotateArray[end];
 		}
 
-		//mid = (start + end) / 2;//¿ÉÄÜ»á³öÏÖÊı×éÒç³ö
+		//mid = (start + end) / 2;//å¯èƒ½ä¼šå‡ºç°æ•°ç»„æº¢å‡º
 		mid = start + (end - start) / 2;
 
 		if (rotateArray[start] == rotateArray[end] &&
@@ -394,7 +394,7 @@ int minNumberInRotateArray(vector<int> rotateArray)
 #endif
 
 #if 0
-//ì³²¨ÄÇÆõÊı
+//æ–æ³¢é‚£å¥‘æ•°
 class Solution {
 public:
 	int Fibonacci(int n) {
@@ -416,7 +416,7 @@ public:
 #endif
 
 #if 0
-//Ò»Ö»ÇàÍÜÒ»´Î¿ÉÒÔÌøÉÏ1¼¶Ì¨½×£¬Ò²¿ÉÒÔÌøÉÏ2¼¶¡£Çó¸ÃÇàÍÜÌøÉÏÒ»¸ön¼¶µÄÌ¨½××Ü¹²ÓĞ¶àÉÙÖÖÌø·¨£¨ÏÈºó´ÎĞò²»Í¬Ëã²»Í¬µÄ½á¹û£©¡£
+//ä¸€åªé’è›™ä¸€æ¬¡å¯ä»¥è·³ä¸Š1çº§å°é˜¶ï¼Œä¹Ÿå¯ä»¥è·³ä¸Š2çº§ã€‚æ±‚è¯¥é’è›™è·³ä¸Šä¸€ä¸ªnçº§çš„å°é˜¶æ€»å…±æœ‰å¤šå°‘ç§è·³æ³•ï¼ˆå…ˆåæ¬¡åºä¸åŒç®—ä¸åŒçš„ç»“æœï¼‰ã€‚
 class Solution {
 public:
 	int jumpFloor(int number) {
@@ -432,7 +432,7 @@ public:
 
 #if 0
 #include<math.h>
-//Ò»Ö»ÇàÍÜÒ»´Î¿ÉÒÔÌøÉÏ1¼¶Ì¨½×£¬Ò²¿ÉÒÔÌøÉÏ2¼¶¡­¡­ËüÒ²¿ÉÒÔÌøÉÏn¼¶¡£Çó¸ÃÇàÍÜÌøÉÏÒ»¸ön¼¶µÄÌ¨½××Ü¹²ÓĞ¶àÉÙÖÖÌø·¨¡£
+//ä¸€åªé’è›™ä¸€æ¬¡å¯ä»¥è·³ä¸Š1çº§å°é˜¶ï¼Œä¹Ÿå¯ä»¥è·³ä¸Š2çº§â€¦â€¦å®ƒä¹Ÿå¯ä»¥è·³ä¸Šnçº§ã€‚æ±‚è¯¥é’è›™è·³ä¸Šä¸€ä¸ªnçº§çš„å°é˜¶æ€»å…±æœ‰å¤šå°‘ç§è·³æ³•ã€‚
 class Solution {
 public:
 	int jumpFloorII(int number) {
@@ -444,7 +444,7 @@ public:
 #endif
 
 #if 0
-//ÎÒÃÇ¿ÉÒÔÓÃ2*1µÄĞ¡¾ØĞÎºá×Å»òÕßÊú×ÅÈ¥¸²¸Ç¸ü´óµÄ¾ØĞÎ¡£ÇëÎÊÓÃn¸ö2*1µÄĞ¡¾ØĞÎÎŞÖØµşµØ¸²¸ÇÒ»¸ö2*nµÄ´ó¾ØĞÎ£¬×Ü¹²ÓĞ¶àÉÙÖÖ·½·¨£¿
+//æˆ‘ä»¬å¯ä»¥ç”¨2*1çš„å°çŸ©å½¢æ¨ªç€æˆ–è€…ç«–ç€å»è¦†ç›–æ›´å¤§çš„çŸ©å½¢ã€‚è¯·é—®ç”¨nä¸ª2*1çš„å°çŸ©å½¢æ— é‡å åœ°è¦†ç›–ä¸€ä¸ª2*nçš„å¤§çŸ©å½¢ï¼Œæ€»å…±æœ‰å¤šå°‘ç§æ–¹æ³•ï¼Ÿ
 class Solution {
 public:
 	int rectCover(int number) {
@@ -457,3 +457,57 @@ public:
 	}
 };
 #endif
+
+#if 0
+//è¾“å…¥ä¸€ä¸ªæ•´æ•°ï¼Œè¾“å‡ºè¯¥æ•°äºŒè¿›åˆ¶è¡¨ç¤ºä¸­1çš„ä¸ªæ•°ã€‚å…¶ä¸­è´Ÿæ•°ç”¨è¡¥ç è¡¨ç¤ºã€‚
+class Solution {
+public:
+	int  NumberOf1(int n) {
+		int count = 0;
+		for (int i = 0; i <= 32; i++)
+		{
+			if ((n & 0x1) == 1)
+			{
+				count++;
+			}
+			n = (unsigned)n >> 1;
+		}
+		return count;
+	}
+};
+#endif
+
+#if 0
+//ç»™å®šä¸€ä¸ªdoubleç±»å‹çš„æµ®ç‚¹æ•°baseå’Œintç±»å‹çš„æ•´æ•°exponentã€‚æ±‚baseçš„exponentæ¬¡æ–¹ã€‚
+//ä¿è¯baseå’Œexponentä¸åŒæ—¶ä¸º0
+//x^11=x^8*x^2*x^1=x^2^3*x^2^1*x^2^0=(1*x^2^3)*(0*x^2^2)*(1*x^2^1)*(1*x^2^0)
+//11-->1011
+//æ‰€ä»¥ï¼Œæˆ‘ä»¬å¯ä»¥è¿™æ ·å®ç°è¿™ä¸ªå¿«é€Ÿå¹‚è¿ç®—ã€‚
+//
+//step1ï¼šé¦–å…ˆéœ€è¦çŸ¥é“åœ¨æ¯æ¬¡å¾ªç¯é‡Œé€šè¿‡è‡ªä¹˜è®¡ç®—baseçš„2çš„æŒ‡æ•°æ¬¡æ–¹ã€‚å¾ªç¯çš„æ¬¡æ•°å°±æ˜¯æ‰€æ±‚æŒ‡æ•°exponentçš„äºŒè¿›åˆ¶ä½æ•°
+//
+//step2:Â å…¶æ¬¡å°±æ˜¯å¯¹äºæ¯ä¸ªbaseçš„2çš„æŒ‡æ•°æ¬¡æ–¹ï¼Œä¹˜ä»¥å…¶ç›¸å¯¹åº”çš„äºŒè¿›åˆ¶ä½ä¸Šçš„æ•°ã€‚
+//
+//step3:Â å¾ªç¯é‡Œä¸æ–­çš„ç´¯æˆstep2é‡Œè®¡ç®—çš„ç»“æœã€‚
+class Solution {
+public:
+	double Power(double base, int exponent) {
+		int num = abs(exponent);//æ•´æ•°å¯èƒ½æ˜¯è´Ÿæ•°
+		double res = 1.0;
+		while (num)
+		{
+			if ((num & 1) == 1)
+			{
+				res *= base;
+			}
+			base *= base;
+			num >>= 1;
+		}
+		if (exponent<0)//å¦‚æœæ•´æ•°æ˜¯è´Ÿæ•°
+			res = 1.0 / res;
+		return res;
+
+	}
+};
+#endif
+
