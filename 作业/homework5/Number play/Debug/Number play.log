@@ -1,0 +1,16 @@
+﻿生成启动时间为 2019/5/7 11:11:31。
+     1>项目“D:\代码\Number play\Number play\Number play.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\vs\新建文件夹\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "Output character.cpp"
+         Output character.cpp
+       Link:
+         D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\代码\Number play\Debug\Number play.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\代码\Number play\Debug\Number play.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\代码\Number play\Debug\Number play.lib" /MACHINE:X86 Debug\Binsearch.obj
+         Debug\Login.obj
+         "Debug\Number play.obj"
+         "Debug\Output character.obj"
+         Number play.vcxproj -> D:\代码\Number play\Debug\Number play.exe
+     1>已完成生成项目“D:\代码\Number play\Number play\Number play.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.03
