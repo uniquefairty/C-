@@ -1,6 +1,6 @@
-#include<iostream>
+//#include<iostream>
 #include<algorithm>
-using namespace std;
+//using namespace std;
 
 #if 0
 //////消除字符后面重复的字符
@@ -3276,3 +3276,109 @@ int main()
 }
 #endif
 
+#if 0
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string s1, s2, s3;
+	while (1)
+	{
+		getline(cin , s1);
+		cin >> s2;
+		int arr[256] = { 0 };
+		int i = 0;
+		for (; i<s2.size(); i++)
+		{
+			arr[s2[i]] = 1;
+		}
+
+		for (i = 0; i<s1.size(); i++)
+		{
+			if (arr[s1[i]] == 1)
+			{
+				continue;
+			}
+			s3 += s1[i];
+		}
+		s3 += '\0';
+		for (i = 0; i<s3.size(); i++)
+		{
+			cout << s3[i] << endl;
+		}
+	}
+
+
+	return 0;
+}
+#endif
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string s1, s2, s3;
+	while (cin >> s1 >> s2)
+	{
+		int arr[256] = { 0 };
+		int i = 0;
+		for (; i<s2.size(); i++)
+		{
+			arr[s2[i]] = 1;
+		}
+
+		for (i = 0; i<s1.size(); i++)
+		{
+			if (arr[s1[i]] == 1)
+			{
+				s1.erase(i, 1);
+				i--;
+			}
+
+		}
+
+		cout << s1;
+		
+	}
+
+
+	return 0;
+}
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	int n, i;
+	cin >> n;
+	vector<int> v;
+	v.resize(n);
+	for (i = 0; i<n; i++)
+	{
+		cin >> v[i];
+	}
+	int sum = v[0], max = v[0];
+	for (i = 1; i<n; i++)
+	{
+		sum += v[i];
+		if (sum<v[i])
+		{
+			sum = v[i];
+		}
+		if (sum>max)
+		{
+			max = sum;
+		}
+	}
+	cout << max;
+
+	return 0;
+}
