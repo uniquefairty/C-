@@ -1,7 +1,21 @@
 /* ftell example : getting size of a file */
 #include <stdio.h>
 #include<string.h>
+#include <assert.h>
 
+int main()
+{
+	FILE *fp = fopen("1.txt", "r");
+
+	if (fp == NULL)
+	{
+		assert(fp);
+		return 0;
+	}
+
+	return 0;
+}
+#if 0
 int main()
 {
 	FILE * fp;
@@ -22,3 +36,6 @@ int main()
 
 	return 0;
 }
+
+#endif
+
