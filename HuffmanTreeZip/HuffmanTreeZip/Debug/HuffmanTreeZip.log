@@ -1,47 +1,17 @@
-﻿生成启动时间为 2020/2/13 21:51:50。
-     1>项目“E:\githab代码\C-\HuffmanTreeZip\HuffmanTreeZip\HuffmanTreeZip.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2020/2/17 23:16:33。
+     1>项目“E:\githab代码\C-\HuffmanTreeZip\HuffmanTreeZip\HuffmanTreeZip.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FileCompress.cpp FileCompressHuff.cpp
          FileCompressHuff.cpp
-     1>e:\githab代码\c-\huffmantreezip\huffmantreezip\huffmantree.hpp(28): error C2678: 二进制“>”: 没有找到接受“const charInfo”类型的左操作数的运算符(或没有可接受的转换)
-                 e:\githab代码\c-\huffmantreezip\huffmantreezip\filecompresshuff.h(20): 可能是“bool charInfo::operator >(const charInfo &)”
-                 尝试匹配参数列表“(const charInfo, const charInfo)”时
-                 e:\githab代码\c-\huffmantreezip\huffmantreezip\huffmantree.hpp(27): 编译类 模板 成员函数“bool Less<W>::operator ()(const HuffManTreeNode<W> *,const HuffManTreeNode<W> *)”时
-                 with
-                 [
-                     W=charInfo
-                 ]
-                 d:\vs\新建文件夹\vc\include\xutility(521): 参见对正在编译的函数 模板 实例化“bool Less<W>::operator ()(const HuffManTreeNode<W> *,const HuffManTreeNode<W> *)”的引用
-                 with
-                 [
-                     W=charInfo
-                 ]
-                 d:\vs\新建文件夹\vc\include\queue(438): 参见对正在编译的类 模板 实例化“Less<W>”的引用
-                 with
-                 [
-                     W=charInfo
-                 ]
-                 e:\githab代码\c-\huffmantreezip\huffmantreezip\huffmantree.hpp(55): 参见对正在编译的类 模板 实例化“std::priority_queue<HuffManTreeNode<W> *,std::vector<HuffManTreeNode<W> *,std::allocator<_Ty>>,Less<W>>”的引用
-                 with
-                 [
-                     W=charInfo
-         ,            _Ty=HuffManTreeNode<charInfo> *
-                 ]
-                 e:\githab代码\c-\huffmantreezip\huffmantreezip\huffmantree.hpp(53): 编译类 模板 成员函数“void HuffManTree<charInfo>::CreateHuffManTree(const std::vector<charInfo,std::allocator<_Ty>> &)”时
-                 with
-                 [
-                     _Ty=charInfo
-                 ]
-                 e:\githab代码\c-\huffmantreezip\huffmantreezip\huffmantree.hpp(44): 参见对正在编译的函数 模板 实例化“void HuffManTree<charInfo>::CreateHuffManTree(const std::vector<charInfo,std::allocator<_Ty>> &)”的引用
-                 with
-                 [
-                     _Ty=charInfo
-                 ]
-                 e:\githab代码\c-\huffmantreezip\huffmantreezip\filecompresshuff.cpp(41): 参见对正在编译的类 模板 实例化“HuffManTree<charInfo>”的引用
+     1>e:\githab代码\c-\huffmantreezip\huffmantreezip\filecompresshuff.cpp(64): warning C4018: “<”: 有符号/无符号不匹配
          FileCompress.cpp
          正在生成代码...
-     1>已完成生成项目“E:\githab代码\C-\HuffmanTreeZip\HuffmanTreeZip\HuffmanTreeZip.vcxproj”(Build 个目标)的操作 - 失败。
+       Link:
+         D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\githab代码\C-\HuffmanTreeZip\Debug\HuffmanTreeZip.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\githab代码\C-\HuffmanTreeZip\Debug\HuffmanTreeZip.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\githab代码\C-\HuffmanTreeZip\Debug\HuffmanTreeZip.lib" /MACHINE:X86 Debug\FileCompress.obj
+         Debug\FileCompressHuff.obj
+         HuffmanTreeZip.vcxproj -> E:\githab代码\C-\HuffmanTreeZip\Debug\HuffmanTreeZip.exe
+     1>已完成生成项目“E:\githab代码\C-\HuffmanTreeZip\HuffmanTreeZip\HuffmanTreeZip.vcxproj”(Rebuild 个目标)的操作。
 
-生成失败。
+生成成功。
 
-已用时间 00:00:02.11
+已用时间 00:00:01.98

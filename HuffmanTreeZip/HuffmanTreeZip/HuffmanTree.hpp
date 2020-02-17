@@ -1,6 +1,7 @@
 #pragma once
 using namespace std;
 //#include <iostream>
+#include "FileCompressHuff.h"
 #include <queue>
 #include <vector>
 
@@ -10,11 +11,14 @@ struct HuffManTreeNode
 	HuffManTreeNode(const W& weight = W())//内置类型：0 自定义类型：无参构造函数 全缺省构造函数
 		: _pLeft(nullptr)
 		, _pRight(nullptr)
+		, _pParent(nullptr)
 		,_weight(weight)
 	{}
 
 	HuffManTreeNode<W>*_pLeft;
 	HuffManTreeNode<W>* _pRight;
+	HuffManTreeNode<W>* _pParent;
+
 	W _weight;//节点的权值
 };
 
@@ -39,9 +43,9 @@ public:
 		:_pRoot(nullptr)
 	{}
 	
-	HuffManTree(const vector<W>& vWeight)
+	HuffManTree(const vector<W>& vWeight,const W& invalid)//有效的权值和无效(字符出现0次)的权值
 	{
-		CreateHuffManTree(vWeight);
+		CreateHuffManTree(vWeight,invalid);
 	}
 
 	~HuffManTree()
@@ -49,12 +53,20 @@ public:
 		_DestroyTree(_pRoot);
 	}
 
-	void CreateHuffManTree(const vector<W>& vWeight)
+	Node* GetRoot()
+	{
+		return _pRoot;
+	}
+
+	void CreateHuffManTree(const vector<W>& vWeight, const W& invalid)
 	{
 		//1.构建森林
 		std::priority_queue<Node*,vector<Node *>,Less<W>> q;
 		for (auto e : vWeight)
 		{
+			if (e == invalid)
+				continue;
+
 			q.push(new Node(e));
 		}
 
@@ -71,10 +83,13 @@ public:
 			pParent->_pLeft = pLeft;
 			pParent->_pRight = pRight;
 
+			pLeft->_pParent = pParent;
+			pRight->_pParent = pParent;
 			q.push(pParent);
 		}
 		_pRoot = q.top();
 	}
+
 
 private:
 	void _DestroyTree(Node*& pRoot)

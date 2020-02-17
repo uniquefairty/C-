@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "HuffmanTree.hpp"
 
 struct charInfo
 {
@@ -17,9 +18,14 @@ struct charInfo
 		return charInfo(_count + c._count);
 	}
 
-	bool operator>(const charInfo& c)
+	bool operator>(const charInfo& c)const
 	{
 		return _count > c._count;
+	}
+
+	bool operator==(const charInfo& c)const
+	{
+		return _count == c._count;
 	}
 };
 
@@ -30,6 +36,11 @@ public:
 	void CompressFile(const std::string& path);
 	void UNCompressFile(const std::string& path);
 
+
+private:
+	void GenerateHuffManCode(HuffManTreeNode<charInfo> *pRoot);
+	void WriteHead(FILE* fOut, const string& filePostFix);//增加文件信息
+	string GetFilePostFix(const string& fileName);//获取文件后缀
 private:
 	std::vector<charInfo> _fileInfo;
 };
