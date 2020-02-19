@@ -1,4 +1,4 @@
-﻿生成启动时间为 2020/2/17 23:16:33。
+﻿生成启动时间为 2020/2/19 21:09:36。
      1>项目“E:\githab代码\C-\HuffmanTreeZip\HuffmanTreeZip\HuffmanTreeZip.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FileCompress.cpp FileCompressHuff.cpp
@@ -14,4 +14,4 @@
 
 生成成功。
 
-已用时间 00:00:01.98
+已用时间 00:00:02.65

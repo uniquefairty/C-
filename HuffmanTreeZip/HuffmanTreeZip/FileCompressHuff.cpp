@@ -102,15 +102,79 @@ void FileCompressHuff::UNCompressFile(const std::string& path)
 		return;
 	}
 	//文件后缀
+	string strFilePostFix;
+	ReadLine(fIn, strFilePostFix);
 
 	//字符信息的总行数
+	string strCount;
+	ReadLine(fIn, strCount);
+	int lineCount = atoi(strCount.c_str());
+
 	//字符信息
+	for (int i = 0; i < lineCount; i++)
+	{
+		string strchCount;
+		ReadLine(fIn, strchCount);
+
+		//A:1
+		_fileInfo[strchCount[0]]._count = atoi(strchCount.c_str() + 2);//前两个字符是A和：
+	}
 
 	//还原哈夫曼树
+	HuffManTree<charInfo> t;
+	t.CreateHuffManTree(_fileInfo, charInfo(0));
+
+	FILE* fOut = fopen("3.txt","w");
+		assert(fOut);
 	//解压缩
+	char* pReadBuff = new char[1024];
+	HuffManTreeNode<charInfo>* pCur = t.GetRoot();
+	char ch = 0;
+	while (true)
+	{
+		size_t rdSize = fread(pReadBuff, 1, 1024, fIn);
+		if (0 == rdSize)
+			break;
+
+		for (size_t i = 0; i < rdSize; i++)
+		{
+			//只需将一个字节中8个比特位单独处理
+			ch = pReadBuff[i];
+			for (int pos = 0; pos < 8; pos++)
+			{
+				if (ch & 0x80)
+					pCur = pCur->_pRight;
+				else
+					pCur = pCur->_pLeft;
+
+				ch <<= 1;
+				if (nullptr == pCur->_pLeft&&nullptr == pCur->_pRight)
+				{
+					fputc(pCur->_weight._ch,fOut);
+					pCur = t.GetRoot();
+				}
+				
+			}
+		}
+	}
 	//压缩数据
+	delete[] pReadBuff;
+	fclose(fIn);
+	fclose(fOut);
 }
 
+void FileCompressHuff::ReadLine(FILE* fIn, string &strInfo)
+{
+	assert(fIn);
+	while (!feof(fIn))//没有到文件的末尾
+	{
+		char ch = fgetc(fIn);
+		if (ch == '\n')
+			break;
+		strInfo += ch;
+	}
+	
+}
 void FileCompressHuff::WriteHead(FILE* fOut, const string& fileName)
 {
 	assert(fOut);
