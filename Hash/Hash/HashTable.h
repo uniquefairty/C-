@@ -1,10 +1,12 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <iostream>
 using namespace std;
 
-enum State{EMPTY,EXIST,DELETE};
+#include "Common.h"
 
+enum State{EMPTY,EXIST,DELETE};
 template<class T>
 struct Elem
 {
@@ -19,14 +21,12 @@ struct Elem
 };
 
 
-
-
-
 //假设哈希表中元素唯一
 //T:表示元素类型
 //DF：表示T类型的对象转化为整数数据的方法
 //isLine：选择用线性探测还是二次探测来解决哈希冲突
-template<class T，class DF = DefHashF<T>, bool isLine = true>
+
+template<class T,class DF = DefHashF<T>, bool isLine = true>
 class HashTable
 {
 public:
@@ -35,6 +35,7 @@ public:
 	{
 		_ht.resize(10);
 	}
+
 	bool Insert(const T& data)
 	{
 		//检测哈希表底层空间是否充足
@@ -65,7 +66,7 @@ public:
 				//二次探测
 				i++;
 				hashAddr = hashAddr + 2 * i + 1;
-				hassAddr %= _ht.capacity();
+				hashAddr %= _ht.capacity();
 			}
 	
 		}
@@ -80,16 +81,28 @@ public:
 	{
 		//通过哈希函数，计算表格中的位置
 		size_t hashAddr = HashFunc(data);
+		size_t i = 0;
 		//查找
 		while (_ht[hashAddr]._state != EMPTY)
 		{
 			if (_ht[hashAddr]._state == EXIST&&_ht[hashAddr]._data == data)
 				return hashAddr;
 
-			//线性探测
-			hashAddr++;
-			if (hashAddr == _ht.capacity())
-				hashAddr = 0;
+			if (isLine)
+			{
+				//线性探测
+				hashAddr++;
+				if (hashAddr == _ht.capacity())
+					hashAddr = 0;
+			}
+			else
+			{
+				//二次探测
+				i++;
+				hashAddr = hashAddr + 2 * i + 1;
+				hashAddr %= _ht.capacity();
+			}
+
 		}
 		return -1;
 	}
@@ -111,10 +124,37 @@ public:
 		return _size;
 	}
 
+	void Swap(HashTable<T, DF, isLine>& ht)
+	{
+		_ht.swap(ht._ht);
+		swap(_size, ht._size);
+	}
+
 private:
+	void CheckCapacity()
+	{
+		if (_size *10/ _ht.capacity() >= 7)
+		{
+			//1.新创建一个哈希表
+			HashTable<T, DF, isLine> newHT(GetNextPrime(_ht.capacity()));
+
+			//2.将哈希表中状态存在的元素向哈希表中插入
+			for (auto e : _ht)
+			{
+				if (e._state == EXIST)
+				{
+					newHT.insert(e);
+				}
+			}
+			Swap(newHT);
+		}
+	}
 	size_t HashFunc(const T& data)
 	{
-		return data % 10;
+		//DF df;
+		//return df(data) % 10;
+
+		return DF()(data) % _ht.capacity();
 	}
 
 private:
@@ -125,7 +165,7 @@ private:
 void TestHashTable()
 {
 	int array[] = { 21, 67, 112,99,5,13,44 };
-	HashTable<int> ht;
+	HashTable<int, DefHashF<int>> ht;
 	for (auto e : array)
 
 		ht.Insert(e);
@@ -163,4 +203,14 @@ void TestHashTable()
 	{
 		cout << "87 is not in hashtable" << endl;
 	}
+}
+
+void TestHashTable2()
+{
+
+	HashTable<string, StrInt> ht;
+	ht.Insert("1111");
+	ht.Insert("2222");
+	ht.Insert("3333");
+	ht.Insert("4444");
 }

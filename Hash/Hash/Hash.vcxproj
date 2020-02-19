@@ -68,6 +68,8 @@
     <ClInclude Include="HashTable.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="HashBucket.h" />
     <ClCompile Include="testHash.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

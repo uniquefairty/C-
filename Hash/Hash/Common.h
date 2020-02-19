@@ -1,5 +1,8 @@
 #pragma once
 #include<string>
+using namespace std;
+
+size_t GetNextPrime(size_t capacity);
 
 //整形数据不需要转化
 template<class T>
@@ -18,7 +21,7 @@ class StrInt
 public:
 	size_t operator()(const std::string& s)
 	{
-		return BKDRHash();
+		return BKDRHash(s.c_str());
 	}
 private:
 	size_t BKDRHash(const char *str)
