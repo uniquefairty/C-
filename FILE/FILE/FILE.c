@@ -5,6 +5,18 @@
 
 int main()
 {
+	FILE * pFile;
+	char buffer[] = { 'x' , 'y' , 'z' };
+	pFile = fopen ( "myfile.bin" , "wb" );
+	fwrite (buffer , 1 , sizeof(buffer) , pFile );
+	fclose (pFile);
+	return 0;
+}
+
+
+#if 0
+int main()
+{
 	FILE *fp = fopen("1.txt", "r");
 
 	if (fp == NULL)
@@ -15,6 +27,8 @@ int main()
 
 	return 0;
 }
+
+#endif
 #if 0
 int main()
 {
