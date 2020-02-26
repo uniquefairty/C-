@@ -3,7 +3,7 @@
 #include <assert.h>
 
 
-FileCompressHuff::FileCompressHuff()
+FileCompressHuff::FileCompressHuff()//构造函数--完成初始化
 {
 	_fileInfo.resize(256);
 	for (int i = 0; i < 256; i++)
@@ -12,6 +12,7 @@ FileCompressHuff::FileCompressHuff()
 		_fileInfo[i]._count = 0;
 	}
 }
+
 void FileCompressHuff::CompressFile(const std::string& path)
 {
 	//1.统计源文件中每个字符出现的次数
@@ -52,9 +53,10 @@ void FileCompressHuff::CompressFile(const std::string& path)
 	}
 
 	WriteHead(fOut, path);//解压缩的信息
-	fseek(fIn,0,SEEK_SET);//
+	                      //+解压缩数据
+	fseek(fIn,0,SEEK_SET);//修改文件指针指向起始位置
 	char ch = 0;
-	size_t bitcount = 0;
+	size_t bitcount = 0;//统计读到的比特位个数
 	while (true)
 	{
 		rdSize = fread(pReadBuff, 1, 1024, fIn);
@@ -65,7 +67,7 @@ void FileCompressHuff::CompressFile(const std::string& path)
 		{
 			string strCode=_fileInfo[pReadBuff[i]]._strCode;
 			//A:"110"  B:"101" 
-			for (size_t j = 0; i < strCode.size(); i++)
+			for (size_t j = 0; j< strCode.size(); j++)
 			{
 				ch <<= 1;
 				if ('1' == strCode[j])
@@ -73,7 +75,7 @@ void FileCompressHuff::CompressFile(const std::string& path)
 				bitcount++;
 				if (8 == bitcount)
 				{
-					fputc(ch, fOut);
+					fputc(ch, fOut);//读取一个字节(8个比特位)
 					bitcount = 0;
 					ch = 0;
 				}
@@ -84,7 +86,7 @@ void FileCompressHuff::CompressFile(const std::string& path)
 	//最后一个可能不够8个比特位
 	if (bitcount < 8)
 	{
-		ch <<= (8 - bitcount);
+		ch <<= (8 - bitcount);//剩下的比特位数值移到高位
 		fputc(ch, fOut);
 	}
 
@@ -175,7 +177,7 @@ void FileCompressHuff::ReadLine(FILE* fIn, string &strInfo)
 	}
 	
 }
-void FileCompressHuff::WriteHead(FILE* fOut, const string& fileName)
+void FileCompressHuff::WriteHead(FILE* fOut, const string& fileName)//文件压缩信息
 {
 	assert(fOut);
 
@@ -191,27 +193,26 @@ void FileCompressHuff::WriteHead(FILE* fOut, const string& fileName)
 	for (int i = 0; i < 256; i++)
 	{
 		charInfo& charInfo = _fileInfo[i];
-		if (_fileInfo[i]._count)
+		if (_fileInfo[i]._count)//出现字符的次数不为0
 		{
 			lineCount++;
 			strChCount += _fileInfo[i]._ch;
 			strChCount += ':';
-			_itoa(charInfo._count, szValue, 10);
-			strChCount += szValue;//字符转整形
+			//char *  itoa ( int value, char * str, int base );
+			_itoa(charInfo._count, szValue, 10);//字符转整形
+			strChCount += szValue;
 			strChCount += '\n';
 		}
 	}
 
 	_itoa(lineCount, szValue, 10);
-	strHead += szValue;
+	strHead += szValue;//+行数
 	strHead += '\n';
 	//写字符信息
-
-	strHead += strChCount;
+	strHead += strChCount;//+每个字符的信息
 
 	fwrite(strHead.c_str(),1,strHead.size(),fOut);
 
-	//fwrite();
 }
 
 //2.txt  F:\123\2.txt
@@ -219,6 +220,8 @@ string FileCompressHuff::GetFilePostFix(const string& fileName)
 {
 	return fileName.substr(fileName.rfind('.'));
 }
+
+//获取每个字符的编码
 void FileCompressHuff::GenerateHuffManCode(HuffManTreeNode<charInfo> *pRoot)//根到叶子的路径
 {
 	if (nullptr == pRoot)

@@ -38,7 +38,8 @@ public:
 
 
 private:
-	void GenerateHuffManCode(HuffManTreeNode<charInfo> *pRoot);
+	void GenerateHuffManCode(HuffManTreeNode<charInfo> *pRoot);//生成编码
+
 	void WriteHead(FILE* fOut, const string& filePostFix);//增加文件信息
 	string GetFilePostFix(const string& fileName);//获取文件后缀
 	void ReadLine(FILE* fIn, string &strInfo);
