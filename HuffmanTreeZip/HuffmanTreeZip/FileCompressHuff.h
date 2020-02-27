@@ -5,7 +5,7 @@
 
 struct charInfo
 {
-	char _ch;  //具体的字符
+	unsigned char _ch;  //具体的字符
 	size_t _count;  //字符出现的次数
 	std::string _strCode; //字符的编码
 

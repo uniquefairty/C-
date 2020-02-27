@@ -16,7 +16,7 @@ FileCompressHuff::FileCompressHuff()//构造函数--完成初始化
 void FileCompressHuff::CompressFile(const std::string& path)
 {
 	//1.统计源文件中每个字符出现的次数
-	FILE* fIn = fopen(path.c_str(), "r");
+	FILE* fIn = fopen(path.c_str(), "rb");
 	if (nullptr == fIn)
 	{
 		assert(false);
@@ -33,7 +33,7 @@ void FileCompressHuff::CompressFile(const std::string& path)
 
 		for (int i = 0; i < rdSize; i++)
 		{
-			_fileInfo[pReadBuff[i]]._count++;
+			_fileInfo[(unsigned char)pReadBuff[i]]._count++;
 		}
 	}
 	
@@ -45,7 +45,8 @@ void FileCompressHuff::CompressFile(const std::string& path)
 	GenerateHuffManCode(t.GetRoot());
 
 	//4.用获取的字符编码重新改写编码
-	FILE* fOut = fopen("2.txt", "w");
+	FILE* fOut = fopen("2.txt", "wb");
+
 	if (nullptr == fOut)
 	{
 		assert(false);
@@ -65,13 +66,14 @@ void FileCompressHuff::CompressFile(const std::string& path)
 		//根据字节的编码对读取到的内容进行重写
 		for (size_t i = 0; i < rdSize; i++)
 		{
-			string strCode=_fileInfo[pReadBuff[i]]._strCode;
+			string strCode=_fileInfo[(unsigned char)pReadBuff[i]]._strCode;
 			//A:"110"  B:"101" 
 			for (size_t j = 0; j< strCode.size(); j++)
 			{
 				ch <<= 1;
 				if ('1' == strCode[j])
-					ch |= 1;
+	
+				ch |= 1;
 				bitcount++;
 				if (8 == bitcount)
 				{
@@ -97,7 +99,7 @@ void FileCompressHuff::CompressFile(const std::string& path)
 
 void FileCompressHuff::UNCompressFile(const std::string& path)
 {
-	FILE* fIn = fopen(path.c_str(), "r");
+	FILE* fIn = fopen(path.c_str(), "rb");
 	if (nullptr == fIn)
 	{
 		assert(false);
@@ -118,19 +120,29 @@ void FileCompressHuff::UNCompressFile(const std::string& path)
 		string strchCount;
 		ReadLine(fIn, strchCount);
 
+		//如果读取到的是\n
+		if (strchCount.empty())
+		{
+			strchCount += '\n';
+			ReadLine(fIn, strchCount);
+		}
+
 		//A:1
-		_fileInfo[strchCount[0]]._count = atoi(strchCount.c_str() + 2);//前两个字符是A和：
+		_fileInfo[(unsigned char)strchCount[0]]._count = atoi(strchCount.c_str() + 2);
+		
 	}
 
 	//还原哈夫曼树
 	HuffManTree<charInfo> t;
 	t.CreateHuffManTree(_fileInfo, charInfo(0));
 
-	FILE* fOut = fopen("3.txt","w");
-		assert(fOut);
+	FILE* fOut = fopen("3.txt","wb");
+	assert(fOut);
 	//解压缩
-	char* pReadBuff = new char[1024];
+	unsigned char* pReadBuff = new unsigned char[1024];
 	HuffManTreeNode<charInfo>* pCur = t.GetRoot();
+	size_t fileSize = pCur->_weight._count;//文件组的大小就是字节组中字符的个数
+	size_t unCount = 0;//解压缩的个数
 	char ch = 0;
 	while (true)
 	{
@@ -144,7 +156,7 @@ void FileCompressHuff::UNCompressFile(const std::string& path)
 			ch = pReadBuff[i];
 			for (int pos = 0; pos < 8; pos++)
 			{
-				if (ch & 0x80)
+				if (ch & 0x80)//检测高位
 					pCur = pCur->_pRight;
 				else
 					pCur = pCur->_pLeft;
@@ -152,8 +164,11 @@ void FileCompressHuff::UNCompressFile(const std::string& path)
 				ch <<= 1;
 				if (nullptr == pCur->_pLeft&&nullptr == pCur->_pRight)
 				{
-					fputc(pCur->_weight._ch,fOut);
-					pCur = t.GetRoot();
+					fputc(pCur->_weight._ch, fOut);
+					unCount++;
+					if (unCount == fileSize)
+						break;
+					pCur = t.GetRoot();//每次写一个字符，然后指向根节点
 				}
 				
 			}
