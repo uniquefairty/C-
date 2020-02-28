@@ -45,3 +45,8 @@ USH LZHashTable::H_SHIFT()
 {
 	return (HASH_BITS + MIN_MATCH - 1) / MIN_MATCH;
 }
+
+USH LZHashTable::GetNext(USH matchHead)
+{
+	return _prev[matchHead&HASH_MASK];
+}

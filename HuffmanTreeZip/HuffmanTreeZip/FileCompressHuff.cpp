@@ -64,7 +64,7 @@ void FileCompressHuff::CompressFile(const std::string& path)
 		if (0 == rdSize)
 			break;
 		//根据字节的编码对读取到的内容进行重写
-		for (size_t i = 0; i < rdSize; i++)
+		for (int i = 0; i < rdSize; i++)
 		{
 			string strCode=_fileInfo[(unsigned char)pReadBuff[i]]._strCode;
 			//A:"110"  B:"101" 
