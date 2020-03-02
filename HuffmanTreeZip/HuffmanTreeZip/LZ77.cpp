@@ -129,6 +129,7 @@ void LZ77::CompressFile(const std::string& strFilePath)
 	if (bitCount > 0 && bitCount < 8)
 	{
 		chFlage <<= (8 - bitCount);
+		fputc(chFlage, fOutF);
 	}
 	//将压缩文件和标记信息文件合并
 
@@ -203,4 +204,76 @@ USH LZ77::LongestMatch(USH matchHead, USH& MatchDist,USH start)
 
 	MatchDist = start - curMatchStart;
 	return maxMatchLen;
+}
+
+void LZ77::UNCompressFile(const std::string& strFilePath)
+{
+	//打开压缩文件和标记文件
+	FILE* fInD = fopen("11.lzp", "rb");
+	if (nullptr == fInD)
+	{
+		cout << "压缩文件失败" << endl;
+		return;
+	}
+
+	FILE* fInF = fopen("12.txt", "rb");
+	if (nullptr == fInF)
+	{
+		fclose(fInD);
+		cout << "标记文件失败" << endl;
+		return;
+	}
+
+	//写解压缩的数据
+	FILE* fOut = fopen("14.txt", "wb");
+	assert(fOut);
+
+	FILE* fR = fopen("14.txt", "rb");
+	assert(fR);
+	UCH bitCount = 0;
+	UCH chFlage = 0;
+
+	while (!feof(fInD))
+	{
+		//读取标记
+		if (0 == bitCount)
+		{
+			chFlage=fgetc(fInF);
+			bitCount = 8;
+		}
+
+		if (chFlage & 0x80)
+		{
+			//距离长度对
+			USH matchLen = fgetc(fInD)+3;
+			USH matchDist = 0;
+			fread(&matchDist, sizeof(matchDist), 1, fInD);
+
+			//清空缓冲区，系统会将缓冲的数据写入到文件中
+			fflush(fOut);
+			//定位前文中匹配的文件指针
+			//fR:读取前文匹配串中的内容
+			UCH ch;
+			fseek(fR, 0-matchDist, SEEK_END);
+			while (matchLen)
+			{
+				ch = fgetc(fR);
+				fputc(ch, fOut);
+				matchLen--;
+			}
+		}
+		else
+		{
+			//源字符
+			UCH ch = fgetc(fInD);
+			fputc(ch, fOut);
+		}
+		chFlage <<= 1;
+		bitCount--;
+	}
+	
+	fclose(fInD);
+	fclose(fInF);
+	fclose(fOut);
+	fclose(fR);
 }

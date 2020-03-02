@@ -25,5 +25,6 @@ int main()
 {
 	LZ77 lz;
 	lz.CompressFile("10.txt");
+	lz.UNCompressFile("11.lzp");
 	return 0;
 }
