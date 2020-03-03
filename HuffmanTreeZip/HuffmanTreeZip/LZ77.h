@@ -12,6 +12,9 @@ public:
 private:
 	USH LZ77::LongestMatch(USH matchHead, USH& curMatchDist,USH start);
 	void WriteFlage(FILE* fOut,UCH& chFlage,UCH& bitCount,bool isCharOrLen );
+	void MerageFile(FILE* fOut, ULL fileSize);
+	void FillWindow(FILE* fIn,size_t& lookAhead,USH& start);
+
 
 private:
 	UCH* _pWin;  //用来保存待压缩数据的缓冲区

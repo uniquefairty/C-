@@ -18,6 +18,7 @@ LZHashTable::~LZHashTable()
 	delete[] _prev;
 	_prev = nullptr;
 }
+
 void LZHashTable::Insert(USH& matchHead, UCH ch, USH pos, USH& hashAddr)
 {
 	HashFunc(hashAddr, ch);
@@ -49,4 +50,22 @@ USH LZHashTable::H_SHIFT()
 USH LZHashTable::GetNext(USH matchHead)
 {
 	return _prev[matchHead&HASH_MASK];
+}
+
+void LZHashTable::Updata()
+{
+	for (USH i = 0; i < WSIZE; i++)
+	{
+		//先更新head
+		if (_head[i] >= WSIZE)
+			_head[i] -= WSIZE;
+		else
+			_head[i] = 0;
+
+		//更新prev
+		if (_prev[i] >= WSIZE)
+			_prev[i] -= WSIZE;
+		else
+			_prev[i] = 0;
+	}
 }
