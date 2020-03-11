@@ -10,16 +10,20 @@ int main()
 	FileCompressHuff fc;
 
 	//压缩文本文件
-	/*fc.CompressFile("1.txt");
-	fc.UNCompressFile("2.txt");*/
+	fc.CompressFile("1.txt");
+	fc.UNCompressFile("2.txt");
 
-	fc.CompressFile("1.png");
-	fc.UNCompressFile("2.png");
+	//压缩照片
+	//fc.CompressFile("1.png");
+	//fc.UNCompressFile("2.png");
 	return 0;
 }
 
 #endif 
 
+#if 1
+//LZ77算法的检测
+//源文件：10.txt  压缩文件：11.lzp  标记文件：12.txt  解压缩文件：13.txt
 #include <windows.h>
 #include <iostream>
 int main()
@@ -33,3 +37,5 @@ int main()
 	
 	return 0;
 }
+#endif
+
