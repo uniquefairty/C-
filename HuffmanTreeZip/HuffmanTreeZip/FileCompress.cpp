@@ -30,7 +30,16 @@ int main()
 {
 	LZ77 lz;
 	long t1 = GetTickCount();
-	lz.CompressFile("10.txt");
+	//lz.CompressFile("10.txt");
+	//lz.CompressFile("C语言关键字.jpg");
+	//lz.CompressFile("二叉树.jpg");
+	//lz.CompressFile("LZ77.txt");
+	//lz.CompressFile("Allen老师叫早2.mp3");
+	//lz.CompressFile("天亮以前说再见_20160105691321.mp3");
+
+	lz.CompressFile("LZ77.bin");
+
+
 	lz.UNCompressFile("11.lzp");
 	long t2 = GetTickCount();
 	cout << "运行时间" << (t2 - t1) << endl;
