@@ -1,0 +1,19 @@
+﻿生成启动时间为 2020/3/21 0:14:15。
+     1>项目“E:\githab代码\C-\Test\Test\Test.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 320.cpp
+         320.cpp
+     1>e:\githab代码\c-\test\test\320.cpp(142): error C2234: “array”: 引用数组是非法的
+     1>e:\githab代码\c-\test\test\320.cpp(145): error C2228: “.size”的左边必须有类/结构/联合
+                 类型是“int *[]”
+     1>e:\githab代码\c-\test\test\320.cpp(147): error C2228: “.size”的左边必须有类/结构/联合
+                 类型是“int *[]”
+     1>e:\githab代码\c-\test\test\320.cpp(151): error C2440: “初始化”: 无法从“int *”转换为“int”
+                 没有使该转换得以执行的上下文
+     1>e:\githab代码\c-\test\test\320.cpp(153): error C2440: “=”: 无法从“int”转换为“int *”
+                 从整型转换为指针类型要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>已完成生成项目“E:\githab代码\C-\Test\Test\Test.vcxproj”(Rebuild 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.28
