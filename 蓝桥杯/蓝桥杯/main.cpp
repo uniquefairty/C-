@@ -319,3 +319,166 @@ int main()
 }
 #endif
 
+
+#if 0
+//算法训练1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	int N, M;
+	cin >> N >> M;
+	vector<vector<int>> v;
+	v.resize(M);
+	for (int i = 0; i < v.size(); i++)
+	{
+		v[i].resize(N);
+		for (int j = 0; j < v[i].size(); j++)
+		{
+			cin >> v[i][j];
+		}
+	}
+
+	int max = v[0][2];
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (v[i][2]>max)
+			max = v[i][2];
+	}
+	cout << max << endl;
+	return 0;
+}
+#endif
+
+#if 0
+//huffmans树
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
+#include <queue>
+class Less
+{
+public:
+	bool operator()(const int left, const int right)
+	{
+		return left > right;
+	}
+};
+int main()
+{
+	int num;
+	cin >> num;
+	vector<int> v;
+	v.resize(num);
+	int sum = 0;
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		cin >> v[i];
+	}
+	priority_queue<int,vector<int>,Less> q;
+	for (auto e : v)
+	{
+		q.push(e);
+	}
+
+	while (q.size()>1)
+	{
+		int tmp = q.top();
+		q.pop();
+		tmp += q.top();
+		q.pop();
+		sum += tmp;
+		q.push(tmp);
+		/*sort(v.begin(), v.end());
+		int tmp = v[0] + v[1];
+		sum += tmp;
+		v.erase(v.begin(),v.begin()+1);
+		v.push_back(tmp);*/
+	}
+	
+	cout << sum;
+	return 0;
+}
+#endif
+
+
+#if 0
+#include <stdio.h>
+#include <algorithm>
+#define maxx 100
+using namespace std;
+int main()
+{
+	int a[maxx];
+	int i, n;
+	scanf("%d", &n);
+	for (i = 0; i<n; i++)
+		scanf("%d", &a[i]);
+	sort(a, a + n);//从小到大排序
+	int sum = 0;
+	while (n>1)
+	{
+		i = 0;
+		a[i] = a[i] + a[i + 1];
+		sum += a[i];
+		a[i + 1] = -1;//将这个数去除
+		sort(a, a + n);
+		for (i = 0; i<n - 1; i++)
+			a[i] = a[i + 1];
+		n--;
+	}
+	printf("%d\n", sum);
+	return 0;
+}
+#endif
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	int num;
+	cin >> num;
+	vector<int> v;
+	v.resize(num);
+	int sum = 0;
+	int i = 0;
+	int n = v.size();
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		cin >> v[i];
+	}
+	sort(v.begin(), v.end());
+	while (n>1)
+	{
+		i = 0;
+		v[i] = v[i] + v[i+1];
+		sum += v[i];
+		v[i+1] = -1;//将这个数去除
+		sort(v.begin(), v.begin()+n);//排序
+
+		for (; i < v.size()-1; i++)
+		{
+			v[i] = v[i + 1];
+		}
+		n--;
+	}
+
+	cout << sum;
+	return 0;
+}
+
+#if 0
+scanf("%f",&fahr);
+
+celsius
+
+printf("fahr=%.1f,celsius=%.1f",fahr, celsius);
+
+#endif
+
