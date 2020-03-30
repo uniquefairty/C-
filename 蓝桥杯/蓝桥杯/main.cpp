@@ -435,6 +435,8 @@ int main()
 }
 #endif
 
+#if 0
+//Huffman树
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -472,6 +474,8 @@ int main()
 	cout << sum;
 	return 0;
 }
+#endif
+
 
 #if 0
 scanf("%f",&fahr);
@@ -482,3 +486,81 @@ printf("fahr=%.1f,celsius=%.1f",fahr, celsius);
 
 #endif
 
+//数组逆序排列
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void Swap(vector<int>& v,int start, int end)
+{
+	int tmp = v[start];
+	v[start] = v[end];
+	v[end] = tmp;
+}
+
+//void Swap(vector<int>& v, int n)
+//{
+//	int end = n-1;
+//	for (size_t i = 0; i < n/ 2; i++)//注意条件
+//	{
+//		int tmp = v[i];
+//		v[i] = v[end];
+//		v[end] = v[i];
+//		end--;
+//	}
+//}
+int main()
+{
+	vector<int> v;
+	int num;
+	
+	while (cin >> num)
+	{
+		if (num == 0)
+			break;
+		v.push_back(num);
+	}
+	int start = 0, end = v.size() - 1;
+	while (start < end)
+	{
+	    Swap(v,start, end);
+		start++;
+		end--;
+	}
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		cout << v[i];
+	}
+	return 0;
+}
+
+#if 0
+#include<stdio.h>
+void swap(int a[], int n)
+{
+	int i, j, t;
+	for (i = 0; i<n / 2; i++)
+	{
+		t = a[i];
+		a[i] = a[n - i - 1];
+		a[n - i - 1] = t;
+	}
+}
+int main()
+{
+	int a[100], i = 0, j;
+	for (i = 0; i<100; i++)
+	{
+		scanf("%d", &a[i]);
+		if (a[i] == 0)
+			break;
+	}
+	swap(a, i);
+	for (j = 0; j<i; j++)
+	{
+		printf("%d ", a[j]);
+	}
+	return 0;
+}
+#endif
