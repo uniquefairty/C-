@@ -614,3 +614,37 @@ int  main()
 	return 0;
 }
 #endif
+
+#if 0
+//一个空类的大小是1,C++中规定的。
+//如果是0，定义不同的对象，就会使用相同的地址。
+//使用对象就会分不清楚使用的是哪个对象
+class Data
+{
+};
+
+int main()
+{
+	Data a;
+	cout << sizeof(a) << endl;
+	return 0;
+}
+#endif
+
+#if 0
+//一个类中只有虚函数，大小为4->虚基表指针（32位的平台下）
+class Data
+{
+	virtual void Fun()
+	{}
+	virtual void Fun1()
+	{}
+};
+
+int main()
+{
+	Data a;
+	cout << sizeof(a) << endl;
+	return 0;
+}
+#endif
