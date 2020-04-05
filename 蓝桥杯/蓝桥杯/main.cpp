@@ -642,3 +642,128 @@ int main()
 }
 
 #endif
+
+#if 0
+//回形取数
+#include<iostream>
+#include<string.h>
+#define N 205
+
+using namespace std;
+
+int main(){
+	int n, m;
+	cin >> n >> m;
+
+	int res[N][N];
+	int a[N][N];
+
+	for (int i = 0; i<n; i++)
+		for (int j = 0; j<m; j++)
+			cin >> a[i][j];
+
+	memset(res, 1, sizeof(res));
+
+	//方法，首先第一个为0，代表走过的，判断下一次要走的方向的格子是否为1，
+	//如果为1，就将下一个格子置为1，对于蛇形来说+1 -1 代表着方向，但是只改变当前的状态，
+	//就会导致存在某一个点最后永远无法到达，因为到了那个点，但是他的下一个位置却是走过的 
+	int i = 0, j = 0, ct = 0;
+	res[0][0] = 0;
+	cout << a[0][0] << " ";
+
+	while (ct<n*m - 1){
+		while (i<n - 1 && res[i + 1][j] != 0) {
+
+			i++;
+			cout << a[i][j] << " ";
+			res[i][j] = 0;
+			ct++;
+		}
+		while (j<m - 1 && res[i][j + 1] != 0){
+			j++;
+			cout << a[i][j] << " ";
+			res[i][j] = 0;
+			ct++;
+		}
+		while (i>-1 && res[i - 1][j] != 0 && i - 1 >= 0) {
+			i--;
+			cout << a[i][j] << " ";
+			res[i][j] = 0;
+			ct++;
+		}
+		while (j>-1 && res[i][j - 1] != 0 && j - 1 >= 0){
+			j--;
+			res[i][j] = 0;
+			cout << a[i][j] << " ";
+			ct++;
+		}
+	}
+
+	return 0;
+}
+
+#endif
+
+#if 0
+////回形取数
+#include <iostream>
+using namespace std;
+#include <vector>
+
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	int i, j;
+	vector<vector<int>> v;
+	v.resize(n);
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		v[i].resize(n);
+		for (size_t j = 0; j < v[i].size(); j++)
+		{
+			cin >> v[i][j];
+		}
+	}
+
+	for (i = 0; i < (n + 1) / 2 && i < (m + 1) / 2; i++)//这里的i代表全书，循环的次数i小于行数的一半且小于列数的一半
+	{
+		for (j = i; j < n - i; j++)//向下输出
+		{
+			if (i == 0 && j == 0)
+			{
+				cout << v[j][i];
+			}
+			else
+			{
+				cout << " " << v[j][i];
+			}
+			
+		}
+
+		for (j = i + 1; j < m - i; j++)//向右输出
+		{
+			cout << " " << v[n - i - 1][j];
+		}
+
+		/*当m为奇数时最后一次循环只有左一列的数据。
+		每进一次循环都读了对称的两列数据，前面i-1次循环读了2i个数据（i从0开始）在这次判断之前又读了一列数据
+		所以判断有没有对称的右列数据只要判断m-2*i-1是否大于0（等价于m - i - 1 > i） ,下同 */
+		if (m - i - 1 > i)
+		{
+			for (j = n - i - 2; j >= i; j--)//向上输出
+				cout << " " << v[j][m - i - 1];
+		}
+
+		if (n - i - 1 > i)
+		{
+			for (j = m - i - 2; j > i; j--)//向右输出
+				cout << " " << v[i][j];
+		}
+	}
+
+	return 0;
+}
+
+#endif
+
