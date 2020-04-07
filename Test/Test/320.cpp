@@ -104,32 +104,35 @@ int main()
 
 #endif
 
+#if 0
+int strcmp(char *source, char *dest)//比较
+{
+	int i = 0;
+	while (1)
+	{
+		if (*source == *dest)
+		{
+			source++;
+			dest++;
+		}
+		else return -1;
+	}
+	return 0;
+	
+}
 
-//int strcmp(char *source, char *dest)//比较
-//{
-//	int i = 0;
-//	while (1)
-//	{
-//		if (*source == *dest)
-//		{
-//			source++;
-//			dest++;
-//		}
-//		else return -1;
-//	}
-//	return 0;
-//	
-//}
-//
+#endif
+
+
 //CComplex& operator=(const CComplex& c)
 //{
 //	m_real = c.mreal;
 //	m_image = c.m_image;
 //}
 
-#include<stdio.h>
-#include <iostream>
-using namespace std;
+//#include<stdio.h>
+//#include <iostream>
+//using namespace std;
 //int main()
 //{
 //	unsigned  char  a = 2, b = 4, c = 5, d;
@@ -156,6 +159,8 @@ using namespace std;
 //	}
 //}
 
+#if 0
+//二分查找
 int bin_search(int *array, int array_size, int key)
 {
 	int start = 0;
@@ -179,6 +184,9 @@ int bin_search(int *array, int array_size, int key)
 	
 }
 
+#endif
+
+#if 0
 class Card
 {
 public:
@@ -195,7 +203,7 @@ private:
 	string _id;
 	string _money;
 };
-
+#endif
 
 #if 0
 //删除链表重复节点
@@ -281,6 +289,7 @@ int main(){
 #endif
 
 
+#if 0
 #include <iostream>
 using namespace std;
 #include <string>
@@ -304,3 +313,29 @@ int main()
 	cout << firstUniqChar(s) << endl;
 	return 0;
 }
+
+#endif
+
+#if 0
+//返回值为函数指针
+#include<iostream>
+using namespace std;
+
+int Max(int i, int j) {
+	return i >= j ? i : j;
+}
+typedef int(*PFun)(int, int);
+
+PFun fun(int a) {
+	cout << a << endl;
+	return Max;
+}
+int main() {
+	PFun pf;
+	pf = fun(100);
+	int max = pf(5, 8);
+	cout << "max : " << max << endl;
+	return 0;
+}
+#endif
+
