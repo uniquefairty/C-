@@ -767,3 +767,98 @@ int main()
 
 #endif
 
+#if 0
+//1221是一个非常特殊的数，它从左边读和从右边读是一样的，编程求所有这样的四位十进制数。
+#include <iostream>
+using namespace std;
+#include <vector>
+
+int main()
+{
+	for (int i = 1; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			for (int k = 0; k < 10; k++) {
+				for (int l = 0; l < 10; l++) {
+					if (i == l && j == k) {
+						cout << i << j << k << l << endl;
+						/*System.out.println("" + i + j + k + l);*/
+					}
+				}
+			}
+		}
+	}
+	return 0;
+}
+#endif
+
+//　求出区间[a,b]中所有整数的质因数分解。
+#include <iostream>
+#include <vector>
+using namespace std;
+
+//判断是否是质数
+bool IsPrime(int n)
+{
+	int i;
+	for (i = 2; i <= n / 2; i++)
+	{
+		if (n%i == 0)
+			return false;
+	}
+
+	if (i > n / 2)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int main()
+{
+	vector<int> v;//存储这个区间的所有质数
+	int a, b;
+	cin >> a;
+	cin >> b;
+	for (int i = 2; i <= b; i++)
+	{
+		if (IsPrime(i))
+		{
+			v.push_back(i);
+		}
+	}
+
+	for (int i=a; i <= b; ++i)
+	{
+		if (IsPrime(i))//是质数的话，直接输出
+		{
+			cout << i << "=" << i;
+		}
+		else
+		{
+			cout << i << "=";
+			int tmp = i;
+			int index = 0;//存储质数的数组下标
+			while (tmp != 1)//当前数字没有被除尽时继续
+			{
+				if (tmp%v[index] == 0)//从第一个质数开始除
+				{
+					cout << v[index];
+					tmp /= v[index];
+
+					index = 0;//还原数组下标从一个数组中的值
+					if (tmp != 1)
+						cout << "*";
+				}
+				else//不能整除的话尝试下一个质数
+				{
+					index++;
+				}
+			}
+		}
+		cout << endl;
+	}
+	return 0;
+}
