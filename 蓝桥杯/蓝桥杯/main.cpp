@@ -791,6 +791,8 @@ int main()
 }
 #endif
 
+#if 0
+
 //　求出区间[a,b]中所有整数的质因数分解。
 #include <iostream>
 #include <vector>
@@ -860,5 +862,172 @@ int main()
 		}
 		cout << endl;
 	}
+	return 0;
+}
+
+#endif
+
+
+#if 0
+//n皇后问题
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int num[8][8];//记录不同位置的权值：是否可以放皇后
+int location[8];//记录每行放皇后的位置标记（每行的哪一列）
+int maxn = -1;//多少种方法
+
+//rows:总共放了多少行
+//colimns:这一行放皇后的列下标
+int valid(int rows, int columns)//剪枝函数
+{
+	for (int i = 0; i < rows; i++)
+	{
+		//判断是否在同一列或是对角线
+		if (columns == location[i] || abs(rows - i) == abs(columns - location[i]))
+			return 0;
+	}
+	return 1;
+}
+void Queue(int row)//回溯函数
+{
+	if (row == 8)
+	{
+		int current_max = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			current_max += num[i][location[i]];
+		}
+		maxn = max(current_max, maxn);
+	}
+	else
+	{
+		for (int n = 0; n < 8; n++)//当前行放皇后的列下标
+		{
+			if (valid(row, n))
+			{
+				location[row] = n;
+				Queue(row + 1);
+			}
+		}
+	}
+}
+int main()
+{
+	int k;
+	cin >> k;
+	//while (k--)
+	//{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				cin >> num[i][j];
+			}
+		}
+		Queue(0);
+		cout << maxn << endl;
+	//}
+		return 0;
+}
+#endif
+
+//2n皇后问题
+#include <iostream>
+#include <cmath>
+using namespace std;
+int board[8][8];
+int all = 0;
+int black_location[8];//记录每行放皇后的列下标
+int white_location[8];
+
+//rows:总共放了多少行
+//colimns:当前行放皇后的列下标
+int w_valid(int rows, int columns)//剪枝函数
+{
+	for (int i = 0; i < rows; i++)
+	{
+		//判断当前行是否和前面的皇后在一列 或者 是对角线
+		if (columns == white_location[i] || abs(rows - i) == abs(columns - white_location[i]))
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int b_valid(int rows, int columns)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		if (columns == black_location[i] || abs(rows - i) == abs(columns - black_location[i]))
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+
+//cur :当前行 n:总共的行数
+void Queen_b(int cur, int n)
+{
+	if (cur == n)
+		all++;
+	else
+	{
+		for (int i = 0; i < n; i++)
+		{
+			//这个位置有了白皇后并且可以不能放皇后
+			if (i == white_location[cur] || board[cur][i] == 0)
+				continue;
+			else
+			{
+				if (b_valid(cur, i))
+				{
+					black_location[cur] = i;
+					Queen_b(cur + 1, n);//计算下一行
+				}
+			}
+		}
+	}
+}
+
+void Queen_w(int cur, int n)
+{
+	if (cur == n)
+	{
+		Queen_b(0, n);
+	}
+	else
+	{
+		for (int i = 0; i < n; i++)
+		{
+			if (board[cur][i] == 0)//当前位置不能插入
+				continue;
+			if (w_valid(cur, i))
+			{
+				white_location[cur] = i;//记录当前行可以放皇后的列下标
+				Queen_w(cur + 1, n);//计算下一行
+			}
+		}
+	}
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		for (int h = 0; h < n; h++)
+		{
+			cin >> board[i][h];
+		}
+		
+	}
+	Queen_w(0, n);
+	cout << all;
 	return 0;
 }
