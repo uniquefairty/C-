@@ -1035,6 +1035,7 @@ int main()
 
 #endif
 
+#if 0
 //报时助手
 #include <iostream>
 #include <string>
@@ -1082,5 +1083,25 @@ int main()
 	int h, m;
 	cin >> h >> m;
 	time_ass(h, m);
+	return 0;
+}
+#endif
+
+//判断闰年
+#include <iostream>
+using namespace std;
+int main()
+{
+	int year;
+	cin >> year;
+
+	if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+	{
+		cout << "yes";
+	}
+	else
+	{
+		cout << "no";
+	}
 	return 0;
 }
