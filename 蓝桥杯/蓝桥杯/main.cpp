@@ -1087,6 +1087,7 @@ int main()
 }
 #endif
 
+#if 0
 //判断闰年
 #include <iostream>
 using namespace std;
@@ -1105,3 +1106,42 @@ int main()
 	}
 	return 0;
 }
+#endif
+
+#if 0
+//特殊回文数
+#include <iostream>
+using namespace std;
+int main()
+{
+	long i;
+	int n;
+	int a, b, c, d, e, f;
+	cin >> n;
+	for (i = 10000; i < 10000; i++)
+	{
+			a = i % 10;//个
+			b = i / 10 % 10;//十
+			c = i / 100 % 10;//百
+			d = i % 1000 % 10;//千
+			e = i / 10000 ;//万
+
+			if (a == e&&b == d&&a + b + c + d + e == n)
+				cout << i << endl;
+	 }
+	for (i = 100000; i < 1000000; i++)
+	{
+		a = i / 100000 % 10;
+		b = i / 10000 % 10;
+		c = i / 1000 % 10;
+		d = i / 100 % 10;
+		e = i / 10 % 10;
+		f = i % 10;
+
+		if (a == f&&b == e&&c == d&&a + b + c + d + e + f == n)
+			cout << i << endl;
+	}
+		
+	return 0;
+}
+#endif
