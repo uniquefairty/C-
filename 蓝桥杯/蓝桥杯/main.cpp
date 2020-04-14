@@ -1145,3 +1145,21 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//Ê±¼ä×ª»»
+#include <iostream>
+using namespace std;
+int main()
+{
+	int t, h, m, s;
+	cin >> t;
+	h = t / 3600;
+	t %= 3600;
+	m = t / 60;
+	t %= 60;
+	s = t;
+	cout << h << ":" << m << ":" << s;
+	return 0;
+}
+#endif
