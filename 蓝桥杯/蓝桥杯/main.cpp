@@ -1163,3 +1163,32 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//算法训练 相邻数对
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+	int n,res=0;
+	cin >> n;
+	vector<int> v;
+	v.resize(n);
+	for (int i = 0; i < v.size(); i++)
+	{
+		cin >> v[i];
+	}
+
+	sort(v.begin(), v.end());
+	for (int i = 0; i < v.size() - 1; i++)
+	{
+		if ((v[i + 1] - v[i]) == 1)
+			res++;
+	}
+	cout << res;
+	return 0;
+}
+#endif
