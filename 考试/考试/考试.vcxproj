@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="20200416.cpp" />
     <ClCompile Include="a.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
