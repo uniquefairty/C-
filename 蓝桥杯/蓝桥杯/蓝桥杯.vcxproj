@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="20200419.cpp" />
     <ClCompile Include="book1.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

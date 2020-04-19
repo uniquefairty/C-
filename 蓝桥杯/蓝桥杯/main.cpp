@@ -1207,6 +1207,7 @@ int main()
 //	return 0;
 //}
 
+#if 0
 #include<iostream>
 #include<algorithm>
 #include<stdio.h>
@@ -1239,3 +1240,73 @@ int main(void)
 	}
 	return 0;
 }
+
+#endif 
+
+#if 0
+//水仙花数
+#include <iostream>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	int a = n % 100;//个位
+	int b = n / 10 % 10;//十位
+	int c = n / 100;//百位
+	if ((a*a*a + b*b*b + c*c*c) == n)
+		cout << "YES" << endl;
+	else
+	{
+		cout << "NO" << endl;
+	}
+	return 0;
+}
+#endif
+
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	int x,y,z,x1, y1, z1, p;
+//	cin >> x >> y >> z >> x1 >> y1 >> z1 >> p;
+//
+//	double res = x1 / x + y1 / y + z1 / z;
+//
+//	printf("%.2f", res);
+//	return 0;
+//}
+
+#if 0
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	int x, y, z, x1, y1, z1, p;
+	cin >> x >> y >> z >> x1 >> y1 >> z1 >> p;
+	long long  m = x1*y*z + y1*x*z + z1*x*y;//这里由于考虑到0<x1,y1,z1<=1000000,而且0<x,y,z<100,经查看各类型的取值范围，long int都无法满足了，所以long long最适合。
+	int n = x*y*z;
+	int s = m / n;
+	cout << s << ".";
+	for (int i = 0; i<p - 1; i++)//对p-1位的小数进行输出
+	{
+		m = m%n * 10;
+		s = m / n;
+		cout << s;
+	}
+	//讨论p位小数是否+1,s1为p为小数值，s2为p+1位小数值
+	m = m%n * 10;
+	int s1 = m / n;
+	m = m%n * 10;
+	int s2 = m / n;
+	if (s2 >= 5)
+		cout << s1 + 1;
+	else
+		cout << s1;
+	return 0;
+
+}
+#endif
+
