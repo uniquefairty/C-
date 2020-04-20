@@ -1,9 +1,9 @@
-﻿生成启动时间为 2020/4/19 23:00:54。
+﻿生成启动时间为 2020/4/20 22:24:40。
      1>项目“E:\githab代码\C-\Test\Test\Test.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 20200418.cpp 320.cpp Everyday.cpp
          Everyday.cpp
-     1>e:\githab代码\c-\test\test\everyday.cpp(355): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\test\test\everyday.cpp(449): warning C4018: “<”: 有符号/无符号不匹配
          320.cpp
          20200418.cpp
          正在生成代码...
@@ -16,4 +16,4 @@
 
 生成成功。
 
-已用时间 00:00:01.52
+已用时间 00:00:01.54
