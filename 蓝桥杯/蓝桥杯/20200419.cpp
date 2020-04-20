@@ -112,3 +112,50 @@ int main() {
 //	cout << store[r - 1][c - 1];
 //	return 0;
 //}
+
+#if 0
+//螺旋矩阵读数
+class Solution {
+public:
+	vector<int> spiralOrder(vector<vector<int>>& matrix) {
+
+		vector<int> ans;
+		if (matrix.size() == 0)
+		{
+			return ans;
+		}
+
+		int cir = 0;//记录第几圈
+		int row = matrix.size();
+		int col = matrix[0].size();
+		//最大的圈数
+		int max_cir = int(min(matrix.size(), matrix[0].size()) + 1) / 2;
+
+		for (; cir<max_cir; cir++)
+		{
+			for (int i = cir; i<col - cir; i++)//右
+			{
+				ans.push_back(matrix[cir][i]);
+			}
+
+			for (int i = cir + 1; i<row - cir; i++)//下
+			{
+				ans.push_back(matrix[i][col - 1 - cir]);
+			}
+
+			for (int i = col - 2 - cir; i >= cir && (row - 1 - cir != cir); i--)//左
+			{
+				ans.push_back(matrix[row - cir - 1][i]);
+			}
+
+			for (int i = row - 2 - cir; i>cir && (col - 1 - cir != cir); i--)
+			{
+				ans.push_back(matrix[i][cir]);
+			}
+
+		}
+		return ans;
+	}
+};
+#endif
+
