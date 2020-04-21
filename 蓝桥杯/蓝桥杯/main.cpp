@@ -1310,3 +1310,96 @@ int main()
 }
 #endif
 
+#if 0
+//矩阵乘法
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+#include <vector>
+
+int main()
+{
+	int n,m;
+	cin >> n>>m;
+	vector<vector<int>> v,k;
+	v.resize(n);
+	k.resize(n);
+	for (int i = 0; i < n; i++)
+	{
+		v[i].resize(n);
+		k[i].resize(n);
+		for (int j = 0; j < n; j++)
+		{
+			int num;
+			cin >> num;
+			v[i][j] = num;
+			k[i][j] = num;
+		}
+	}
+
+	vector<vector<int>> ans;
+	ans.resize(n);
+	for (int i = 0; i < n; i++)
+	{
+		ans[i].resize(n);
+	}
+
+	if (m == 0)//矩阵的0次幂是单位矩阵
+	{
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (i == j)
+					ans[i][j] = 1;
+				else
+					ans[i][j] = 0;
+			}
+		}
+	}
+
+
+	if (m > 1)
+	{
+		m--;
+		while (m)
+		{
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < n; j++)
+				{
+					for (int m = 0; m < n; m++)
+					{
+						ans[i][j] += v[i][m] * k[m][j];
+					}
+				}
+			}
+
+			//k=ans
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < n; j++)
+				{
+					k[i][j] = ans[i][j];
+				}
+			}
+			m--;
+		}
+	}
+	
+	
+	//打印
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout << ans[i][j]<<" ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+
+}
+#endif
+
