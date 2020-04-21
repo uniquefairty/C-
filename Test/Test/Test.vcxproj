@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="20200418.cpp" />
+    <ClCompile Include="20200421.cpp" />
     <ClCompile Include="320.cpp" />
     <ClCompile Include="Everyday.cpp" />
   </ItemGroup>
