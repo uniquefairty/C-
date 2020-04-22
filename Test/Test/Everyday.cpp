@@ -482,3 +482,246 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//day32 4.21  1.淘宝网店
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+bool IsPrime(int num)
+{
+	if (num == 1)
+		return false;
+	if (num == 2)
+		return true;
+	for(int i = 2; i <= sqrt(num); i++)
+	{
+		if (num % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool IsLeap(int year)
+{
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+int main()
+{
+	int year1, month1, day1, year2, month2, day2;
+	vector<int> v{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	vector<int> a{ 0, 62, 28, 31, 60, 31, 60, 31, 62, 60, 62, 30, 62};
+
+	while (cin >> year1 >> month1 >> day1 >> year2 >> month2 >> day2)
+	{
+		int res = 0;
+		if (year1 == year2)//年份一样
+		{
+			if (IsLeap(year1))//是闰年
+			{
+				v[2] = 29;
+			}
+
+			if (month1 == month2)//月份一样
+			{
+				if (IsPrime(month1))
+				{
+					res = day2 - day1 + 1;
+				}
+				else
+				{
+					res = (day2 - day1 + 1) * 2;
+				}
+			}
+			else//月份不一样
+			{
+				if (IsPrime(month1))
+				{
+					res += v[month1] - day1 + 1;
+				}
+				else
+				{
+					res += (v[month1] - day1 + 1) * 2;
+				}
+				//中间月份
+				for (int i = month1+1; i < month2; i++)
+				{
+					if (IsPrime(i))
+					{
+						res += v[i] ;
+					}
+					else
+					{
+						res += v[i] * 2;
+					}
+				}
+
+				if (IsPrime(month2))
+				{
+					res += day2;
+				}
+				else
+				{
+					res += day2 * 2;
+				}
+
+			}
+		}
+		else//年份不一样
+		{
+			if (IsLeap(year1))
+			{
+				v[2] = 29;
+			}
+
+			if (IsPrime(month1))
+			{
+				res += v[month1] - day1+1;
+			}
+			else
+			{
+				res += (v[month1] - day1+1) * 2;
+			}
+			for (int i = month1+1; i <= 12; i++)
+			{
+				if (IsPrime(i))
+				{
+					res += v[i];
+				}
+				else
+				{
+					res += v[i] * 2;
+				}
+			}
+
+
+			for (int i = year1+1; i < year2; i++)
+			{
+				if (IsLeap(i))
+				{
+					a[2] = 29;
+				}
+				else
+				{
+					a[2] = 28;
+				}
+
+				for (int j = 1; j < a.size(); j++)
+				{
+					res += a[j];
+				}
+			}
+
+			if (IsLeap(year2))
+			{
+				v[2] = 29;
+			}
+			else
+			{
+				v[2] = 28;
+			}
+
+			for (int i = 1; i < month2; i++)
+			{
+				if (IsPrime(i))
+				{
+					res += v[i];
+				}
+				else
+				{
+					res += v[i] * 2;
+				}
+			}
+
+			if (IsPrime(month2))
+			{
+				res += day2;
+			}
+			else
+			{
+				res += day2 * 2;
+			}
+		}
+
+		cout << res<<endl;
+	}
+	return 0;
+}
+#endif
+
+//day32 4.21  2.斐波那契凤尾
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+//int main()
+//{
+//	long n;
+//	while (cin >> n)
+//	{
+//		if (n == 1)
+//		{
+//			cout << "1"<<endl;
+//			continue;
+//		}
+//		if (n == 2)
+//		{
+//			cout << "2"<<endl;
+//			continue;
+//		}
+//
+//		long a = 1;
+//		long b = 2;
+//		long c;
+//		for (int i = 3; i <= n;i++)
+//		{
+//			c = a + b;
+//			a = b;
+//			b = c;
+//			//cout << c << " ";
+//
+//		}
+//	 cout << c % 1000000<<endl;
+//	}
+//	return 0;
+//}
+
+#if 0
+#include <iostream>
+using namespace std;
+int main()
+{
+	int fib[100001];
+	fib[0] = 1;
+	fib[1] = 1;
+
+	for (int i = 2; i <= 100000; i++)
+	{
+		fib[i] = fib[i - 1] + fib[i - 2];
+		fib[i] = fib[i] % 1000000;
+	}
+
+	int n;
+	while (cin >> n)
+	{
+		if (n <= 25)
+		{
+			cout << fib[n] << endl;
+		}
+		else
+		{
+			printf("%06d\n", fib[n]);
+		}
+	}
+	return 0;
+}
+#endif
+
