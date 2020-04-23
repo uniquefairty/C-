@@ -725,3 +725,67 @@ int main()
 }
 #endif
 
+#if 0
+//day33 4.22  1.剪花布条
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		int count = 0;
+		size_t found = 0;
+		
+		while (1)
+		{
+			size_t found = s1.find(s2);
+			if (found != string::npos)
+			{
+				count++;
+			}
+			else
+			{
+				break;
+			}
+			s1.erase(found, s2.size());
+		}
+		
+		cout << count << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//day33 4.22  2.客似云来
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+	int a, b;
+	vector<long long> v;
+	v.resize(81);
+	v[0] = 0;
+	v[1] = 1;
+	v[2] = 1;
+	for (int i = 3; i < v.size(); i++)
+	{
+		v[i] = v[i - 1] + v[i - 2];
+	}
+
+	while (cin >> a >> b)
+	{
+		long long res = 0;
+		for (int i = a; i <= b; i++)
+		{
+			res += v[i];
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
