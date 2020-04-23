@@ -1403,3 +1403,89 @@ int main()
 }
 #endif
 
+#if 0
+#include<stdio.h>
+void f(int a)
+{
+	if (a == 1)printf("A");//开始马马虎虎的写成了单引号
+	else
+	{
+		f(a - 1);
+		printf("%c", a + 64);
+		f(a - 1);
+	}
+}
+
+int main()
+{
+	int a;
+	scanf("%d", &a);
+	f(a);
+	return 0;
+}
+#endif
+
+#if 0
+//复数运算
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+
+struct Complex
+{
+	double a, b;
+};
+
+Complex add(Complex c1, Complex c2)
+{
+	Complex result;
+	result.a = c1.a + c2.a;
+	result.b = c1.b + c2.b;
+	return result;
+}
+
+Complex minu(Complex c1, Complex c2)
+{
+	Complex result;
+	result.a = c1.a - c2.a;
+	result.b = c1.b - c2.b;
+	return result;
+}
+
+Complex multi(Complex c1, Complex c2)
+{
+	Complex result;
+	result.a = c1.a * c2.a - c1.b * c2.b;
+	result.b = c1.a * c2.b + c1.b * c2.a;
+	return result;
+}
+
+Complex divide(Complex c1, Complex c2)
+{
+	Complex result;
+	result.a = (c1.a*c2.a + c1.b*c2.b) / (c2.a*c2.a + c2.b*c2.b);
+	result.b = (c1.b*c2.a - c1.a*c2.b) / (c2.a*c2.a + c2.b*c2.b);
+	return result;
+}
+
+int main()
+{
+	char op;
+	double a, b, c, d;
+
+	while (cin >> op >> a >> b >> c >> d)
+	{
+		Complex x, y, ans;
+		x.a = a; x.b = b;
+		y.a = c; y.b = d;
+
+		if (op == '+') ans = add(x, y);
+		else if (op == '-') ans = minu(x, y);
+		else if (op == '*') ans = multi(x, y);
+		else if (op == '/') ans = divide(x, y);
+
+		printf("%.2f+%.2fi\n", ans.a, ans.b);
+	}
+	return 0;
+}
+#endif
