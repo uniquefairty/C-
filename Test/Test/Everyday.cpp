@@ -789,3 +789,87 @@ int main()
 }
 #endif
 
+#if 0
+//day34 4.23  1.收件人列表
+#include <iostream>
+using namespace std;
+#include <string>
+#include <vector>
+
+bool Fun(string str)
+{
+	size_t found = str.find(',');
+	size_t tmp = str.find(' ');
+	if (found != string::npos || tmp != string::npos)
+		return true;
+
+	return false;
+}
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		getchar();
+		vector<string> v;
+		v.resize(n);
+		for (int i = 0; i<n; i++)
+		{
+			string str;
+			//v[i] = getline(cin, str);//错误代码
+			getline(cin, str);
+			v[i] = str;
+		}
+		for (int i = 0; i<n; i++)
+		{
+			string str = v[i];
+			if (Fun(str))//有空格或逗号
+			{
+				cout << "\"" << str << "\"";
+			}
+			else
+			{
+				cout << str;
+			}
+			if (i != n - 1)
+			{
+				cout << "," << " ";
+			}
+			else{
+				cout << endl;
+			}
+
+		}
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//day34 4.23  2.养兔子
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <algorithm>
+int main()
+{
+	long long num[91] = { 1, 2 };
+	for (int i = 2; i<91; i++)
+		{
+			num[i] = num[i - 1] + num[i - 2];
+		}
+
+	int d;
+		while (cin >> d)
+		{
+			cout << num[d - 1] << endl:
+		}
+	return 0;
+}
+
+#endif
+
+
+
+
+
