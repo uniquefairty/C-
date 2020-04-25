@@ -869,7 +869,69 @@ int main()
 
 #endif
 
+#if 0
+//day35 4.24  1.年会抽奖
+#include <iostream>
+using namespace std;
 
+int main()
+{
+	int n;
+	long long a[21] = { 0, 0, 1 }, b[21] = { 1, 1, 2 };
 
+	while (cin >> n)
+	{
+		for (int i = 3; i<=n; i++)
+		{
+			b[i] = i*b[i - 1];
+			a[i] = (i - 1)*(a[i - 1] + a[i - 2]);
+		}
+		printf("%.2f%c\n", 1.0*a[n]/b[n]*100,'%');
+	
+	}
 
+	return 0;
+}
+#endif
 
+#if 0
+//day35 4.24  1.年会抽奖
+#include <iostream>
+using namespace std;
+#include <string>
+#include <vector>
+
+int main()
+{
+	string str1, str2;
+	while (getline(cin, str1))
+	{
+		getline(cin, str2);
+		size_t found=str1.find(str2);
+		if (found != string::npos)
+		{
+			if (found == 0 )
+			{
+				if (str1[str2.size()] == ',')
+				{
+					cout << "Ignore" << endl;
+				}
+			}
+			else//不是第一个
+			{
+				if ((str1[found-1]==','&&str1[found+str2.size()]==',')||
+					(str1[found - 1] == '"'&&str1[found + str2.size()] == '"'))
+					cout << "Ignore" << endl;
+				else 
+					cout << "Important!" << endl;
+			}
+			
+		}
+		else
+		{
+			cout << "Important!" << endl;
+		}
+	}
+	return 0;
+}
+#endif
