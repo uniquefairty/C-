@@ -1489,3 +1489,48 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int main() {
+	ll n, m, k, x;
+	ll a = 10, ans = 1;
+	cin >> n >> m >> k >> x;
+	while (k) {
+		if (k & 1) {
+			ans = ans * a % n;
+		}
+		a = a * a % n;
+		k >>= 1;
+	}
+	ans %= n;
+	ans = (x + ans * m) % n;
+	cout << ans << endl;
+	return 0;
+}
+#endif
+
+#if 0
+#include <stdio.h>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	double x[4], y[4];
+	double s = 0;
+	scanf("%lf %lf %lf %lf", &x[0], &y[0], &x[1], &y[1]);
+	scanf("%lf %lf %lf %lf", &x[2], &y[2], &x[3], &y[3]);
+	if (max(x[0], x[1]) <= min(x[2], x[3]) || max(x[2], x[3]) <= min(x[0], x[1]) || max(y[0], y[1]) <= min(y[2], y[3]) || max(y[2], y[3]) <= min(y[0], y[1]))
+		printf("0.00\n");
+	else
+	{
+		sort(x, x + 4);//ÅÅÐò
+		sort(y, y + 4);
+		s = (x[2] - x[1])*(y[2] - y[1]);
+		printf("%.2lf", s);
+	}
+
+#endif
+
