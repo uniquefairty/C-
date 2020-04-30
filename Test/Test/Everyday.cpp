@@ -1025,3 +1025,137 @@ int main()
 }
 #endif
 
+#if 0
+//day38 4.28  1.红与黑
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<string>
+using namespace std;
+int dest[4][2] = { 1, 0, 0, 1, 0, -1, -1, 0 };
+struct node{
+	int x;
+	int y;
+};
+int main()
+{
+	int m, n;
+	while (cin >> m >> n)
+	{
+		vector<vector<char>> room(m, vector<char>(n));
+		int a, b;
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				cin >> room[i][j];
+				if (room[i][j] == '@')
+				{
+					a = i;
+					b = j;
+				}
+
+			}
+		}
+		queue<node> p;
+		int result = 1;
+		node cur;
+		cur.x = a;
+		cur.y = b;
+		p.push(cur);
+		while (!p.empty())
+		{
+			node tmp = p.front();
+			p.pop();
+			for (int i = 0; i < 4; i++)
+			{
+				node next;
+				next.x = tmp.x + dest[i][0];
+				next.y = tmp.y + dest[i][1];
+				if (next.x < m && next.x >= 0 && next.y < n && next.y >= 0 && room[next.x][next.y] == '.')
+				{
+					result++;
+					p.push(next);
+					room[next.x][next.y] = '@';
+				}
+			}
+
+		}
+		cout << result << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//day38 4.29  1.字符串计数
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	string s1, s2;
+	int len1, len2;
+	while (cin >> s1 >> s2 >> len1 >> len2) {
+		// 只包含小写字母的字符串可以看成26进制的数制
+		// 将s1和s2补长到len2长度
+		s1.append(len2 - s1.size(), 'a');
+		s2.append(len2 - s2.size(), (char)('z' + 1));
+
+		// 确认s1和s2的两个字符串每个位置上的差值
+		vector<int> arr;
+		for (int i = 0; i < len2; ++i)
+			arr.push_back(s2[i] - s1[i]);
+		// 确认len1和len2之间可组成的不同字符串的个数
+		int result = 0;
+		for (int i = len1; i <= len2; ++i)
+			for (int k = 0; k < i; ++k)
+				result += arr[k] * pow(26, i - 1 - k);
+		// 所有字符串最后都不包含是s2自身，所有最后要减1
+		cout << result - 1 << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//day38 4.29  2.字符串计数最长公共字串
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	string s1, s2;
+	while (cin >> s1 >> s2) {
+		int s1Length = s1.length();
+		int s2Length = s2.length();
+		// 用来保存状态转移方程中间结果的矩阵
+		vector<vector<int>> dp(s1Length, vector<int>(s2Length, 0));
+		// 初始化dp矩阵边界：边界要么在，要么不在
+		dp[0][0] = (s1[0] == s2[0]) ? 1 : 0;
+		for (int i = 1; i < s1Length; ++i) {
+			dp[i][0] = (s1[i] == s2[0]) ? 1 : 0;
+			dp[i][0] = max(dp[i - 1][0], dp[i][0]);
+		}
+		for (int j = 1; j < s2Length; ++j) {
+			dp[0][j] = (s1[0] == s2[j]) ? 1 : 0;
+			dp[0][j] = max(dp[0][j - 1], dp[0][j]);
+		}
+
+		// 根据状态转移方程进行计算
+		for (int i = 1; i < s1Length; ++i) {
+			for (int j = 1; j < s2Length; ++j) {
+				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+				if (s1[i] == s2[j])
+					dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + 1);
+			}
+		}
+		cout << dp[s1Length - 1][s2Length - 1] << endl;
+	}
+	return 0;
+}
+#endif
+
