@@ -1534,3 +1534,157 @@ int main()
 
 #endif
 
+#if 0
+	//两个无符号相乘位运算
+#include <iostream>
+using namespace std;
+int main(void)
+{
+	int i, res = 0;
+	unsigned int x, y;
+	cin >> x >> y;
+	for (i = 0; i<32; i++)//32位长度为满足测试数据，大小可根据实际修改 
+	{
+		if ((y & 1) == 1)//y的最低位是否为1 
+		{
+			res += x;//计算相乘的结果 
+		}
+		x <<= 1;
+		y >>= 1;
+	}
+	cout << res << endl;
+	return 0;
+}
+#endif
+
+#if 0
+//求一组数据中有最大质因数的数
+#include <iostream>
+using namespace std;
+#include <algorithm>
+#include <math.h>
+//判断是否是质数
+int zhi(int n)
+{
+	int i;
+	if (n<2) return 0;
+	for (i = 2; i <= sqrt(n); i++)
+	{
+		if (n%i == 0) 
+			return 0;
+	}
+	return 1;
+}
+
+//找一个数的最大质因数 
+int zhiyin(int n){
+	int i;
+	int max = 1;
+	for (i = 2; n != 1;)
+	{
+		if (zhi(i))
+		{
+			if (n%i == 0)
+			{//是因数 
+				max = i;
+				n = n / i;
+			}
+			else i++;
+		}
+		else
+			i++;
+	}
+	return max;
+}
+int main()
+{
+	int n, i;
+	cin >> n;
+	int a[2502], b[2502], c[2502];
+	for (i = 0; i<n; i++)
+	{
+		cin>>a[i];
+	}
+
+	for (i = 0; i<n; i++)
+	{
+		c[i] = a[i];
+		b[i] = zhiyin(a[i]);
+	}
+	int bm = b[0];
+	for (i = 0; i<n-1 ; i++)
+	{//找到最大的质因数 
+		if (bm <= b[i])
+			bm = b[i];
+	}
+	for (i = 0; i<n; i++)
+	{
+		if (bm == b[i])
+		{
+			break;
+		}
+	}
+	cout << c[i];
+	return 0;
+}
+#endif
+
+#if 0
+//阶乘的最右边非0的数
+#include <stdio.h>
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	long int temp = 1;
+	int i;
+	for (i = 1; i <= n; i++)
+	{
+		temp *= i;
+		while (temp % 100 == 0)
+		{
+			temp /= 100;
+		}
+		temp %= 100;
+	}
+	while (temp % 10 == 0)
+	{
+		temp /= 10;
+	}
+	printf("%d", temp % 10);
+
+	return 0;
+
+}
+#endif
+
+#if 0
+//审美课
+#include<iostream> 
+using namespace std;
+int m, n, A[50005];
+int ans[2000000] = { 0 };
+int sum = 0;
+int main()
+{
+	cin >> n >> m;//输入学生数和画数 
+	for (int i = 0; i<n; i++)
+	{
+		for (int j = 0; j<m; j++)
+		{
+			int temp;
+			cin >> temp;
+			A[i] = (A[i] << 1) + temp;//2进制保存 
+		}
+		ans[A[i]]++;//获得每个答案的人数 
+	}
+	int max = (1 << m) - 1;
+	for (int i = 0; i<n; i++)
+	{
+		int temp = A[i] ^ max;//按位取反 
+		sum += ans[temp];
+	}
+	cout << sum / 2 << endl;
+	return 0;
+}
+#endif
