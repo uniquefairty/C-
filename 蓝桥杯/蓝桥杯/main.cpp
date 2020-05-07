@@ -1688,3 +1688,45 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//天天向上
+#include <iostream>
+#include <algorithm>
+#include <cstring> 
+using namespace std;
+typedef long long ll;
+ll value[2005];
+ll dp[2005][5];//表示以i结尾的序列 
+ll n;
+int main()
+{
+	memset(dp, 0, sizeof(dp));
+	cin >> n;
+	for (int i = 1; i <= n; i++) //初始化 
+	{
+		cin >> value[i];
+		dp[i][1] = 1;
+	}
+	ll sum = 0;
+	for (int i = 2; i <= n; i++)
+	{
+		for (int k = 2; k <= 4; k++)
+		{
+			for (int j = i - 1; j >= 1; j--)
+			{
+				if (value[i]>value[j])
+					dp[i][k] += dp[j][k - 1];
+
+			}
+			if (k == 4)
+			{
+				sum += dp[i][k];
+			}
+			//printf("%d zai %d de wei zhi you %d\n",value[i],k,dp[i][k]); 
+		}
+	}
+	printf("%lld\n", sum);
+}
+#endif
+

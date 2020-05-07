@@ -1159,3 +1159,61 @@ int main() {
 }
 #endif
 
+#if 0
+//day40 4.30  1.发邮件
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		long long arr[21] = { 0, 0, 1 };
+		for (int i = 3; i <= n; i++)
+			arr[i] = (i - 1)*(arr[i - 1] + arr[i - 2]);
+		cout << arr[n] << endl;
+	}
+	return 0;
+}
+#endif
+
+////最长上升子序列
+//#include <iostream>
+//using namespace std;
+//
+//void solve()
+//{
+//	int i, j, n, top, temp;
+//	int arr[1010];//用数组代替栈
+//	cin >> n;
+//	top = 0;
+//	arr[0] = -1;
+//	for (i = 0; i < n; i++)
+//	{
+//		cin >> temp;
+//		if (temp > arr[top])
+//		{
+//			arr[++top] = temp;
+//		}
+//		else//二分查找
+//		{
+//			int low = 1, high = top;
+//			int mid;
+//			while (low <= high)
+//			{
+//				mid = (low + high) / 2;
+//				if (temp > arr[mid])
+//				{
+//					low = mid + 1;
+//				}
+//				else
+//				{
+//					high = mid - 1;
+//				}
+//			}
+//			arr[low] = temp;
+//		}
+//	}
+//	cout << top << endl;
+//}
