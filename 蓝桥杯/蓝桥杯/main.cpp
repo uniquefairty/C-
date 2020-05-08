@@ -1730,3 +1730,45 @@ int main()
 }
 #endif
 
+#if 0
+//二进制1得数数
+#include <stdio.h>
+int sum = 0;
+int len;
+void fun(int a[1000], int len)
+{
+	int i = 0;
+	for (i = 0; i<len; i++)
+	{
+		if (a[i] == 1)
+			sum++;
+	}
+}
+
+void change(int n)
+{
+	int a[1000];
+	int i = 0;
+	while (n>0)
+	{
+		a[i] = n % 2;
+		n /= 2;
+		i++;
+	}
+	fun(a, i);
+}
+
+int main()
+{
+	int L, R;
+	scanf("%d %d", &L, &R);
+	int i;
+	for (i = L; i <= R; i++)
+	{
+		change(i);
+	}
+	printf("%d", sum);
+	return 0;
+}
+#endif
+
