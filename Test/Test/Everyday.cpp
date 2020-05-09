@@ -1217,3 +1217,151 @@ int main()
 //	}
 //	cout << top << endl;
 //}
+
+#if 0
+//day41 _5.8 1.ŒÂ◊”∆Â
+#include <iostream>
+using namespace std;
+#include <vector>
+
+bool Fun(vector<vector<char>> v,int i, int j)
+{
+	//∫·
+	if (j+4<20 && v[i][j + 1] == v[i][j] && v[i][j + 2] == v[i][j]
+		&& v[i][j + 3] == v[i][j]&& v[i][j + 4] == v[i][j] )
+	{
+		return true;
+	}
+	// ˙
+	if (i + 4 < 20 && v[i + 1][j] == v[i][j] && v[i + 2][j] == v[i][j]
+		&& v[i + 3][j] == v[i][j] && v[i + 4][j] == v[i][j])
+	{
+		return true;
+	}
+	//◊Û–±
+	if (i+4<20&&j-4>=0&&v[i + 1][j - 1] == v[i][j] && v[i + 2][j - 2] == v[i][j]
+		&& v[i + 3][j - 3] == v[i][j] && v[i + 4][j - 4] == v[i][j])
+	{
+		return true;
+	}
+	//”“–±
+	if (i+4<20&&j+4<20&&v[i + 1][j + 1] == v[i][j] && v[i + 2][j + 2] == v[i][j]
+		&& v[i + 3][j + 3] == v[i][j] && v[i + 4][j + 4] == v[i][j])
+	{
+		return true;
+	}
+	return false;
+}
+int main()
+{
+
+	vector<vector<char>> v;
+	v. resize(20);
+	for (int i = 0; i < 20; ++i)
+	{
+		v[i].resize(20);
+		for (int j = 0; j < 20; ++j)
+		{
+			char a;
+			cin >> a;
+			v[i][j] = a;
+		}
+	}
+
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if (v[i][j] == '*' || v[i][j] == '+')
+			{
+				if (Fun(v, i, j))
+				{
+					cout << "Yes" << endl;
+					return 0;
+				}
+			}
+		}
+	}
+
+	cout << "No" << endl;
+	return 0;
+}
+#endif
+
+#if 0
+//day41 _5.8 2.º∆À„∆˜
+#include <iostream>
+using namespace std;
+#include <stack>
+#include <string>
+#include <sstream>
+int f(string x)
+{
+	stringstream ss;
+	ss << x;
+	int num;
+	ss >> num;
+	return num;
+}
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		stack<int> s;
+		for (int i = 0; i < n; i++)
+		{
+			string x;
+			cin >> x;
+			if (x == "+")
+			{
+				int a, b;
+				a = s.top();
+				s.pop();
+				b = s.top();
+				s.pop();
+				a += b;
+				s.push(a);
+			}
+			else if (x == "-")
+			{
+				int a, b;
+				a = s.top();
+				s.pop();
+				b = s.top();
+				s.pop();
+				a = b-a;
+				s.push(a);
+			}
+			else if (x == "*")
+			{
+				int a, b;
+				a = s.top();
+				s.pop();
+				b = s.top();
+				s.pop();
+				a *= b;
+				s.push(a);
+			}
+			else if (x == "/")
+			{
+				int a, b;
+				a = s.top();
+				s.pop();
+				b = s.top();
+				s.pop();
+				a = b / a;
+				s.push(a);
+			}
+			else
+			{
+				int a = f(x);
+				s.push(a);
+			}
+		}
+		cout << s.top()<<endl;
+	}
+	return 0;
+}
+#endif
+
