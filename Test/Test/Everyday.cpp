@@ -1365,3 +1365,26 @@ int main()
 }
 #endif
 
+#if 0
+//day42 5.9 ½â¶ÁÃÜÂë
+#include <iostream>
+using namespace std;
+#include <string>
+
+int main()
+{
+	string s;
+	while (getline(cin, s))
+	{
+		string res;
+		for (size_t i = 0; i<s.size(); i++)
+		{
+			if (s[i] >= '0'&&s[i] <= '9')
+				res += s[i];
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
