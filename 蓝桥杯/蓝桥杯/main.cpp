@@ -1772,3 +1772,55 @@ int main()
 }
 #endif
 
+#if 0
+//　输入两个矩阵，分别是m*s，s*n大小。输出两个矩阵相乘的结果。
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int m, s, n;
+	int a[201][201], b[201][201], c[201][201];
+
+	cin >> m >> s >> n;
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < s; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+	for (int i = 0; i < s; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> b[i][j];
+		}
+	}
+
+	//矩阵乘法
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < s; j++)
+		{
+			for (int k = 0; k < n; k++)
+			{
+				c[i][k] += a[i][j] * b[j][k];
+			}
+		}
+	}
+
+	//输出矩阵
+	for (int i = 0; i<m; i++)
+	{
+		for (int j = 0; j<n; j++)
+		{
+			cout << c[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
+#endif
+
