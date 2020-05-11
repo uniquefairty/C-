@@ -1824,3 +1824,64 @@ int main()
 }
 #endif
 
+#if 0
+//1的个数
+#include <stdio.h>
+int sum = 0;
+void f(int n)
+{
+	int a;
+	while (n>0)
+	{
+		if (n % 10 == 1)
+			sum++;
+		n /= 10;
+	}
+}
+
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	int i;
+	for (i = 1; i <= n; i++)
+	{
+		f(i);
+	}
+	printf("%d", sum);
+	return 0;
+}
+#endif
+
+#if 0
+//　输出大等于n的最小的完全平方数。
+//若一个数能表示成某个自然数的平方的形式，则称这个数为完全平方数
+//Tips：n是32位有符号整数
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+	long long n;
+	scanf("%lld", &n);
+	long long j;
+	long long acc;
+	if (n >= 0)
+	{
+		j = (long long)sqrt(n) - 1;
+		while (1)
+		{
+			acc = j*j;
+			j++;
+			if (acc >= n)
+			{
+				printf("%lld", acc);
+				break;
+			}
+		}
+	}
+	else
+		printf("0");
+	return 0;
+}
+#endif
+
