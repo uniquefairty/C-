@@ -1366,7 +1366,7 @@ int main()
 #endif
 
 #if 0
-//day42 5.9 解读密码
+//day42 5.9 1解读密码
 #include <iostream>
 using namespace std;
 #include <string>
@@ -1388,3 +1388,133 @@ int main()
 }
 #endif
 
+#if 0
+//day43 5.11 1电话号码
+#include <iostream>
+using namespace std;
+#include <string>
+#include <vector>
+#include <algorithm>
+
+string Fun(string s)
+{
+	string res;
+	for (int i = 0; i < s.size(); i++)
+	{
+		if (s[i] >= '0'&&s[i] <= '9')
+		{
+			res += s[i];
+		}
+		else if (s[i] >= 'A'&&s[i] <= 'C')
+		{
+			res += '2';
+		}
+		else if (s[i] >= 'D'&&s[i] <= 'F')
+		{
+			res += '3';
+		}
+		else if (s[i] >= 'G'&&s[i] <= 'I')
+		{
+			res += '4';
+		}
+		else if (s[i] >= 'J'&&s[i] <= 'L')
+		{
+			res += '5';
+		}
+		else if (s[i] >= 'M'&&s[i] <= 'O')
+		{
+			res += '6';
+		}
+		else if (s[i] >= 'P'&&s[i] <= 'S')
+		{
+			res += '7';
+		}
+		else if (s[i] >= 'T'&&s[i] <= 'V')
+		{
+			res += '8';
+		}
+		else if (s[i] >= 'W'&&s[i] <= 'Z')
+		{
+			res += '9';
+		}
+		else if (s[i] =='-')
+		{
+			continue;
+		}
+
+		if (res.size() == 3)
+			res += '-';
+	}
+	return res;
+}
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		vector<string> v,res;
+		v.resize(n);
+		res.resize(n);
+		string s;
+		for (size_t i = 0; i<n; i++)
+		{
+			cin >> s;
+			v[i] = s;
+		}
+
+		for (size_t i = 0; i < n; i++)
+		{
+			res[i]=Fun(v[i]);
+		}
+		
+		sort(res.begin(), res.end());
+
+		for (size_t i = 0; i < n - 1; i++)
+		{
+			if (res[i] == res[i + 1])
+			{
+				res[i] = '0';
+			}
+		}
+
+		for (size_t i = 0; i < n; i++)
+		{
+			if (res[i] != "0")
+			{
+				cout << res[i] << endl;
+			}
+		}
+		cout << endl;
+
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//day43 5.11 2.求和
+//不全对
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, m;
+	while (cin >> n >> m)
+	{
+		for (int i = 1; i <= n && i <= m/2 ; i++)
+		{
+			int tmp = m - i;
+			if (tmp <= n)
+			{
+				cout << i << ' ' << tmp << endl;
+			}
+		}
+		if (n >= m)
+		{
+			cout << m << endl;
+		}
+	}
+	return 0;
+}
+#endif
