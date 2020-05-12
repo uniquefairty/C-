@@ -1518,3 +1518,88 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//day44 5.12 1.骆驼命名法
+#include <iostream>
+using namespace std;
+#include <string>
+
+int main()
+{
+	string s;
+	while (cin >> s)
+	{
+		string res;
+		for (int i = 0; i<s.size(); i++)
+		{
+			if (s[i] == '_')
+			{
+				res += (s[++i] - 'a' + 'A');
+			}
+			else
+			{
+				res += s[i];
+			}
+
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//day44 5.12 2.单词到排
+#include <iostream>
+using namespace std;
+#include <string>
+#include <algorithm>
+string Reverse(string s, int start, int end)
+{
+	string res;
+	for (int i = start; i <= end; i++)
+	{
+		res += s[i];
+	}
+
+	reverse(res.begin(), res.end());
+	return res;
+}
+int main()
+{
+	string s;
+	while (getline(cin, s))
+	{
+		string res;
+		reverse(s.begin(), s.end());
+
+		for (int i = 0, j = 0; i <= s.size(); i++)
+		{
+			if (s[j] == ' ' || s[j] == '\0' || ((s[j]<'a'&&s[j]>'z') && (s[j]<'A'&&s[j]>'Z')))
+			{
+				j++;
+				continue;
+			}
+			if (s[i] == ' ' || s[i] == '\0' || ((s[i]<'a'&&s[i]>'z') && (s[i]<'A'&&s[i]>'Z')))
+			{
+					
+				res += Reverse(s, j, i - 1);
+				if (s[i] != '\0')
+					res += ' ';
+				/*while (s[i] == ' '&& s[++i] == ' ')
+				{
+					i++;
+				}*/
+
+				j = i+1;
+				
+			}
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+
