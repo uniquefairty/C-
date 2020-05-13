@@ -1602,4 +1602,68 @@ int main()
 }
 #endif
 
+#if 0
+//day45 5.13 1.Æ¹ÅÒÇò¿ð
+//#include <iostream>
+//using namespace std;
+//#include <string>
+
+//int main()
+//{
+//	string s1, s2;
+//	while (cin >> s1 >> s2)
+//	{
+//		size_t i = 0;
+//		for (; i<s2.size(); i++)
+//		{
+//			size_t pos = s1.find(s2[i]);
+//			if (pos != string::npos)
+//				s1[i] -= 32;
+//			else{
+//				cout << "No" << endl;
+//				break;
+//			}
+//		}
+//		if (i == s2.size())
+//			cout << "Yes" << endl;
+//	}
+//	return 0;
+//}
+
+#include <iostream>
+using namespace std;
+#include <string>
+int main()
+{
+	string s1, s2;
+	while (cin >> s1 >> s2)
+	{
+		int arr[256] = { 0 };
+		int flag = 1;
+		for (size_t i = 0; i < s1.size(); i++)
+		{
+			arr[s1[i]]++;
+		}
+		
+		for (size_t i = 0; i < s2.size(); i++)
+		{
+			arr[s2[i]]--;
+		}
+
+		for (size_t i = 0; i < 256; i++)
+		{
+			if (arr[i] < 0)
+			{
+				cout << "No" << endl;
+				flag = 0;
+				break;
+			}
+		}
+		if (flag)
+			cout << "Yes" << endl;
+	}
+	return 0;
+}
+
+#endif
 
