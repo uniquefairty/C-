@@ -1667,3 +1667,59 @@ int main()
 
 #endif
 
+#if 0
+//day46 5.14 数组中出现次数超过一半的数字
+#include <iostream>
+using namespace std;
+#include <vector>
+//int MoreThanHalfNum_Solution(vector<int> numbers) {
+//	int tmp = 0;
+//	int res = numbers[0];
+//	sort(numbers.begin(), numbers.end());
+//	int count = 1;
+//	for (int i = 0; i<numbers.size() - 1; i++)
+//	{
+//		if (numbers[i] == numbers[i + 1])
+//			count++;
+//		else
+//			count = 1;
+//		
+//		if (count > tmp)
+//		{
+//			tmp = count;
+//			res = numbers[i];
+//		}
+//			
+//	}
+//
+//	if (tmp>numbers.size() / 2)
+//		return res;
+//	else
+//		return 0;
+//}//////没过
+
+int MoreThanHalfNum_Solution(vector<int> numbers) {
+
+	sort(numbers.begin(), numbers.end());
+	int res = numbers[numbers.size()/2];
+	int count = 0;
+	for (int i = 0; i < numbers.size(); i++)
+	{
+		if (numbers[i] == res)
+			count++;
+
+	}
+	if (count > numbers.size()/2)
+		return res;
+	else
+		return 0;
+}
+int main()
+{
+	//vector<int> v{ 1, 2, 2, 2, 2, 2,2,3, 4,5 };
+	vector<int> v{ 1, 2, 2, 2, 2, 2, 2, 3, 4, 5 ,8,8,8,8,8,8,8,8,8,8,8};
+	cout<<MoreThanHalfNum_Solution(v)<<endl;
+	return 0;
+}
+#endif
+
