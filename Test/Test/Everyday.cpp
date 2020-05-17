@@ -1723,3 +1723,67 @@ int main()
 }
 #endif
 
+#if 0
+//day47 5.15 1.合唱团  20%
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int Fun(vector<int> v, int start, int end, int sub)
+{
+	int res = 1;
+	int flag = 1;
+	for (int i = start; i<end; i++)
+	{
+		if (abs(v[i] - v[i + 1]) <= sub)
+		{
+			res *= v[i];
+		}
+		else
+		{
+			flag = 0;
+		}
+	}
+
+	if (flag)
+	{
+		res *= v[end];
+		return res;
+	}
+	else
+	{
+		return 0;
+	}
+
+}
+
+int main()
+{
+	int n, k, d;
+	while (cin >> n)
+	{
+		vector<int> v;
+		v.resize(n);
+		int res = 0, tmp = 0;
+		for (size_t i = 0; i<n; i++)
+		{
+			int a;
+			cin >> a;
+			v[i] = a;
+		}
+		cin >> k >> d;
+
+		for (size_t i = 0; i <= n - k; i++)
+		{
+			tmp = Fun(v, i, i + k - 1, d);
+			if (tmp>res)
+				res = tmp;
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+//2.马戏团
