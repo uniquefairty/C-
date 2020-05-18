@@ -1787,3 +1787,63 @@ int main()
 #endif
 
 //2.马戏团
+
+
+#if 0
+//day48 5.16 1.左右最值最大差
+class MaxGap {
+public:
+	int findMaxGap(vector<int> A, int n) {
+		// write code here
+		int max = A[0];
+		int pos = 0;
+		for (size_t i = 0; i<A.size(); i++)
+		{
+			if (A[i]>max)
+			{
+				max = A[i];
+				pos = i;
+			}
+
+		}
+
+		if (pos == 0)
+			return A[pos] - A[n - 1];
+		else if (pos == n - 1)
+			return A[pos] - A[0];
+		else
+		{
+			int left = A[pos] - A[0];
+			int right = A[pos] - A[n - 1];
+			return left>right ? left : right;
+		}
+	}
+};
+#endif
+
+#if 0
+//day48 5.16 2.顺时针打印矩阵
+class Printer {
+public:
+	vector<int> clockwisePrint(vector<vector<int> > mat, int n, int m) {
+		vector<int> ret;
+		int x1 = 0, y1 = 0;
+		int x2 = n - 1, y2 = m - 1;
+		while (x1 <= x2&&y1 <= y2)
+		{
+			for (int j = y1; j <= y2; ++j)
+				ret.push_back(mat[x1][j]);
+			for (int i = x1 + 1; i<x2; ++i)
+				ret.push_back(mat[i][y2]);
+			for (int j = y2; x1<x2&&j >= y1; --j)
+				ret.push_back(mat[x2][j]);
+			for (int i = x2 - 1; y1<y2&&i>x1; --i)
+				ret.push_back(mat[i][y1]);
+			x1++; y1++;
+			x2--; y2--;
+		}
+		return ret;
+	}
+};
+#endif
+

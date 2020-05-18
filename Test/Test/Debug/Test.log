@@ -1,10 +1,8 @@
-﻿生成启动时间为 2020/5/16 17:25:22。
+﻿生成启动时间为 2020/5/18 17:32:37。
      1>项目“E:\githab代码\C-\Test\Test\Test.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 20200418.cpp 20200421.cpp 20200426.cpp 320.cpp Everyday.cpp
          Everyday.cpp
-     1>e:\githab代码\c-\test\test\everyday.cpp(1705): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\githab代码\c-\test\test\everyday.cpp(1711): warning C4018: “>”: 有符号/无符号不匹配
          320.cpp
          20200426.cpp
          20200421.cpp
@@ -16,9 +14,9 @@
          Debug\20200426.obj
          Debug\320.obj
          Debug\Everyday.obj
-         Test.vcxproj -> E:\githab代码\C-\Test\Debug\Test.exe
-     1>已完成生成项目“E:\githab代码\C-\Test\Test\Test.vcxproj”(Rebuild 个目标)的操作。
+     1>LINK : fatal error LNK1561: 必须定义入口点
+     1>已完成生成项目“E:\githab代码\C-\Test\Test\Test.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:02.99
+已用时间 00:00:01.50
