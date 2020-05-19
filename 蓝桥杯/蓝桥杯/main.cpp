@@ -1885,3 +1885,122 @@ int main()
 }
 #endif
 
+#if 0
+//芯片测试
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n;
+	cin >> n;
+	int chip[n][n], sum;
+	for (int i = 0; i < n; ++i)
+		for (int j = 0; j < n; ++j)
+			cin >> chip[i][j];
+	for (int j = 0; j < n; ++j)
+	{
+		sum = 0;
+		for (int i = 0; i < n; ++i)
+		{
+			if (chip[i][j] == 1)
+				sum++;
+		}
+		if (sum > n / 2)
+			cout << j + 1 << ' ';
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//数的读法
+#include<iostream>  
+using namespace std;
+int main(){
+	char *num[] = { "ling", "yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu" };
+	char *wei[] = { "shi", "bai", "qian", "wan", "yi" };
+	char *str[20];  //存最后结果  
+	int i, j, k, n, l[2] = { 0 };
+	i = 0, j = 0;
+	cin >> n;
+	while (n>0)
+	{
+		k = n % 10;
+		n = n / 10;
+		if (k>0)
+		{
+			if (i >= 4 && !l[i / 4 - 1])
+			{
+				l[i / 4 - 1] = 1;
+				str[j++] = wei[i / 4 + 2];
+			}
+			if (i % 4 != 0)
+			{
+				str[j++] = wei[i % 4 - 1];
+			}
+			str[j++] = num[k];
+		}
+		else if (j>0 && str[j - 1] != num[0])
+			str[j++] = num[0];
+		i++;
+	}
+	if (!(str[j - 1] == "yi"&&j>1 && str[j - 2] == "shi"))
+		cout << str[j - 1] << " ";
+	for (int i = j - 2; i >= 0; i--)
+		cout << str[i] << " ";
+	return 0;
+}
+#endif
+
+#if 0
+//水仙花数
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main()
+{
+	int a, b, c;
+	for (int n = 100; n <= 999; n++)
+	{
+		a = n / 100;
+		b = n / 10 % 10;
+		c = n % 10;
+		//		cout<<a<<" "<<b<<" "<<c<<endl; 
+		if (n == a*a*a + b*b*b + c*c*c)
+			cout << n << endl;
+	}
+}
+#endif
+
+#if 0
+//计数问题
+#include<iostream>
+using namespace std;
+int geshu(int n, int x)
+{
+	int t = 0;
+	int b;
+	while (n>0)
+	{
+		b = n % 10;
+		if (b == x)
+			t++;
+		n = n / 10;
+	}
+	return t;
+}
+int main()
+{
+	int n, x;
+	cin >> n >> x;
+	int sum = 0;
+	for (int i = 1; i <= n; i++)
+	{
+		sum = sum + geshu(i, x);
+	}
+	cout << sum;
+	return 0;
+}
+#endif
+
