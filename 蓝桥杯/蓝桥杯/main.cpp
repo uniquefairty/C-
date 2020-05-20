@@ -2004,3 +2004,58 @@ int main()
 }
 #endif
 
+#if 0
+//字符串匹配
+#include<stdio.h>
+#include<string.h>
+#define max 999
+main()
+{
+	char data[max];
+	int flag, n, i, j;
+	scanf("%s", data);
+	scanf("%d%d", &flag, &n);
+	char map[n][max];
+	for (i = 0; i<n; i++)
+	{
+		scanf("%s", map[i]);
+	}
+	for (i = 0; i<n; i++)
+	{
+		for (j = 0; j<strlen(map[i]); j++)
+		{
+			if (flag == 1)  //大小写比对开启
+			{
+				int temp = 0, p = 0;
+				if (data[temp] == map[i][j])
+				{
+					while (data[temp] == map[i][j] && j<strlen(map[i]))
+					{
+						temp++; j++; p = 1;
+					}
+				}
+				if (temp == strlen(data)){ printf("%s\n", map[i]); i++; j = -1; }
+				else if (p == 1){ p = 0; j--; };
+			}
+			else if (flag == 0)  //大小写比对关闭
+			{
+				int temp = 0, p = 0;
+				char op[max];
+				strcpy(op, map[i]);
+				strlwr(data);
+				strlwr(op);
+				if (data[temp] == op[j])
+				{
+					while (data[temp] == op[j] && j<strlen(op))
+					{
+						temp++; j++; p = 1;
+					}
+				}
+				if (temp == strlen(data)){ printf("%s\n", map[i]); i++; j = -1; }
+				else if (p == 1){ p = 0; j--; };
+			}
+		}
+	}
+	return 0;
+}
+#endif
