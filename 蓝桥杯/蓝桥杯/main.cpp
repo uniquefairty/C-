@@ -2059,3 +2059,33 @@ main()
 	return 0;
 }
 #endif
+
+#if 0
+//字符串压缩
+#include<iostream>
+#include<string>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	string s;
+	getline(cin, s);
+	int size_s = s.size();
+	int count_s[size_s] = { 0 };//用于记录字符串中每个字母是第几次出现
+	int i, j;
+	for (i = 0; i<size_s; i++)
+	{
+		for (j = 0; j <= i; j++)
+		{
+			if (s[i] == s[j])
+				count_s[i]++;
+		}
+	}
+	for (i = 0; i<size_s; i++)
+	{
+		if (s[i] == ' ' || count_s[i] == 1 || count_s[i] == 3 || count_s[i] == 6)//根据条件输出结果
+			cout << s[i];
+	}
+	return 0;
+}
+#endif
