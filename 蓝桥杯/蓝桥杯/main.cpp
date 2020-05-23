@@ -2089,3 +2089,27 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//ÖéĞÄËã²âÊÔ
+#include<stdio.h>
+int main()
+{
+	int n, a[100005], b[100005] = { 0 }, i, count = 0, j;
+	scanf("%d", &n);
+	for (i = 0; i<n; i++)
+	{
+		scanf("%d", &a[i]);
+		b[a[i]] = 1;
+	}
+	for (i = 0; i<n; i++)
+		for (j = i + 1; j<n; j++)
+			if (b[a[i] + a[j]] == 1)
+			{
+				count++;
+				b[a[i] + a[j]] = 0;
+			}
+	printf("%d\n", count);
+	return 0;
+}
+#endif
