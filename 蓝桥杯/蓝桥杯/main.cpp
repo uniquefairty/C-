@@ -2113,3 +2113,64 @@ int main()
 	return 0;
 }
 #endif
+
+#if 0
+//研究兔子得土豪
+#include<stdio.h>
+int main(){
+	int t[1000], i;
+	t[1] = t[2] = 1;
+	t[0] = 0;//找到规律后补的0 
+	for (i = 3; i <= 108; i++)
+		t[i] = (t[i - 1] + t[i - 2]) % 1007;
+	long long n;
+	scanf("%lld", &n);
+	return printf("%d", t[n % 108]) & 0;
+}
+#endif
+
+#if 0
+//特等奖学金
+#include<iostream>
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+int n, m, k;
+struct node{
+	int age[105];
+	int xue;
+	int flag;//奖学金的资格0为默认有 
+}a[1005];
+bool cmp(node l, node r){
+	int i = 1;
+	while (i <= m){
+		if (l.age[i] != r.age[i]){
+			return l.age[i]>r.age[i];
+		}
+		else
+			i++;
+	}
+
+}
+int main(){
+	scanf("%d%d%d", &n, &m, &k);
+	for (int i = 1; i <= n; i++){
+		a[i].xue = i;
+		for (int j = 1; j <= m; j++){
+			scanf("%d", &a[i].age[j]);
+			if (a[i].age[j]<85)
+				a[i].flag = 1;
+		}
+	}
+	sort(a + 1, a + n + 1, cmp);
+	int cnt = 0;
+	for (int i = 1; i <= n; i++){
+		if (a[i].flag == 0){
+			cout << a[i].xue << " ";
+			cnt++;
+		}
+		if (cnt >= k) break;
+	}
+	return 0;
+}
+#endif
