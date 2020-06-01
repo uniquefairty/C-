@@ -2212,8 +2212,11 @@ int main()
 #endif
 
 
-#include <STDIO.H>
-#include <MATH.H>
+#if 0
+//求解一元二次方程的根
+#include <iostream>
+#include <math.h>
+using namespace std;
 
 int main(void)
 {
@@ -2248,7 +2251,7 @@ int main(void)
 		cout << "NO" << endl;
 	}
 
-
 	return 0;
 
 }
+#enidif
