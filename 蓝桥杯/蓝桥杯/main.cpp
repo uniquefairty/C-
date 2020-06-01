@@ -2174,3 +2174,81 @@ int main(){
 	return 0;
 }
 #endif
+
+#if 0
+using namespace std;
+const int N = 100000 + 5;
+vector<int > prime_factor[N];
+void init(){
+	int temp;
+	for (int i = 2; i < N; i++){
+		if (prime_factor[i].size() == 0){
+			for (int j = i; j < N; j += i){
+				temp = j;
+				while (temp % i == 0){
+					prime_factor[j].push_back(i);
+					temp /= i;
+				}
+			}
+		}
+	}
+}
+int main()
+{
+	init();
+
+	int a, b;
+	scanf("%d %d", &a, &b);
+	vector<int>::iterator it;
+	for (int i = a; i <= b; i++){
+		cout << i << "=";
+		for (it = prime_factor[i].begin(); it != prime_factor[i].end(); it++){
+			if (it != prime_factor[i].end() - 1) cout << *it << "*";
+			else cout << *it << endl;
+		}
+
+	}
+}
+#endif
+
+
+#include <STDIO.H>
+#include <MATH.H>
+
+int main(void)
+{
+	//将三个系数保存在计算机中
+	int a;
+	int b;
+	int c;
+
+	cin >> a >> b >> c;
+
+	double delta; //delta存放b*b - 4*a*c
+	double x1, x2; //存放方程的解
+	delta = b*b - 4 * a*c;
+	if (delta>0)
+	{
+		//两个解
+		x1 = (-b + sqrt(delta)) / (2 * a); //sqrt是math.h中一个求开方的函数
+		x2 = (-b - sqrt(delta)) / (2 * a);
+		cout << x1 << " " << x2<<endl;
+			
+	}
+	else if (delta == 0)
+	{
+		//唯一解
+		x1 = (-b) / (2 * a);
+		x2 = x1;
+		cout << x1 << endl;
+	}
+	else
+	{
+		//无解
+		cout << "NO" << endl;
+	}
+
+
+	return 0;
+
+}
