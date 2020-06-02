@@ -1,0 +1,38 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: JL3_ - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\unique\AppData\Local\Temp\RSPAB15.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/JL3_.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\githab´úÂë\C-\MFC\JL3_\JL3_.cpp"
+"E:\githab´úÂë\C-\MFC\JL3_\JL3_Dlg.cpp"
+]
+Creating command line "cl.exe @C:\Users\unique\AppData\Local\Temp\RSPAB15.tmp" 
+Creating temporary file "C:\Users\unique\AppData\Local\Temp\RSPAB16.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/JL3_.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\githab´úÂë\C-\MFC\JL3_\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\unique\AppData\Local\Temp\RSPAB16.tmp" 
+Creating command line "link.exe /nologo /subsystem:windows /incremental:yes /pdb:"Debug/JL3_.pdb" /debug /machine:I386 /out:"Debug/JL3_.exe" /pdbtype:sept  ".\Debug\JL3_.obj" ".\Debug\JL3_Dlg.obj" ".\Debug\StdAfx.obj" ".\Debug\JL3_.res" "
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling...
+JL3_.cpp
+JL3_Dlg.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+JL3_.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
