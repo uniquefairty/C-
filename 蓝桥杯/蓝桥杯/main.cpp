@@ -2254,4 +2254,41 @@ int main(void)
 	return 0;
 
 }
-#enidif
+#endif
+
+#if 0
+//菱形
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	int i;
+	for (i = 1; i <= (2 * n + 1); i++)//上层（包括中间那层）
+	{
+		if (i <= n + 1)
+		{
+			for (int j = n; j >= i; j--)//上层的空格，从一层n个，逐层减1
+			{
+				cout << " ";
+			}
+			for (int k = 1; k <= (2 * i - 1); k++)//上层的*的个数为层数的2倍减1
+				cout << "*";
+			cout << endl;
+		}
+		else//下层
+		{
+			for (int j = 1; j<i - n; j++)//下层的空格，从1，逐层加1
+			{
+				cout << " ";
+			}
+			for (int k = 4 * n + 3; k>2 * i; k--)//下层的*的个数，为2(2n+1-i)+1
+				cout << "*";
+			cout << endl;
+		}
+	}
+}
+#endif
+
