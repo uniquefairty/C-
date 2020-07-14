@@ -85,6 +85,7 @@ int main()
 //}
 
 #if 0
+
 #include <iostream>
 #include <vector>
 #include <time.h>
@@ -102,7 +103,7 @@ int main()
 	while (n--)
 	{
 		r *= (1.0 / val);
-		int k = rand() % val;
+		int k = rand() % val;//Ëæ»úÊý
 		cout << k << " " << val << endl;
 		res = val - k;
 		if (res == 0)
