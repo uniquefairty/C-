@@ -89,3 +89,61 @@ public:
 };
 #endif
 
+#if 0
+核心考点：链表，前后指针的使用，边界条件检测
+解析：输入一个链表，输出该链表中倒数第k个结点。
+//OJ链接：https://www.nowcoder.com/practice/beb5aa231adc45b2a5dcc5b62c93f593?
+//解题思路：
+//这道题原题是不需要保证奇偶位置不变的。
+//现在新增了需求，解决方法也比较多，我们用较优方式解决一下，借鉴一下插入排序的思想
+class Solution {
+public:
+	void reOrderArray(vector<int> &array) {
+		int k = 0;
+		for (int i = 0; i < array.size(); ++i){
+			if (array[i] & 1){ //从左向右，每次遇到的，都是最前面的奇数，一定将来要被放在k
+				下标处
+					int temp = array[i]; //现将当前奇数保存起来
+				int j = i;
+				while (j > k){ //将该奇数之前的内容(偶数序列)，整体后移一个位置
+					array[j] = array[j - 1];
+					j--;
+				}
+				array[k++] = temp; //将奇数保存在它将来改在的位置，因为我们是从左往右放
+				//的，没有跨越奇数，所以一定是相对位置不变的
+			}
+		}
+	}
+};
+#endif
+
+#if 0
+链接：https://www.nowcoder.com/questionTerminal/57d85990ba5b440ab888fc72b0751bf8?answerType=1&f=discussion
+
+给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n>1并且m>1，m <= n），每段绳子的长度记为k[1], ..., k[m]。请问k[1]x...xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
+链接：https ://www.nowcoder.com/questionTerminal/57d85990ba5b440ab888fc72b0751bf8?answerType=1&f=discussion
+来源：牛客网
+
+class Solution {
+public:
+	int cutRope(int number) {
+		if (number == 2) {
+			return 1;
+		}
+		else if (number == 3) {
+			return 2;
+		}
+
+		vector<int> f(number + 1, -1);
+		for (int i = 1; i <= 4; ++i) {
+			f[i] = i;
+		}
+		for (int i = 5; i <= number; ++i) {
+			for (int j = 1; j < i; ++j) {
+				f[i] = max(f[i], j * f[i - j]);
+			}
+		}
+		return f[number];
+	}
+};
+#endif
