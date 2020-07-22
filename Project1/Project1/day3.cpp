@@ -149,3 +149,116 @@ public:
 };
 #endif
 
+#if 0
+/*矩阵中的路径
+请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。
+路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。
+如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。
+矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
+*/
+class Solution {
+public:
+	bool hasPathCore(const char*matrix, int rows, int cols, int row, int col, const char* str, int& pathLength, bool*visited)
+	{
+		if (str[pathLength] == '\0')
+			return true;//字符串遍历成功
+
+		bool hasPath = false;
+		if (row >= 0 && row<rows&&col >= 0 && col<cols&&matrix[row*cols + col] == str[pathLength] && !visited[row*cols + col])
+		{
+			++pathLength;
+			visited[row*cols + col] = true;
+			hasPath = hasPathCore(matrix, rows, cols, row, col - 1, str, pathLength, visited)//左
+				|| hasPathCore(matrix, rows, cols, row - 1, col, str, pathLength, visited)//上
+				|| hasPathCore(matrix, rows, cols, row, col + 1, str, pathLength, visited)//右
+				|| hasPathCore(matrix, rows, cols, row + 1, col, str, pathLength, visited);//下
+
+			if (!hasPath)
+			{
+				--pathLength;//回到前一个字符重新定位
+				visited[row*cols + col] = false;
+			}
+		}
+		return hasPath;
+	}
+	bool hasPath(char* matrix, int rows, int cols, char* str)
+	{
+		if (matrix == nullptr || rows<1 || cols<1 || str == nullptr)
+			return false;
+
+		bool* visited = new bool[rows*cols];//定义和字符矩阵大小一样的布尔值矩阵，用来标识路径是否已经进入每个格子
+		memset(visited, 0, rows*cols);
+
+		int pathLength = 0;//字符串的下标
+		for (int row = 0; row<rows; ++row)
+		{
+			for (int col = 0; col<cols; ++col)
+			{
+				if (hasPathCore(matrix, rows, cols, row, col, str, pathLength, visited))
+				{
+					return true;
+				}
+			}
+		}
+
+		delete[] visited;
+		return false;
+	}
+};
+#endif
+
+#if 0
+/*地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，
+但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。
+但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？*/
+
+class Solution {
+public:
+	int getDigitSum(int number)
+	{
+		int sum = 0;
+		while (number>0)
+		{
+			sum += number % 10;
+			number /= 10;
+		}
+		return sum;
+	}
+	bool check(int threshold, int rows, int cols, int row, int col, bool* visited)
+	{
+		if (row >= 0 && row<rows&&col >= 0 && col<cols&&getDigitSum(row) + getDigitSum(col) <= threshold&&!visited[row*cols + col])
+		{
+			return true;
+		}
+		return false;
+	}
+	int movingCountCore(int threshold, int rows, int cols, int row, int col, bool* visited)
+	{
+		int count = 0;
+		if (check(threshold, rows, cols, row, col, visited))
+		{
+			visited[row*cols + col] = true;
+			count = 1 + movingCountCore(threshold, rows, cols, row - 1, col, visited)
+				+ movingCountCore(threshold, rows, cols, row, col - 1, visited)
+				+ movingCountCore(threshold, rows, cols, row + 1, col, visited)
+				+ movingCountCore(threshold, rows, cols, row, col + 1, visited);
+		}
+		return count;
+	}
+
+	int movingCount(int threshold, int rows, int cols)
+	{
+		if (threshold<0 || rows<1 || cols<1)
+			return 0;
+
+		bool *visited = new bool[rows*cols];
+		for (int i = 0; i<rows*cols; ++i)
+			visited[i] = false;
+
+		int count = movingCountCore(threshold, rows, cols, 0, 0, visited);
+		delete[] visited;
+
+		return count;
+	}
+};
+#endif
