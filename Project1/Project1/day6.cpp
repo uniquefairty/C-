@@ -97,3 +97,54 @@ public:
 };
 #endif
 
+#if 0
+
+/*输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c
+所能排列出来的所有字符串 abc,acb,bac,bca,cab 和 cba 。*/
+//解题思路：
+//全排列问题，可以看做如下多叉树形态
+//该问题可以把目标串理解成两部分：第一部分：以哪个字符开头，第二部分：剩下的是子问题
+class Solution {
+public:
+	void swap(string &str, int i, int j){
+		char temp = str[i];
+		str[i] = str[j];
+		str[j] = temp;
+	}
+	bool IsExist(vector<string>& result, string &str){
+		auto it = result.begin();
+		for (; it != result.end(); ++it){
+			if (*it == str){
+				return true;
+			}
+		}
+		return false;
+	}
+	void PermutationHelper(string &str, int start, vector<string>& result){
+		if (start == str.length() - 1){
+			if (!IsExist(result, str)){
+				result.push_back(str);
+			}
+			return;
+		}
+		for (int i = start; i < (int)str.size(); i++){
+			//start 和 i 的关系是：表示以谁开始
+			swap(str, start, i);
+			//当确定以哪个字符作为开始，就要在决定另一部分的排列组合种类
+			//这里一定要深刻理解，i仅仅是决定以谁作为排列的开始，但是求sub字符串每次开始，都
+			//要从start + 1开始
+				PermutationHelper(str, start + 1, result);
+			swap(str, start, i);
+		}
+	}
+	vector<string> Permutation(string str) {
+		vector<string> result;
+		if (str.length() > 0){
+			PermutationHelper(str, 0, result);
+			sort(result.begin(), result.end());
+		}
+		return result;
+	}
+};
+#endif
+
