@@ -148,3 +148,47 @@ public:
 };
 #endif
 
+#if 0
+/*输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是
+1,2,3,4,。*/
+//解题思路：
+//思路一：直接升序排序，取前n个，这个方法不考虑了
+//思路二：可以采用最小堆，我们这里使用C+++ priority_queue or java PriorityQueue优先级队
+//列进行处理（底层原理类似堆）.这里核心思路在于实现topk，我们使用现成的解决方案。如果需要了解堆实
+//现，可以自行了解一下
+struct comp{
+	bool operator()(const int &a, const int &b){
+		return a < b; //我们需要最大堆，所以我们采用降序排序
+	}
+};
+class Solution {
+public:
+	vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+		vector<int> list;
+		if (input.size() == 0 || k <= 0 || k > input.size()){
+			return list;
+		}
+
+		priority_queue<int> queue; //采用指定容器实现最大堆
+		for (int i = 0; i < input.size(); i++){
+			if (i < k){
+				//前k个元素，直接放入，priority_queue内部会降序排序
+				queue.push(input[i]);
+			}
+			else{
+				if (input[i] < queue.top()){
+					//如果新的数据，小于queue首部元素（最大值），进行更新
+					queue.pop();
+					queue.push(input[i]);
+				}
+			}
+		}
+		for (int i = 0; i < k; i++){
+			list.push_back(queue.top());
+			queue.pop();
+		}
+		return list;
+	}
+};
+
+#endif
