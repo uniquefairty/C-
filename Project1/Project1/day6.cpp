@@ -47,3 +47,53 @@ public:
 };
 #endif
 
+#if 0
+/*简单回溯法的使用
+输入一颗二叉树的根节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为
+从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。*/
+//解题思路：
+//这是一个典型的DFS回溯的算法
+//回溯法本质是一个基于DFS的穷举的过程
+//1. 先添加值
+//2. 在判定现有结果是否满足条件
+//3. DFS
+//4. 回退
+/*
+struct TreeNode {
+int val;
+struct TreeNode *left;
+struct TreeNode *right;
+TreeNode(int x) :
+val(x), left(NULL), right(NULL) {
+}
+};*/
+class Solution {
+public:
+	void FindPathDFS(TreeNode* root, int expectNumber, vector<vector<int> >
+		&result, vector<int> &list){
+		if (root == nullptr){
+			return;
+		}
+		//先添加值
+		list.push_back(root->val);
+		expectNumber -= root->val;
+		//检测条件是否满足题面需求
+		if (root->left == nullptr && root->right == nullptr && expectNumber == 0)
+		{
+			result.push_back(list);
+		}
+		//dfs进去
+		FindPathDFS(root->left, expectNumber, result, list);
+		FindPathDFS(root->right, expectNumber, result, list);
+
+		list.pop_back(); //回退
+	}
+	vector<vector<int> > FindPath(TreeNode* root, int expectNumber) {
+		vector<vector<int> > result;
+		vector<int> list;
+		FindPathDFS(root, expectNumber, result, list);
+		return result;
+	}
+};
+#endif
+
