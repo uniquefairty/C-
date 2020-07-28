@@ -66,3 +66,52 @@ public:
 };
 #endif
 
+#if 0
+/*给定一个仅由小写字母组成的字符串。现在请找出一个位置，删掉那个字母之后，字符串变成回文。请
+放心总会有一个合法的解。如果给定的字符串已经是一个回文串，那么输出-1*/
+//解题思路：
+//可以从两侧进行统计，如果不同，则删除任意一个，在判定是否是回文，如果是，下标就是删除数据的下
+//标，如果不是，就是另一个元素的下标
+#include <iostream>
+#include <string>
+using namespace std;
+bool IsPalindrome(string &s, int *start, int *end){
+	int i = 0;
+	int j = s.size() - 1;
+	bool result = true;
+	while (i <= j){
+		if (s[i] != s[j]){
+			result = false;
+			break;
+		}
+		i++, j--;
+	}
+	if (start != nullptr) *start = i;
+	if (end != nullptr) *end = j;
+	return result;
+}
+int main()
+{
+	int num = 0;
+	cin >> num;
+	while (num){
+		string s;
+		cin >> s;
+		int start = 0;
+		int end = s.size() - 1;
+		if (IsPalindrome(s, &start, &end)){
+			cout << -1 << endl; //已经是回文了
+		}
+		else{
+			s.erase(end, 1);
+			if (IsPalindrome(s, nullptr, nullptr)){
+				cout << end << endl;
+			}
+			else{
+				cout << start << endl;
+			}
+		}
+		num--;
+	}
+}
+#endif
