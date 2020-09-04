@@ -30,6 +30,7 @@ int main()
 }
 #endif
 
+#if 0
 //看高楼层数--错误
 #include <iostream>
 #include <vector>
@@ -91,3 +92,73 @@ int main()
 	}
 	return 0;
 }
+
+#endif
+
+#if 0
+1.压缩算法
+//小Q想要给他的朋友发送一个神秘字符串，但是他发现字符串的过于长了，
+//于是小Q发明了一种压缩算法对字符串中重复的部分进行了压缩，
+//对于字符串中连续的m个相同字符串S将会压缩为m | S，
+//例如字符串ABCABCABC将会被压缩为[3 | ABC]，现在小Q的同学收到了小Q发送过来的字符串，你能帮助他进行解压缩么？
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+int main()
+{
+	stack<char> st;
+	string s;
+	cin >> s;
+	int n = s.length();
+
+	for (int i = 0; i < n; ++i)
+	{
+		if (s[i] != ']')
+		{
+			st.push(s[i]);
+		}
+		else
+		{
+			string tmp = "";
+			while (st.top() != '|')
+			{
+				tmp += st.top();
+				st.pop();
+			}
+			reverse(tmp.begin(), tmp.end());//tmp重复的字符串
+
+			string num = "";
+			st.pop();
+			while (st.top() != '[')
+			{
+				num += st.top();
+				st.pop();
+			}
+			st.pop();
+			reverse(num.begin(), num.end());
+			int x = stoi(num);
+
+			string t = "";
+			while (x--)
+			{
+				for (char c : tmp)
+					st.push(c);
+			}
+
+		}
+	}
+	string ans;
+	while (!st.empty())
+	{
+		ans += st.top();
+		st.pop();
+	}
+	reverse(ans.begin(), ans.end());
+	cout << ans << endl;
+	return 0;
+
+}
+#endif
+
+
