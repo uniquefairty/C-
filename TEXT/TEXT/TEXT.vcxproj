@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClCompile Include="20200816.cpp" />
     <ClCompile Include="20200908.cpp" />
+    <ClCompile Include="dfs.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

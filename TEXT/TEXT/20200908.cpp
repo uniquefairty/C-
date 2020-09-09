@@ -1,3 +1,4 @@
+//错误代码
 //#include <iostream>
 //#include <vector>
 //#include <string>
@@ -51,7 +52,8 @@
 //}
 
 
-
+#if 0
+//错误代码
 #define CRT_SECURE_NO_WARNINGS 1
 #pragma warning(disable:4996)
 #include <iostream>
@@ -120,5 +122,127 @@ int main()
 
 
 	}
+	return 0;
+}
+#endif
+
+#if 0
+//敏感词替换--正确
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main()
+{
+	string str1, str2, str3;
+	cin >> str1;
+	getchar();
+	getline(cin, str2);
+	cin >> str3;
+
+	vector<string> v;
+	string tmp = "";
+	for (int i = 0; i < str2.size(); i++)
+	{
+		if (str2[i] == ' ')
+		{
+			v.push_back(tmp);
+			tmp = "";
+		}
+		else if (str2[i] == ',')
+		{
+			v.push_back(tmp);
+			v.push_back(",");
+			tmp = "";
+		}
+		else
+		{
+			tmp += str2[i];
+		}
+	}
+	v.push_back(tmp);
+
+	sort(str1.begin(), str1.end());
+	for (int i = 0; i < v.size(); i++)
+	{
+		string s;
+		s = v[i];
+		sort(s.begin(), s.end());
+		if (s == str1)
+		{
+			v[i].clear();
+			v[i] = str3;
+		}
+	}
+	string res;
+	for (int i = 0; i < v.size(); i++)
+	{
+		res += v[i];
+		res += ' ';
+	}
+
+	cout << res << endl;
+
+	return 0;
+}
+#endif
+
+
+//订单系统系统工作流路径解析
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+//回溯
+vector<string> result;
+string temp="";
+void backward(vector<string> part, int index)
+{
+	if (temp.size() == part.size())//每个结果的长度等于分割后数组的个数
+	{
+		result.push_back(temp);
+	}
+	else if (temp.size()<part.size())
+	{
+		for (int i = 0; i < part[index].size(); i++)
+		{
+
+		}
+	}
+		
+
+}
+
+int main()
+{
+	string s, cache;
+	getline(cin, s);
+	vector<string> part;
+
+	int i = 0;
+	//切割字符串
+	while (i < s.size())
+	{
+		if (s[i] == ' ')
+		{
+			part.push_back(cache);
+			cache = "";
+		}
+		else
+			cache.push_back(s[i]);
+
+		i++;
+	}
+	part.push_back(cache);
+
+	//回溯
+	for (int i = 0; i < part[0].size(); i++)
+	{
+		temp.push_back(part[0][i]);
+		backward(part, 1);
+		temp.pop_back();
+	}
+
 	return 0;
 }

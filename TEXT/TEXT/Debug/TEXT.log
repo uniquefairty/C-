@@ -1,10 +1,12 @@
-﻿生成启动时间为 2020/9/8 23:51:58。
+﻿生成启动时间为 2020/9/9 16:05:04。
      1>项目“E:\githab代码\C-\TEXT\TEXT\TEXT.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 20200816.cpp 20200908.cpp
          20200908.cpp
+     1>e:\githab代码\c-\text\text\20200908.cpp(142): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\text\text\20200908.cpp(163): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\text\text\20200908.cpp(175): warning C4018: “<”: 有符号/无符号不匹配
          20200816.cpp
-     1>e:\githab代码\c-\text\text\20200816.cpp(498): warning C4018: “<”: 有符号/无符号不匹配
          正在生成代码...
        Link:
          D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\githab代码\C-\TEXT\Debug\TEXT.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\githab代码\C-\TEXT\Debug\TEXT.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\githab代码\C-\TEXT\Debug\TEXT.lib" /MACHINE:X86 Debug\20200816.obj
@@ -14,4 +16,4 @@
 
 生成成功。
 
-已用时间 00:00:01.77
+已用时间 00:00:01.63
