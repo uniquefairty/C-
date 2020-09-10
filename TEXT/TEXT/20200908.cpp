@@ -188,7 +188,7 @@ int main()
 }
 #endif
 
-
+#if 0
 //订单系统系统工作流路径解析
 #include <iostream>
 #include <vector>
@@ -244,5 +244,105 @@ int main()
 		temp.pop_back();
 	}
 
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+using namespace std;
+
+char ans[500];
+int main()
+{
+	int n;
+	std::cin >> n;
+
+	int l = 0;
+	while (n > 0)
+	{
+		ans[l++] = n % 36 > 9 ? n % 36 - 10 + 'a' : n % 36 + '0';
+		n /= 36;
+	}
+
+	for (int i = l - 1; i >= 0; --i)
+	{
+		std::cout << ans[i];
+	}
+	return 0;
+}
+#endif
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+long fun(int i)
+{
+	long res = 1;
+	while (i)
+	{
+		res *= 36;
+		i--;
+	}
+}
+
+int main()
+{
+	string s;
+	while (cin >> s)
+	{
+		long result = 0;
+		string res = "";
+		int flag = 1;
+		int t = 1;
+		int SIZE = s.size();
+		if (s[0] == '-')
+		{
+			SIZE--;
+		}
+		
+	
+		for (int i = 0; i<s.size(); i++)
+		{
+			if (s[0] == '-')
+			{
+				continue;
+				t = 0;
+			}
+
+			if (s[i] <= '9'&&s[i] >= '0')
+			{
+				result += (s[i] - '0')*fun(SIZE-i-1);
+			}
+			else if (s[i] >= 'a'&&s[i] <= 'z')
+			{
+				result += ((s[i] - 'a') + 10)*fun(SIZE - i - 1);
+			}
+			else
+			{
+				flag = 0;
+				break;
+				
+			}
+		}
+
+		if (flag == 0)
+		{
+			cout << 0 << endl;
+		}
+		else if (t == 0)
+		{
+			//输出负数
+			cout << '-' << result << endl;
+		}
+		else
+		{
+			cout << result << endl;
+		}
+
+
+	}
 	return 0;
 }
