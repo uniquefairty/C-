@@ -1,12 +1,12 @@
-﻿生成启动时间为 2020/9/10 19:58:48。
+﻿生成启动时间为 2020/9/12 16:24:30。
      1>项目“E:\githab代码\C-\TEXT\TEXT\TEXT.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 20200816.cpp 20200908.cpp dfs.cpp
          dfs.cpp
+     1>e:\githab代码\c-\text\text\dfs.cpp(215): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\text\text\dfs.cpp(224): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\text\text\dfs.cpp(227): warning C4018: “<”: 有符号/无符号不匹配
          20200908.cpp
-     1>e:\githab代码\c-\text\text\20200908.cpp(290): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\githab代码\c-\text\text\20200908.cpp(295): warning C4244: “+=”: 从“double”转换到“long”，可能丢失数据
-     1>e:\githab代码\c-\text\text\20200908.cpp(299): warning C4244: “+=”: 从“double”转换到“long”，可能丢失数据
          20200816.cpp
          正在生成代码...
        Link:
@@ -18,4 +18,4 @@
 
 生成成功。
 
-已用时间 00:00:02.98
+已用时间 00:00:01.60

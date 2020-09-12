@@ -273,7 +273,7 @@ int main()
 }
 #endif
 
-
+#if 0
 #include <iostream>
 #include <string>
 using namespace std;
@@ -346,3 +346,126 @@ int main()
 	}
 	return 0;
 }
+#endif
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//
+//	int add(vector<int>& candies, vector<int>& coin, int n, int index)
+//	{
+//		int tmp = 0;
+//		while (n)
+//		{
+//			if (coin[i] == 1)
+//			{
+//				tmp += candies[index];
+//			}
+//			index++;
+//			n--;
+//		}
+//	}
+//	int maxCandies(vector<int>& candies, vector<int>& coin, int n) {
+//		// write code here
+//		if (candies.size() == 0)
+//			return 0;
+//		int res = 0;
+//		int max = 0;
+//
+//		for (int i = 0; i<candies.size(); i++)
+//		{
+//			//碰到反面时，连续n个数反面的糖果数量
+//			if (coin[i] == 0)
+//			{
+//				result += coin[i];
+//			}
+//
+//			if (coin[i] == 1)
+//			{
+//				//反面
+//				int a = add(candies, coin, n, i);
+//				if (a>max)
+//				{
+//					max = a;
+//				}
+//
+//			}
+//		}
+//
+//		cout << res << endl;
+//	}
+
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int maxCandies(vector<int>& candies, vector<int>& coin, int n) {
+	// write code here
+	if (candies.size() == 0)
+		return 0;
+	int res = 0;
+	int max = 0;
+
+	for (int i = 0; i<candies.size(); i++)
+	{
+		//碰到反面时，连续n个数反面的糖果数量
+		if (coin[i] == 0)
+		{
+			res += candies[i];
+		}
+
+		if (coin[i] == 1)
+		{
+			//反面
+			int index = i;
+			int tmp = 0;
+			int count = n;
+			while (index<candies.size() && count)
+			{
+				if (coin[index] == 1)
+				{
+					tmp += candies[index];
+				}
+				
+				index++;
+				count--;
+			}
+
+			if (tmp>max)
+			{
+				max = tmp;
+			}
+		}
+	}
+	res += max;
+	cout << res << endl;
+}
+int main()
+{
+	vector<int> candies={ 3, 5, 7, 2, 8, 8, 15, 3 };
+	vector<int> coin={ 1, 0, 1, 0, 1, 01, 0 };
+	maxCandies(candies, coin, 3);
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+
+	}
+	return 0;
+}
+#endif
+
