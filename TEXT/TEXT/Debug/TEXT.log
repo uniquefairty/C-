@@ -1,9 +1,10 @@
-﻿生成启动时间为 2020/9/13 11:55:57。
+﻿生成启动时间为 2020/9/14 17:24:30。
      1>项目“E:\githab代码\C-\TEXT\TEXT\TEXT.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 20200816.cpp 20200908.cpp dfs.cpp
          dfs.cpp
-     1>e:\githab代码\c-\text\text\dfs.cpp(390): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\text\text\dfs.cpp(535): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\githab代码\c-\text\text\dfs.cpp(541): warning C4018: “<”: 有符号/无符号不匹配
          20200908.cpp
          20200816.cpp
          正在生成代码...
@@ -16,4 +17,4 @@
 
 生成成功。
 
-已用时间 00:00:02.15
+已用时间 00:00:01.47

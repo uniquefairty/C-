@@ -377,7 +377,7 @@ int main()
 }
 #endif
 
-
+#if 0
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -432,3 +432,208 @@ int main()
 	}
 	return 0;
 }
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
+string fun(string str, int i, int n)
+{
+	string res = "";
+	int j = i+n;
+	while (n)
+	{
+		res += str[j-1];
+		j--;
+		n--;
+	}
+	return res;
+}
+int main()
+{
+	int n;
+	string str;
+	while (cin >> n)
+	{
+		getchar();
+		getline(cin, str);
+		string res = "";
+		int i = 0;
+		for (; i < str.size();)
+		{
+			if ((i + n) < str.size())
+			{
+				res+=fun(str, i, n);
+				i = i + n;
+			}
+			else
+			{
+				break;
+			}
+		}
+		if (i != str.size())
+		{
+			for (int j = str.size() - 1; j >= i; j--)
+			{
+				res += str[j];
+			}
+		}
+		
+		cout << res << endl;
+	
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+vector<vector<int> > RotateMatrix(vector<vector<int> >& matrix) {
+	// write code here
+	vector<vector<int> > result;
+	result.resize(matrix[0].size());
+	int ii = 0, jj = 0;
+	for (int j = matrix[0].size() - 1; j >= 0; j--)
+	{
+		result[ii].resize(matrix.size());
+		for (int i = 0, jj = 0; i<matrix.size(); i++)
+		{
+			result[ii][jj] = matrix[i][j];
+			jj++;
+		}
+		ii++;
+	}
+	return result;
+}
+int main()
+{
+
+	vector<vector<int> > matrix = { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
+	RotateMatrix(matrix);
+	return 0;
+}
+#endif
+
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//
+//using namespace std;
+//int main()
+//{
+//	string str1,str2;
+//	str1 = "abccade";
+//	str2 = "dgcadde";
+//	int length = 0;
+//	string res = "";
+//	for (int i = 0; i < str1.size(); i++)
+//	{
+//		int pos = str2.find(str1[i]);
+//		int j = i;
+//		if (pos != string::npos)
+//		{
+//			while (pos < str2.size() && j < str1.size())
+//			{
+//				string tmp = "";
+//				while (str2[pos] == str1[j])
+//				{				
+//					tmp += str1[j];
+//					pos++;
+//					j++;
+//				}
+//				if (tmp.size() > res.size())
+//				{
+//					res = tmp;
+//				}
+//
+//			}
+//		}
+//
+//	}
+//	cout << res << endl;
+//	return 0;
+//}
+
+
+#if 0
+string GetCommon(string str1, string str2) {
+	// write code here
+	vector<vector<int>> record(str1.size(), vector<int>(str2.length()));
+	int maxlen = 0, maxend = 0;
+	for (int i = 0; i<str1.size(); i++)
+	{
+		for (int j = 0; j<str2.size(); j++)
+		{
+			if (str1[i] == str2[j])
+			{
+				if (i == 0 || j == 0)
+				{
+					record[i][j] = 1;
+				}
+				else
+				{
+					record[i][j] = record[i - 1][j - 1] + 1;
+				}
+			}
+			else{
+				record[i][j] = 0;
+			}
+
+			if (record[i][j]>maxlen)
+			{
+				maxlen = record[i][j];
+				maxend = i;
+			}
+		}
+		return str1.substr(maxend - maxlen + 1, maxlen);
+	}
+}
+#endif
+
+# if 0
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+string GetCommon(string str1, string str2) {
+	// write code here
+	vector<vector<int>> record(str1.size(), vector<int>(str2.length()));
+	int maxlen = 0; maxend = 0;
+	for (int i = 0; i<str1.size(); i++)
+	{
+		for (int j = 0; j<str2.size(); j++)
+		{
+			if (str1[i] == str2[j])
+			{
+				if (i == 0 || j == 0)
+				{
+					record[i][j] = 1;
+				}
+				else
+				{
+					record[i][j] = record[i - 1][j - 1] + 1;
+				}
+			}
+			else{
+				record[i][j] = 0;
+			}
+
+			if (record[i][j]>maxlen)
+			{
+				maxlen = record[i][j];
+				maxend = i;
+			}
+		}
+		return str1.substr(maxend - maxlen + 1, maxlen);
+	}
+}
+#endif
+
+
