@@ -636,4 +636,386 @@ string GetCommon(string str1, string str2) {
 }
 #endif
 
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+#pragma pack(2)
+int main()
+{
+	struct u
+	{
+		int mid;
+		char gender;
+		int c[4];
+	};
+	cout << sizeof(u) << endl;
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+		string res = "";
+		int count = 0;
+		for (int i = 0; i<str.size();)
+		{
+			res += str[i];
+			res += '_';
+			i++;
+			count = 1;
+			if (str[i] != str[i - 1])
+			{
+				res += count+'0';
+				res += '_';
+				//i++;
+				continue;
+				
+			}
+
+			while (i<str.size() && str[i] == str[i - 1])
+			{
+				count++;
+				i++;
+			}
+			res += count+'0';
+			if (i != str.size())
+			{
+				res += '_';
+			}
+			
+		}
+
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+using namespace std;
+struct ListNode
+{
+	int val;
+	ListNode *next;
+	ListNode(int x) :val(x), next(nullptr)
+	{}
+};
+
+ListNode* fun(ListNode* pHead1, ListNode * pHead2)
+{
+	if (pHead1 == nullptr)
+	{
+		return pHead2;
+	}
+	if (pHead2 == nullptr)
+	{
+		return pHead1;
+	}
+
+	if (pHead1->val <= pHead2->val)
+	{
+		pHead1->next = fun(pHead1->next, pHead2);
+			return pHead1;
+	}
+	else
+	{
+		pHead2->next = fun(pHead1, pHead2->next);
+		return pHead2;
+	}
+}
+int main()
+{
+	int n,m;
+	while (cin >> n)
+	{
+		ListNode *pHead1 = new ListNode(0);
+		ListNode *p1 = pHead1;
+		while (n--)
+		{
+			int tmp;
+			cin >> tmp;
+			ListNode *Node = new ListNode(tmp);
+			p1->next = Node;
+			p1 = Node;
+		}
+
+		cin >> m;
+		ListNode *pHead2 = new ListNode(0);
+		ListNode *p2 = pHead2;
+		while (m--)
+		{
+			int tmp;
+			cin >> tmp;
+			ListNode *Node = new ListNode(tmp);
+			p2->next = Node;
+			p2 = Node;
+		}
+
+		ListNode* head=fun(pHead1->next, pHead2->next);
+		while (head)
+		{
+			cout << head->val ;
+			if (head->next != nullptr)
+			{
+				cout << ' ';
+			}
+			head = head->next;
+		}
+
+	}
+
+
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stack>
+using namespace std;
+int main()
+{
+	string str;
+	while (getline(cin, str))
+	{
+		if (str.size() == 0)
+		{
+			cout << "true" << endl;
+			continue;
+		}
+
+		if (str.size() % 2 != 0)
+		{
+			cout << "false" << endl;
+			continue;
+		}
+		stack<int> s;
+		int flag = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (str[i] == '(' || str[i] == '[' || str[i] == '{')
+			{
+				s.push(str[i]);
+			}
+			else
+			{
+				char c = s.top();
+				char m;
+				if (c == '(')
+					m = ')';
+				if (c == '[')
+					m = ']';
+				if (c == '{')
+					m = '}';
+
+				if (str[i] != m)
+				{
+					cout << false << endl;
+					flag = 1;
+					break;
+				}
+				else
+				{
+					s.pop();
+				}
+			}	
+		}
+		if (flag)
+		{
+			cout << "false" << endl;
+		}
+		else
+		{
+			cout << "true" << endl;
+		}
+
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stack>
+using namespace std;
+int main()
+{
+	string str;
+	while (getline(cin,str))
+	{
+		int visit[256] = { 0 };
+		string res = "";
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (visit[str[i]] == 0)
+			{
+				res += str[i];
+				visit[str[i]] =1;
+			}
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stack>
+using namespace std;
+int main()
+{
+	string str;
+	while (getline(cin, str))
+	{
+		if (str.size() == 0)
+		{
+			cout << "true" << endl;
+			continue;
+		}
+
+		if (str.size() % 2 != 0)
+		{
+			cout << "false" << endl;
+			continue;
+		}
+		stack<char> s;
+		int flag = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (str[i] == '(' || str[i] == '[' || str[i] == '{')
+			{
+				s.push(str[i]);
+			}
+			else
+			{
+				char c = s.top();
+				char m;
+				if (c == '(')
+					m = ')';
+				if (c == '[')
+					m = ']';
+				if (c == '{')
+					m = '}';
+
+				if (str[i] != m)
+				{
+					cout << false << endl;
+					flag = 1;
+					break;
+				}
+				else
+				{
+					s.pop();
+				}
+			}
+		}
+		if (!s.empty())
+		{
+			flag = 1;
+		}
+		if (flag)
+		{
+			cout << "false" << endl;
+		}
+		else
+		{
+			cout << "true" << endl;
+		}
+
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stack>
+using namespace std;
+int main()
+{
+	string str;
+	stack<char> s;
+	while (cin>>str)
+	{
+		
+		while (!s.empty())
+		{
+			s.pop();
+		}
+		if (str.empty())
+		{
+			cout << "true" << endl;
+			continue;
+
+		}
+		
+		int flag = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (str[i] == '(' || str[i] == '[' || str[i] == '{')
+			{
+				s.push(str[i]);
+			}
+			else
+			{
+				if (s.empty())
+				{
+					flag = 0;
+					break;
+				}
+				char c = s.top();
+				s.pop();
+				if (str[i] == ')' && (c == '[' || c == '{'))
+				{
+					flag = 1;
+					break;
+				}
+				else if (str[i] == ']' && (c == ')' || c == '}'))
+				{
+					flag = 1;
+					break;
+				}
+				else if (str[i] == '}' && (c == ')' || c == ']'))
+				{
+					flag = 1;
+					break;
+				}
+			}
+		}
+		if (!s.empty())
+			flag = 1;
+		if (flag)
+		{
+			cout << "false" << endl;
+		}
+		else
+		{
+			cout << "true" << endl;
+		}
+
+	}
+	return 0;
+}
+#endif
 
