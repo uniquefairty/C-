@@ -1019,3 +1019,123 @@ int main()
 }
 #endif
 
+#if 0
+#include <iostream>
+using namespace std;
+#define DECLARE(name,type)type name##_##type##_type
+
+int main()
+{
+	cout << DECLARE(val, int) << endl;
+	return 0;
+}
+#endif
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+bool fun(vector<vector<int>> pv, vector<int> line)
+{
+	int posi = 0, posj = 0;
+	for (int i = 0; i < pv.size(); i++)
+	{
+		if (pv[i][0] == line[0] && pv[i][1] == line[1])
+		{
+			return true;
+		}
+	}
+
+	return false;
+
+}
+bool self(vector<vector<int>> v, int line,vector<vector<int>> pv)
+{
+	int data = v[line][0];
+	int tmp = v[line][1];
+	int same1,same2;
+	int i = 0,j=0;
+
+	for (i = 0; i < v.size() && i != line; i++)
+	{
+		if (v[i][0] == data)
+		{
+			same1 = v[i][1];
+			break;
+		}
+		
+	}
+
+	if (i == v.size())
+		return false;
+
+	for (j = 0; j < v.size() && j != line; j++)
+	{
+		if (v[j][1] == tmp)
+		{
+			same2 = v[j][0];
+			break;
+		}
+	}
+
+	if (same1 == same2&&fun(pv, v[i]) && fun(pv,v[j]))
+		return true;
+	else
+	{
+		return false;
+	}
+
+
+}
+int main()
+{
+	int n, m, q;
+	while (cin >> n >> m >> q)
+	{
+		vector<vector<int>>  pv;
+		pv.resize(m);
+		for (int i = 0; i<m; i++)
+		{
+			pv[i].resize(2);
+			for (int j = 0; j<2; j++)
+			{
+				cin >> pv[i][j];
+			}
+			sort(pv[i].begin(), pv[i].end());
+		}
+		vector<vector<int>>  v;
+		v.resize(q);
+		for (int i = 0; i<q; i++)
+		{
+			v[i].resize(2);
+			for (int j = 0; j<2; j++)
+			{
+				cin >> v[i][j];
+			}
+			sort(v[i].begin(),v[i].end());
+		}
+
+		for (int i = 0; i < v.size(); i++)
+		{
+			if (fun(pv, v[i]))
+			{
+				cout << "YES" << endl;
+			}
+			else
+			{
+				if (self(v, i,pv))
+				{
+					cout << "YES" << endl;
+				}
+				else
+				{
+					cout << "NO" << endl;
+				}
+			}
+			
+		}
+
+
+	}
+	return 0;
+}
