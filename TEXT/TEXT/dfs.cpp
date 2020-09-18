@@ -1031,6 +1031,8 @@ int main()
 }
 #endif
 
+#if 0
+//¾©¶«
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -1137,5 +1139,30 @@ int main()
 
 
 	}
+	return 0;
+}
+#endif
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+void Path(char* matrix, int rows, int cols, char* str)
+{
+	bool* flag = new bool[rows*cols];
+	for (int i = 0; i < rows*cols; i++)
+	{
+		flag[i] = false;
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for
+	}
+
+}
+int main()
+{
+
 	return 0;
 }
