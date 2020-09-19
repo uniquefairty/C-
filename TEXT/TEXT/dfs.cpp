@@ -1143,6 +1143,7 @@ int main()
 }
 #endif
 
+#if 0
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -1166,3 +1167,44 @@ int main()
 
 	return 0;
 }
+#endif
+
+#if 0
+//ÌìÈÚĞÅ
+#include <iostream>
+#include <string>
+using namespace std;
+string fun(string str)
+{
+	string res = "";
+	string tmp = "";
+	for (int i = 0; i<str.size();)
+	{
+		tmp = "";
+		int j = i + 1;
+		tmp += str[i];
+		while (j<str.size() && str[i] == str[j])
+		{
+			tmp += str[j];
+			j++;
+
+		}
+		i = j;
+		if (res.size()<tmp.size())
+		{
+			res = tmp;
+		}
+	}
+	return res;
+}
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+
+		cout << fun(str) << endl;
+	}
+	return 0;
+}
+#endif

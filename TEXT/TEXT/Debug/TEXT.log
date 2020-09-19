@@ -1,12 +1,8 @@
-﻿生成启动时间为 2020/9/17 20:54:39。
+﻿生成启动时间为 2020/9/19 19:55:42。
      1>项目“E:\githab代码\C-\TEXT\TEXT\TEXT.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
          D:\vs\新建文件夹\VC\bin\CL.exe /c /I"D:\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt 20200816.cpp 20200908.cpp dfs.cpp
          dfs.cpp
-     1>e:\githab代码\c-\text\text\dfs.cpp(1041): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\githab代码\c-\text\text\dfs.cpp(1059): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\githab代码\c-\text\text\dfs.cpp(1072): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\githab代码\c-\text\text\dfs.cpp(1118): warning C4018: “<”: 有符号/无符号不匹配
          20200908.cpp
          20200816.cpp
          正在生成代码...
@@ -14,9 +10,9 @@
          D:\vs\新建文件夹\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\githab代码\C-\TEXT\Debug\TEXT.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\githab代码\C-\TEXT\Debug\TEXT.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\githab代码\C-\TEXT\Debug\TEXT.lib" /MACHINE:X86 Debug\20200816.obj
          Debug\20200908.obj
          Debug\dfs.obj
-         TEXT.vcxproj -> E:\githab代码\C-\TEXT\Debug\TEXT.exe
-     1>已完成生成项目“E:\githab代码\C-\TEXT\TEXT\TEXT.vcxproj”(Rebuild 个目标)的操作。
+     1>LINK : fatal error LNK1561: 必须定义入口点
+     1>已完成生成项目“E:\githab代码\C-\TEXT\TEXT\TEXT.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:01.92
+已用时间 00:00:00.68
