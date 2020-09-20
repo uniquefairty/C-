@@ -1208,3 +1208,122 @@ int main()
 	return 0;
 }
 #endif
+
+
+
+
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
+
+void Swap(char* str, int i, int j)
+{
+	char temp = str[i];
+	str[i] = str[j];
+	str[j] = temp;
+}
+void fun(char* str, int start, int end)
+{
+	if (start == end)
+	{
+		for (int i = 0; i<=end; ++i)
+		{
+			cout << str[i];
+		}
+		cout << endl;
+	}
+	else
+	{
+		for (int i = start; i <= end; ++i)
+		{
+			Swap(str, start, i);
+			fun(str, start + 1, end);
+			Swap(str, start, i);
+		}
+	}
+}
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+		fun((char *)str.c_str(), 0, str.size() - 1);
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+		if (str.empty())
+			return 0;
+		long long res = 0;
+		for (int i = 0; i<str.size(); i++)
+		{
+			int tmp = str[i] - '0';
+			res = res * 10 + tmp;
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
+
+long long strtoint(string str, bool minus, int index)
+{
+	long long res = 0;
+	for (int i = index; i<str.size(); i++)
+	{
+		if (str[i] >= '0'&&str[i] <= '9')
+		{
+			res = res * 10 + str[i] - '0';
+		}
+	}
+	return res;
+}
+int main()
+{
+	string str;
+
+	while (cin >> str)
+	{
+		bool minus = false;
+		int index = 0;
+		long long res = 0;
+		if (!str.empty() && str[0] != '\0')
+		{
+			if (str[0] == '+')
+			{
+				index++;
+				cout << '+' << endl;
+			}
+
+			else if (str[0] == '-')
+			{
+				minus = true;
+				index++;
+				cout << '-';
+			}
+
+			res = strtoint(str, minus, index);
+			cout << res << endl;
+
+		}
+	}
+	return 0;
+}
+#endif
+
