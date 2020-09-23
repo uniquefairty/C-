@@ -469,3 +469,462 @@ int main()
 }
 #endif
 
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+	string s;
+	while (cin >> s)
+	{
+		string res, tmp;
+		int arr[256] = { 0 };
+		for (int i = 0; i<s.size(); i++)
+		{
+			if (arr[s[i]] == 0)
+			{
+				tmp += s[i];
+				arr[s[i]] = 1;
+			}
+			else
+			{
+				if (tmp.size()>res.size())
+				{
+					res = tmp;
+					tmp = "";
+				}
+
+			}
+		}
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+#if 0
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+	string str, s;
+	while (cin >> str >> s)
+	{
+		for (int i = 0; i<s.size();i++)
+		{
+			if (s[i] == str[0])
+			{
+				for (int j = 1; j < str.size(); )
+				{
+					i++;
+					if (s[i] == str[j])
+					{
+						i++; j++;
+					}
+					else if (s[i] == '*')
+					{
+						char last = s[i + 1];
+						char pre = s[i - 1];
+						while (str[j] == pre&&str[j]!=last)
+						{
+							j++;
+							if (j == str.size())
+							{
+								cout << "true" << endl;
+								break;
+							}
+						}
+						//1.str[j]==last  2.str[j]!=last&&str[j]!=per
+
+						if (i<str.size()&&str[j] == last)
+						{
+							i++;
+						}
+						else if (str[j] != pre&&last!='.')
+						{
+							cout << "false" << endl;
+							break;
+						}
+
+						if (i == str.size())
+						{
+							cout << "false" << endl;
+							break;
+						}
+
+					}
+					else if (i<str.size()&&s[i] == '.')
+					{
+						char last = s[i + 1];
+						while (str[j] != last)
+						{
+							j++;
+							if (j == str.size())
+							{
+								cout << "true" << endl;
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+	}
+	return 0;
+}
+#endif
+
+#if 0
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stack>
+
+using namespace std;
+void calculate(string input)
+{
+	// write code here
+	stack<char> s;
+	stack<int> num;
+	int res = 0;
+	for (int i = 0; i < input.size(); i++)
+	{
+		if (input[i] == ' ')
+		{
+			continue;
+		}
+		if (input[i] >= '0'&&input[i] <= '9')
+		{
+			num.push(input[i] - '0');
+		}
+		else if (input[i] == '+' || input[i] == '-')
+		{
+			s.push(input[i]);
+		}
+		else if (input[i] == '*' || input[i] == '/')
+		{
+			int num1 = num.top();
+			num.pop();
+			
+			int num2 = input[i+2] - '0';
+			if (input[i] == '*')
+			{
+				int tmp = num1*num2;
+				num.push(tmp);
+			}
+			else if (input[i] == '/')
+			{
+				int tmp = num1 / num2;
+				num.push(tmp);
+			}
+			i += 2;
+		}
+	}
+
+		while (!s.empty())
+		{
+			char c = s.top();
+			s.pop();
+			int num1 = num.top();
+			num.pop();
+			int num2 = num.top();
+			num.pop();
+			if (c == '+')
+			{
+				int tmp = num1 + num2;
+				num.push(tmp);
+			}
+			else if (c == '-')
+			{
+				int tmp = num1 - num2;
+				num.push(tmp);
+			}
+		}
+
+		cout << num.top() << endl;
+
+	}
+
+int main()
+{
+	
+	string input = "1 +2 * 3";
+	calculate(input);
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+using namespace std;
+//bool fun(int m)
+//{
+//	int tmp = m;
+//	int res = 0;
+//	while (tmp)
+//	{
+//		res += res * 10 + tmp % 10;
+//		tmp /= 10;
+//	}
+//
+//	if (res == m)
+//	{
+//		return true;
+//	}
+//	else
+//	{
+//		return false;
+//	}
+//}
+
+
+
+int main()
+{
+	int m;
+	int v;
+	while (cin >> m)
+	{
+		m++;
+		int tmp = m;
+		int res = 0;
+		int a = tmp / 1000;//前面两位数12
+		int b = tmp % 100;//后面两位数21
+		int mid = tmp % 1000 - b;//300
+
+		int aa = (a % 10) * 10 + (a / 10);//21
+		if (b < aa)
+		{
+			res = m + aa - b;
+		}
+		else if (b>aa)
+		{
+			res = tmp + 100 - (b - aa);
+		}
+		//while (1)
+		//{
+		///*	m++;
+		//	if (fun(m))
+		//	{
+		//		v = m / 2;
+		//		break;
+		//	}
+		//	else
+		//	{
+		//		m++;
+		//	}*/
+		//}
+
+		cout << (res-m)/2+1 << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+using namespace std;
+int main()
+{
+	int V, n;
+	while (cin >> V)
+	{
+		cin >> n;
+		vector<int> v;
+		v.resize(n);
+		int dp[10001];
+		memset(dp, 0, sizeof(dp));
+
+		for (int i = 0; i<n; i++)
+		{
+			cin >> v[i];
+		}
+
+		for (int i = 0; i<n; i++)
+		{
+			for (int j = V; j >= v[i]; j--)
+			{
+				dp[j] = max(dp[j], dp[j - v[i]] + v[i]);
+			}
+		}
+		cout << V - dp[V] << endl;
+	}
+	return 0;
+}
+#endif
+
+
+# if 0
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string str;
+	vector<int> v;
+	while (cin >> str)
+	{
+		int tmp = 0, max = 0;
+		for (int i = 0; i<str.size(); ++i)
+		{
+			if (str[i] != ',')
+			{
+				v.push_back(str[i] - '0');
+			}
+			
+		}
+
+		for (int i = 0; i<v.size(); i++)
+		{
+			if (i % 2 == 0)
+			{
+				if (i == v.size() - 1 && i % 2 != 0)
+				{
+					;
+				}
+				tmp += v[i];
+			}
+			else if (i % 2 != 0)
+			{
+					max += v[i];
+
+			}
+		}
+		max = max>tmp ? max : tmp;
+		cout << max << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+		int len = str.size();
+		int res = 1;
+		int a = 0, b = 0, ab;
+		for (int i = 0; i<str.size() - 1; ++i)
+		{
+			a = str[i] - '0';
+			b = str[i + 1] - '0';
+			ab = a * 10 + b;
+			if (ab<26)
+			{
+				res++;
+			}
+		}
+
+
+		cout << res << endl;
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int m, n;
+	while (cin >> m >> n)
+	{
+		int a = 1, b = 1;
+		for (int i = m; i >= m - n + 1;-- i)
+		{
+			a *= i;
+		}
+		for (int i = 1; i <= n; ++i)
+		{
+			b *= i;
+		}
+
+		cout << a / b << endl;
+
+	}
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int FindPos(vector<char> b, char c,int* tmp)
+{
+	for (int i = *tmp; i < b.size(); i++)
+	{
+		if (b[i] == c)
+		{
+			*tmp = i;
+			return i;
+		}
+	}
+	return -1;
+}
+int fun(vector<char> a, vector<char> b,int pos)
+{
+	int count = 1;
+	int tmp = 0;
+	for (int i = pos; i < a.size(); i++)
+	{
+		int pos = FindPos(b, a[i],&tmp);
+		if (pos>=0)
+		{
+			count++;
+		}
+	}
+	return count;
+}
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		vector<char> v1, v2;
+		v1.resize(n);
+		v2.resize(n);
+		int count = 0;
+		int max = 0;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> v1[i];
+		}
+
+		for (int i = 0; i < n; i++)
+		{
+			cin >> v2[i];
+		}
+
+		for (int i = 0; i < v1.size(); i++)
+		{
+			count = fun(v1, v2, i);
+			if (count > max)
+			{
+				max = count;
+			}
+		}
+		cout << max << endl;
+	}
+	return 0;
+}
+#endif

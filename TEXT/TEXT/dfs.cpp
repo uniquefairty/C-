@@ -1327,3 +1327,106 @@ int main()
 }
 #endif
 
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//int main()
+//{
+//	string str;
+//	while (cin >> str)
+//	{
+//		if (str.empty())
+//		{
+//			continue;
+//		}
+//		int len = str.size();
+//		if (len == 1)
+//		{
+//			cout << str << endl;
+//			continue;
+//		}
+//
+//		int longest = 1;
+//		int start = 0;
+//		vector<vector<int>> dp(len, vector<int>(len));
+//		/*for (int i = 0; i<len; i++)
+//		{
+//			dp[i][i] = 1;
+//			if (i<len - 1)
+//			{
+//				if (str[i] == str[i + 1])
+//				{
+//					dp[i][i + 1] = 1;
+//					start = i;
+//					longest = 2;
+//				}
+//			}
+//		}
+//
+//		for (int l = 3; l <= len; l++)
+//		{
+//			for (int i = 0; i + 1 - l<len; i++)
+//			{
+//				int j = l + i - 1;
+//				if (str[i] == str[j] && dp[i + 1][j - 1] == 1)
+//				{
+//					dp[i][j] = 1;
+//					start = i;
+//					longest = 1;
+//				}
+//			}
+//		}*/
+//		cout << str.substr(start, longest);
+//	}
+//	return 0;
+//}
+
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int main()
+{
+	string str;
+	while (cin >> str)
+	{
+		if (str.empty())
+		{
+			continue;
+		}
+		int len = str.size();
+		if (len == 1)
+		{
+			cout << str << endl;
+			continue;
+		}
+
+		int max = 1;
+		int start = 0;
+		for (int i = 0; i < str.size(); i++)
+		{
+			for (int j = i + 1; j < str.size(); j++)
+			{
+				int temp1, temp2;
+				for (temp1 = i, temp2 = j; temp1 < temp2; temp1++, temp2--)
+				{
+					if (str[temp1] != str[temp2])
+					{
+						break;
+					}
+				}
+				if (temp1 >= temp2&&j - i + 1 > max)
+				{
+					max = j - i + 1;
+					start = i;
+				}
+			}
+		}
+		cout << str.substr(start, max) << endl;
+	}
+	return 0;
+}
+#endif
+
