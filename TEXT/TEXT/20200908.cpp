@@ -928,3 +928,65 @@ int main()
 	return 0;
 }
 #endif
+
+
+#if 0
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+void Reserve(vector<string>& s1)//Ðý×ª90
+{
+	vector<string> s;
+	string tmp = "";
+	for (int i = 0; i<s1.size(); ++i)
+	{
+		for (int j = s1.size()-1; j >= 0; j--)
+		{
+			tmp += s1[j][i];
+		}
+		s.push_back(tmp);
+		tmp = "";
+	}
+	s1 = s;
+	// return s;
+}
+string rotatePassword(vector<string>& s1, vector<string>& s2) {
+	// write code here
+
+	string res;
+	int count = 4;
+	while (count)
+	{
+		for (int i = 0; i<s2.size(); ++i)
+		{
+			for (int j = 0; j<s2[i].size(); ++j)
+			{
+				if (s1[i][j] == '0')
+				{
+					res += s2[i][j];
+				}
+			}
+			
+		}
+		
+
+		Reserve(s1);
+		count--;
+	}
+
+
+	cout << res << endl;
+	return res;
+}
+
+int main()
+{
+	vector<string> s1 = {"1101","1010","1111","1110"}; 
+	vector<string> s2 = { "ABCD", "EFGH", "IJKL", "MNPQ" };
+	rotatePassword(s1, s2);
+	return 0;
+}
+#endif
+
