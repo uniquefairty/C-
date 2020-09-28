@@ -990,3 +990,116 @@ int main()
 }
 #endif
 
+#if 0
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+void diff(vector<int> v1, vector<int> v2,vector<int>& res)
+{
+	int arr[256] = { 0 };
+	for (int i = 0; i < v1.size(); ++i)
+	{
+		arr[v1[i]] = 1;
+	}
+
+	for (int i = 0; i < v2.size(); ++i)
+	{
+		if (arr[v2[i]] != 1)
+		{
+			res.push_back(v2[i]);
+		}
+	}
+}
+int main()
+{
+	vector<int> a{ 1, 2, 45, 67 };
+	vector<int> b{ 4, 5, 6, 7, 1, 2 };
+	vector<int> res;
+	diff(a, b, res);
+	diff(b, a, res);
+
+	for (int i = 0; i < res.size(); ++i)
+	{
+		cout << res[i] << ' ';
+	}
+	return 0;
+}
+#endif
+
+#if 0
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+int main()
+{
+	string str;
+	vector<char> res;
+	
+	while (cin >> str)
+	{
+		int len = str.size();
+		int count = 0;
+		for (int i = 0; i < str.size()-1; )
+		{
+			if (str[i] == '0')
+			{
+				count++;
+				i += 2;
+			}
+			else
+			{
+				res.push_back(str[i]);
+				i++;
+			}
+			
+		}
+		res.push_back(',');
+		while (count)
+		{
+			res.push_back('0');
+			if (count != 1)
+			{
+				res.push_back(',');
+			}
+			count--;
+		}
+		res.push_back(str[len - 1]);
+
+		for (int i = 0; i < res.size(); ++i)
+		{
+			cout << res[i];
+		}
+	}
+
+	return 0;
+}
+#endif
+
+#if 0
+#include<stdio.h>
+#include<string.h>
+
+using namespace std;
+int Strlen(char *ch)
+{
+	int count = 0;
+	while (*ch)
+	{
+		count++;
+		ch++;
+	}
+	return count;
+}
+int main() {
+	char chs[] = "abcdefg";
+	
+	printf("×Ö·û´®µÄ¸ñÊ½£º%d", Strlen(chs));
+	
+	return 0;
+}
+#endif
+
