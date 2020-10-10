@@ -232,3 +232,102 @@ int main()
 }
 #endif
 
+#if 0
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+int fun(char a, vector<vector<char>> arr, int& count,char tmp)
+{
+	for (int i = 0; i<arr.size(); i++)
+	{
+		if (arr[i][0] == a)
+		{
+
+			if (arr[i][1] == tmp)
+			{
+				return count;
+			}
+			count++;
+			fun(arr[i][1], arr,count,tmp);
+			return count;
+		}
+	}
+}
+int main()
+{
+	char a;
+	int n;
+	while (cin >> a)
+	{
+		cin >> n;
+		vector<string> v;
+		v.resize(n);
+		vector<vector<char>> arr(n, vector<char>(2));
+		int count = 0;
+		for (int i = 0; i<v.size(); ++i)
+		{
+			cin >> v[i];
+			arr[i][0] = v[i][0];
+			arr[i][1] = v[i][3];
+		}
+
+		char tmp = a;
+		cout << fun(a, arr, count,tmp) << endl;
+
+
+	}
+	return 0;
+}
+#endif
+
+#if 0
+//整数分解
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+#define MAX 20
+int res[MAX];
+int p = 0;
+
+void resolve(int n, int min, int k, int& res_num)
+{
+	if (n <= 0)
+	{
+		/*for (int i = 0; i < p && p<=k; i++)
+		{
+			cout << res[i] << " ";
+		}
+		cout << endl;*/
+		if (p <= k)
+		{
+			res_num++;
+		}
+		
+	}
+
+	for (int i = min; i <= n; i++)
+	{
+		res[p] = i;
+		p++;
+		resolve(n - i, i, k, res_num);
+		p--;
+	}
+
+}
+int main()
+{
+	while (1)
+	{
+		int n,k;
+		cin >> n>>k;
+		int res_num = 0;
+		int p = 0;
+		resolve(n, 1, k, res_num);
+		cout << res_num << endl;
+		res_num = 0;
+	}
+}
+
+#endif
